@@ -1,6 +1,6 @@
 import React from "react";
 import FivePicture from "./FivePicture";
-
+import MiniListingForm from "./MiniListingForm";
 const SingleLeft = () => {
   return (
     <>
@@ -8,9 +8,9 @@ const SingleLeft = () => {
         {/* <h1>House.location</h1> */}
         <FivePicture />
         <div>
-          {/* Rani's calendar  */}
-          {/* <h2>Hosted.username</h2> */}{" "}
+          {/* <h2>Hosted.username</h2> */} {/* Rani's calendar  */}
           {/* pricing will be on the right of username */}
+          <MiniListingForm />
         </div>
       </div>
     </>

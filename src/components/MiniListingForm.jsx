@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // Question: will handle change functions change to python or is python on back-end irrelevant from front-end javaScript
 
-const MiniListingForm = () => {
+const MiniListingForm = ({required}) => {
   // This allows input and update for check in dates for reservation
   const [checkInDate, setCheckInDate] = useState("");
   // This allows input and update for checkout date for reservation
@@ -16,7 +16,13 @@ const MiniListingForm = () => {
   const handleCheckOutChange = (e) => {
     setCheckOutDate(e.target.value);
   };
+
+  const handleTotalChange = (e) => {
+    setTotal(e.target.value);
+  }
   // Using javaScript, this will allow us create a price total per night for reservations on the form (however, will use python back-end for this data)
+  //**Researched this**
+  
   // const calculatorTotal = () => {
   // const pricePerNight = 0 //set to 0 for now
   // const checkIn = ""
@@ -27,7 +33,33 @@ const MiniListingForm = () => {
 
   return (
     <div>
-      <form></form>
+      <form>
+        <label htmlFor="checkInDate">Check In:</label>
+        <input 
+        type="date"
+        id="checkInDate"
+        value={checkInDate}
+        onChange={handleCheckInChange}
+        required={required}
+        />
+        <label htmlFor="checkOutDate">Check Out:</label>
+        <input 
+        type="date"
+        id="checkOutDate"
+        value={checkOutDate}
+        onChange={handleCheckOutChange}
+        required={required}
+        />
+        <label htmlFor="number">Total:</label>
+        <input 
+        type="number"
+        id="number"
+        value={total}// or 0?
+        onChange={handleTotalChange}
+        required={required}
+        />
+        <button onClick={(total)}>Reserve</button>
+      </form>
     </div>
   );
 };
