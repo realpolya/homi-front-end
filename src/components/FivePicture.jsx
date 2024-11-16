@@ -1,14 +1,5 @@
-import React from 'react'
-import SingleLeft from './SingleLeft';
-
-
-
-
-
-
-
-
-
+import React from "react";
+import SingleLeft from "./SingleLeft";
 
 
 
@@ -19,10 +10,11 @@ export const FivePicture = () => {
       <SingleLeft />
       <div>
         {/* Rani's calendar  */}
-         {/* <h2>Hosted.username</h2> */}  {/* pricing will be on the right of username */}
-        </div>
+        {/* <h2>Hosted.username</h2> */}{" "}
+        {/* pricing will be on the right of username */}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default FivePicture;
