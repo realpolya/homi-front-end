@@ -1,6 +1,7 @@
 import React from "react";
 import FivePicture from "./FivePicture";
 import MiniListingForm from "./MiniListingForm";
+
 const SingleLeft = () => {
   return (
     <>
