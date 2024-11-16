@@ -10,8 +10,7 @@ function App() {
   return (
     <>
       <h1 className='font-sans text-7xl'>Homi</h1>
-      <FivePicture />
-    <MiniListingForm />
+  
     </>
   )
 }
