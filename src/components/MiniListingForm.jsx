@@ -73,7 +73,7 @@ const MiniListingForm = ({required}) => {
         <button
           type="button"
           onClick={(total)}
-          className="bg-green-600 text-white font-medium rounded-full py-2 px-6 mt-2 w-full"
+          className="bg-backgroundColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full"
         >
           reserve
         </button>
