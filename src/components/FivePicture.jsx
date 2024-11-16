@@ -14,7 +14,9 @@ import React from 'react'
 
 export const FivePicture = () => {
   return (
-    <div></div>
+    <div>
+      <img></img>  
+    </div>
   )
 }
 
