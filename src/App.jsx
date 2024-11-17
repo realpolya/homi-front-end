@@ -2,7 +2,7 @@
 import "./App.css";
 import "./index.css";
 import { AppRoutes } from "./Routes";
-
+import { SingleListingBooking } from "./app/SingleListingBooking";
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
 
       <h1 className='font-sans text-7xl'>Homi</h1>
       <AppRoutes />
-   
+   <SingleListingBooking />
     </>
   );
 }
