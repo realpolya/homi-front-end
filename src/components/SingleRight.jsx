@@ -4,7 +4,7 @@ import { ListingDescription } from './ListingDescription';
 
 export const SingleRight = ({ property }) => {
   return (
-    <div className="flex flex-col bg-gray-50 p-6 rounded-lg shadow-lg w-full md:w-1/2 h-full justify-between">
+    <div className="flex flex-col bg-gray-50 p-6 rounded-lg shadow-lg w-full md:w-full h-full justify-between">
       
       {/* Map Section Placeholder */}
       <div className="relative bg-green-200 h-48 rounded-lg flex items-center justify-center border-2 border-blue-300 mb-8">
