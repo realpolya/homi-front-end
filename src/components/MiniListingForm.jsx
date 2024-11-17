@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // Question: will handle change functions change to python or is python on back-end irrelevant from front-end javaScript
 
-const MiniListingForm = ({required}) => {
+export const MiniListingForm = ({required}) => {
   // This allows input and update for check in dates for reservation
   const [checkInDate, setCheckInDate] = useState("");
   // This allows input and update for checkout date for reservation
@@ -84,4 +84,4 @@ const MiniListingForm = ({required}) => {
  
 
 
-export default MiniListingForm;
+
