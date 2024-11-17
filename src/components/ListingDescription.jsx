@@ -20,7 +20,15 @@ export const ListingDescription = ({property}) => {
             </li>
         </ul>
         <div>
-        <p>{property.description}</p>
+            {/* This allows the decription to show only 100 characters and the '...' just shows there is more content to see*/}
+        <p>{isSeeMore
+            ? property.description
+            : `${property.description.slice(0, 60)}...`} 
+          {/* The toggle function will allow the functionallity 'see more' and 'see less'. Basically true or false allowing the expasion after click */}
+          {/* The span just keeps the text from creating a line break and calls toggleSeeMore, switching between expanded and collapsed states as you see above. */}
+          <span onClick={toggleSeeMore} className="text-teal-500 cursor-pointer">
+            {isSeeMore ? " see less" : " see more"}
+          </span></p>
         </div>
     </div>
   )
