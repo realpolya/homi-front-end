@@ -5,7 +5,11 @@ export const Amenities = () => {
     <div>
       <h1>Amenities</h1>
       <div>
-        
+        <div>
+         
+
+        </div>
+
       </div>
     </div>
   )
