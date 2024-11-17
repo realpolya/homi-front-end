@@ -45,4 +45,4 @@ export const FivePicture = () => {
   );
 };
 
-export default FivePicture;
+
