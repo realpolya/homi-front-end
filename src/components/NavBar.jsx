@@ -1,24 +1,27 @@
-import React from 'react';
+import { useState } from 'react';
+import { Twirl as Hamburger } from 'hamburger-react'
 import { FaSearch } from 'react-icons/fa';
+import { Sidebar } from './Sidebar';
 
-export const Navbar = () => {
+export const Navbar = ({setShowRegister, setShowLogin}) => {
+    const [isOpen, setOpen] = useState(false)
+
   return (
-     <nav className="px-4 py-3 flex justify-evenly ml-64">
-      <h1 className="place-items-start">homi</h1>
-      <div className="flex items-center text-xl">
-        <h1 className="text-textColor space-x-5">Where:</h1>
-      </div>
-      <div className="flex items-center gap-x-5">
-        <div className="relative md:w-65">
-          <button className="p-1 focus:outline-none text-textColor md:text-black">
-            <FaSearch />
-          </button>
+     <nav className="flex justify-evenly relative">
+      <h1 className="text-4xl">homi</h1>
+      <div className="flex items-center gap-x-2">
+          <label htmlFor='search-bar'>Where: </label>
           <input
+            id='search-bar'
             type="text"
             className=" w-full px-4 py-1 pl-12 rounded shadow outline-none"
           />
-        </div>
+          <button className="p-1 focus:outline-none text-textColor md:text-black">
+            <FaSearch />
+          </button>
       </div>
+      <Hamburger toggled={isOpen} toggle={setOpen} />
+      {isOpen && <Sidebar setShowRegister={setShowRegister} setShowLogin={setShowLogin}/>}
     </nav> 
   );
 };
