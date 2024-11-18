@@ -1,5 +1,5 @@
-import React from 'react';
-import {dummyAmenities} from "../dummy-data/dummy-amenities"
+import React from "react";
+import { dummyAmenities } from "../dummy-data/dummy-amenities";
 
 export const Amenities = () => {
   return (
@@ -8,7 +8,7 @@ export const Amenities = () => {
         {dummyAmenities.slice(0, 18).map((amenity, index) => (
           <div key={index} className="w-10 h-10">
             <img
-              src={amenity.link}
+              src={amenity.image}
               alt={`amenity ${index}`}
               className="w-full h-full object-cover"
             />
@@ -18,5 +18,3 @@ export const Amenities = () => {
     </div>
   );
 };
-
-
