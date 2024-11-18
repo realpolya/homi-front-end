@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import dummyBookings from "../dummy-data/dummy-bookings";
+import {dummyBookings} from "../dummy-data/dummy-bookings" 
 
 export const Calendar = () => {
   const [selectedRange, setSelectedRange] = useState({
