@@ -27,6 +27,4 @@ export const SingleLeft = () => {
       </div>
     </div>
   );
-};
-
-export default SingleLeft;
+}
