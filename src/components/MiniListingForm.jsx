@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // Question: will handle change functions change to python or is python on back-end irrelevant from front-end javaScript
 
-const MiniListingForm = ({required}) => {
+export const MiniListingForm = ({required}) => {
   // This allows input and update for check in dates for reservation
   const [checkInDate, setCheckInDate] = useState("");
   // This allows input and update for checkout date for reservation
@@ -64,7 +64,7 @@ const MiniListingForm = ({required}) => {
         <input
           type="number"
           id="total"
-          value={total} // maybe make this a 0 for default
+          value={{total}} // maybe make this a 0 for default
           onChange={handleTotalChange}
           required={required}
           className="border rounded-lg p-2 mb-4 w-full text-center"
@@ -72,7 +72,8 @@ const MiniListingForm = ({required}) => {
 
         <button
           type="button"
-          onClick={(total)}
+          // Had to change this into a function in order for this to functionable. I orgnally had onClick={{total}} with no handlchange
+          onClick={() => console.log(total)}
           className="bg-backgroundColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full"
         >
           reserve
@@ -84,4 +85,4 @@ const MiniListingForm = ({required}) => {
  
 
 
-export default MiniListingForm;
+
