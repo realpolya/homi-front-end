@@ -1,5 +1,5 @@
-import React from 'react';
-import {dummyAmenities} from "../dummy-data/dummy-amenities"
+import React from "react";
+import { dummyAmenities } from "../dummy-data/dummy-amenities";
 
 export const Amenities = () => {
   return (
@@ -21,5 +21,3 @@ export const Amenities = () => {
     </div>
   );
 };
-
-
