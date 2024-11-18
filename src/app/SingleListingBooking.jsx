@@ -6,6 +6,8 @@ import { SingleRight } from "../components/SingleRight";
 
 export const SingleListingBooking = () => {
   return (
+    <>
+   
     <div className=" w-full">
       {" "}
       {/* Apply background color */}
@@ -23,5 +25,6 @@ export const SingleListingBooking = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
