@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import dummyBookings from "../dummy-data/dummy-bookings";
+import {dummyBookings} from "../dummy-data/dummy-bookings" 
 
 export const Calendar = () => {
   const [selectedRange, setSelectedRange] = useState({
@@ -76,7 +76,7 @@ export const Calendar = () => {
 
   const monthsToDisplay = [
     currentMonth,
-    new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1),
+    // new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1),
   ];
 
   return (
@@ -98,7 +98,7 @@ export const Calendar = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8">
         {monthsToDisplay.map((month, index) => {
           const days = getDaysInMonth(month.getFullYear(), month.getMonth());
           return (
