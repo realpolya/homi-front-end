@@ -1,3 +1,4 @@
+
 import React from "react";
 import { FaBars, FaMapMarkedAlt } from "react-icons/fa";
 
@@ -18,3 +19,4 @@ export const NavBar = () => {
     </nav>
   );
 };
+
