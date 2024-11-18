@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { dummyUser, dummyProfile } from "../dummy-data/dummy-user";
+import { dummyUser } from "../dummy-data/dummy-user";
 
 export const MyUserInfo = () => {
   //NOTE: THIS NEEDS TO CHANGE ONCE WE GET API
-  const [user] = useState(dummyUser);
-  const [profile] = useState(dummyProfile);
+  const [user] = useState(dummyUser.dummyUser);
+  const [profile] = useState(dummyUser.dummyProfile);
 
   const handleBecomeHost = () => {
     alert("You are now a host! NOTE: THIS NEEDS TO CHANGE ONCE LOGIC COMES"); // Action for "Become a Host"
   };
 
   return (
-    <div className="max-w-sm mx-auto p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
+    <div className="max-w-sm mx-auto p-6 bg-white flex flex-col items-center">
       <img
         src={profile.profile_pic}
         alt="Profile"
