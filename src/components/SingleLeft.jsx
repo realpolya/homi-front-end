@@ -1,8 +1,8 @@
 import React from "react";
-import FivePicture from "./FivePicture";
-import MiniListingForm from "./MiniListingForm";
+import {FivePicture} from "./FivePicture";
+import { MiniListingForm } from "./MiniListingForm";
 
-const SingleLeft = () => {
+export const SingleLeft = () => {
   return (
     <>
       <div>
@@ -18,4 +18,4 @@ const SingleLeft = () => {
   );
 };
 
-export default SingleLeft;
+
