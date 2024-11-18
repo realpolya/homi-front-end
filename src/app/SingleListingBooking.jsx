@@ -1,14 +1,17 @@
 import React from "react";
 import { SingleLeft } from "../components/SingleLeft";
 import { SingleRight } from "../components/SingleRight";
-import {Navbar} from "../components/NavBar";
 
+import { NavBar } from "../components/NavBar";
 
 export const SingleListingBooking = () => {
   return (
     <>
+
+      <h1 className="fixed top-0 left-0 font-sans text-7xl p-4">homi</h1>
       
       <Navbar />
+
       {/* Left Section */}
       <div className="flex-col md:flex-row">
         <div className="flex-1 bg-white rounded-lg  p-6">
