@@ -7,9 +7,9 @@ export const SingleLeft = () => {
   return (
     <div className="flex flex-col bg-white rounded-lg shadow-lg p-6 space-y-8 w-full">
       {/* FivePicture Section */}
-      <div className="p-4 bg-gray-50 rounded-lg shadow">
+      
         <FivePicture />
-      </div>
+      
 
 
 
