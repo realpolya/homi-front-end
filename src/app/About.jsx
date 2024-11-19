@@ -73,7 +73,7 @@ const TeamMemberCard = ({ member }) => {
 
 export const About = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-screen">
       <div className="flex-grow p-8">
         <h1 className="text-4xl text-left text-textColor mb-8">
           Meet your homi-es
@@ -84,6 +84,6 @@ export const About = () => {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
