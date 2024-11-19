@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 
 
 export const Sidebar = ({setShowRegister, setShowLogin, user}) => {
-  const [isUser, setIsUser] = useState(null)
+  // const [isUser, setIsUser] = useState(null)
 
-  const userLogin = () => {
-    setIsUser({username: ""})
-  }
+  // const userLogin = () => {
+  //   setIsUser({username: ""})
+  // }
 
   const authenticatedOptions = (
     <>
