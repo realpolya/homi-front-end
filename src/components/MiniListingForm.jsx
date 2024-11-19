@@ -28,7 +28,7 @@ const pricePerNight = 100
   // const checkIn = ""
   // const checkOut = ""
   // const oneDay = 3456
-  // const nightsTotal = Math.round(Math.abs((checkIn - checkOut) / pricePerNight))
+  const nightsTotal = Math.round(Math.abs((checkInDate - checkOutDate) / pricePerNight))
   // }
 
   const calculateTotal = () => {
@@ -50,10 +50,10 @@ const pricePerNight = 100
     const numberOfNights = differenceInTime / (1000 * 60 * 60 * 24); 
 
     // This will calcualte the total cost
-    const calculatedTotal = numberOfNights * pricePerNight;
-    setTotal(calculatedTotal);
+    // const calculatedTotal = numberOfNights * pricePerNight;
+    // setTotal(calculatedTotal);
 
-    alert(`You booked ${numberOfNights} night(s) and this will cost $${calculatedTotal}.`);
+    alert(`You booked ${numberOfNights} night(s) and this will cost $${nightsTotal}.`);
   };
 
   return (
