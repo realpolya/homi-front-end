@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 //import { AuthedUserContext } from "../services/sub_services/userServices";
 
 export const Sidebar = ({ setShowRegister, setShowLogin, user }) => {
-//const { user } = useContext(AuthedUserContext);
+  //const { user } = useContext(AuthedUserContext);
 
   const authenticatedOptions = (
     <>
@@ -36,7 +36,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user }) => {
         </li>
         <li>
           <NavLink className="nav-link" to="/about">
-            About homi
+            About
           </NavLink>
         </li>
       </ul>
