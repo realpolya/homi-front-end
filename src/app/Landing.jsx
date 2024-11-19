@@ -1,6 +1,6 @@
 // FIXME: TEMPORARILY TESTING SERVICES HERE
 import { useState } from 'react';
-import { signOut, signUp, signIn, getUser, verifyToken, updateUser } from "../services/index.js";
+import { signOut, signUp, signIn, getUser, verifyToken, updateUser, getAmenities } from "../services/index.js";
 
 
 export const Landing = () => {
@@ -64,10 +64,13 @@ export const Landing = () => {
     return !(logInFormData.username && logInFormData.password);
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     // return signOut()
     // getUser()
-    verifyToken()
+    const amenities = await getAmenities()
+    console.log('amenities are ', amenities)
+    console.log('first amenitys name is', amenities[0].name)
+    
   }
 
 
