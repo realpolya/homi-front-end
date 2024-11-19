@@ -51,14 +51,6 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
             About homi
           </NavLink>
         </li>
-      </ul>
-    </>
-  );
-
-  return (
-    <nav className="absolute top-full left-0 w-full space-y-4 text-lg font-semibold bg-white shadow-md transform transition-transform duration-300 ease-in-out">
-      <div className="p-4">
-        <ul>
           <li>
 
             <button onClick={() => {
@@ -92,7 +84,13 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
             </button>
 
           </li>
-        </ul>
+      </ul>
+    </>
+  );
+
+  return (
+    <nav className="absolute top-full left-0 w-full space-y-4 text-lg font-semibold bg-white shadow-md transform transition-transform duration-300 ease-in-out">
+      <div className="p-4">
         <nav>
           {user && <div className="link welcome">Welcome, {user.username}</div>}
           <div className="nav-links">

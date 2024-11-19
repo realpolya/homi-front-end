@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import './App.css';
@@ -8,10 +8,20 @@ import { SignUp } from './app/SignUp';
 import { SignIn } from './app/Signin';
 import { Navbar } from './components/NavBar';
 import { Footer } from './components/Footer';
+import { getUser } from './services/sub_services/userServices';
 
 function App() {
   const [user, setUser] = useState(null)
   const [activeModal, setActiveModal] = useState(null);
+
+  useEffect(()=>{
+    const fetchUser = async () => {
+      const userData = await getUser()
+      setUser(userData)
+    }
+
+    fetchUser()
+  }, [])
 
   const handleSignUp = (data) => {
     setUser(data)
@@ -28,6 +38,7 @@ function App() {
       <Navbar
         setShowRegister={() => setActiveModal("register")}
         setShowLogin={() => setActiveModal("login")}
+        user={user}
       />
       <AppRoutes />
 
