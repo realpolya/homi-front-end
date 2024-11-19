@@ -88,7 +88,7 @@ const getMyArchived = async () => {
 
 }
 
-// TODO: getUserProperties
+
 const getUserProperties = async (user_id) => {
 
     try {
@@ -106,7 +106,23 @@ const getUserProperties = async (user_id) => {
 
 }
 
-// TODO: getSingleProperty
+
+const getSingleProperty = async (id) => {
+
+    try {
+
+        console.log("services: getting one property with id ", id)
+        const response = await api.get(`properties/${id}/`)
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
 
 // TODO: putProperty (achiving properties is included here)
 
@@ -118,5 +134,6 @@ export {
     postProperty,
     getMyProperties,
     getMyArchived,
-    getUserProperties
+    getUserProperties,
+    getSingleProperty
 };

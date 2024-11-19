@@ -17,7 +17,8 @@ const {
   postProperty,
   getMyProperties,
   getMyArchived,
-  getUserProperties
+  getUserProperties,
+  getSingleProperty
 } = properties
 
 const {
@@ -41,6 +42,7 @@ const services = {
     getMyProperties,
     getMyArchived,
     getUserProperties,
+    getSingleProperty,
 
     getBookings,
     
@@ -60,6 +62,7 @@ export {
     getMyProperties,
     getMyArchived,
     getUserProperties,
+    getSingleProperty,
 
     getBookings,
     getAmenities
