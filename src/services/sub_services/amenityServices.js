@@ -4,13 +4,23 @@ import api from './apiConfig.js';
 
 /* --------------------------------Functions--------------------------------*/
 
-const getAmenities = () => {
+const getAmenities = async () => {
 
-    console.log('getting amenities')
+    try {
 
+        const response = await api.get('amenities/');
+        console.log('services: getAmenities in the work', response.data)
+        return response.data;
+
+    } catch (err) {
+        
+        console.log(err.response.data.error);
+        throw err
+
+    }
 }
 
 
 /* --------------------------------Exports--------------------------------*/
 
-export { getAmenities };
+export { getAmenities }
