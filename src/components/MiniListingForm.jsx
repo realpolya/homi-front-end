@@ -15,6 +15,7 @@ export const MiniListingForm = ({ required }) => {
 
   const handleCheckOutChange = (e) => {
     setCheckOutDate(e.target.value);
+    // ternery for populate total
   };
 
   const calculateTotal = () => {
