@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { signUp } from '../services/sub_services/userServices';
 
 export const SignUp = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -15,9 +16,10 @@ export const SignUp = ({ onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData); // Pass formData to the parent handler
+    const userData = await signUp(formData)
+    onSubmit(userData);
   };
 
   return (

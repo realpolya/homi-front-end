@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { signIn } from "../services/sub_services/userServices";
 
 export const SignIn = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -14,9 +15,10 @@ export const SignIn = ({ onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData); // Pass formData to the parent handler
+    const userData = await signIn(formData)
+    onSubmit(userData);
   };
 
   return (
@@ -24,16 +26,16 @@ export const SignIn = ({ onSubmit }) => {
       <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">Log In</h2>
 
       <div className="flex flex-col">
-        <label htmlFor="email" className="text-sm font-medium text-gray-700">
-          Email
+        <label htmlFor="username" className="text-sm font-medium text-gray-700">
+          Username
         </label>
         <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
+          type="text"
+          id="username"
+          name="username"
+          value={formData.username}
           onChange={handleChange}
-          placeholder="Enter your email"
+          placeholder="Enter your username"
           className="p-2 border rounded-md focus:ring-teal-500 focus:border-teal-500"
           required
         />

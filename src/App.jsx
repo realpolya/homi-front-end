@@ -10,15 +10,16 @@ import { Navbar } from './components/NavBar';
 import { Footer } from './components/Footer';
 
 function App() {
+  const [user, setUser] = useState(null)
   const [activeModal, setActiveModal] = useState(null);
 
   const handleSignUp = (data) => {
-    console.log("Sign Up Data:", data);
+    setUser(data)
     setActiveModal(null);
   };
 
   const handleSignIn = (data) => {
-    console.log("Sign In Data:", data);
+    setUser(data)
     setActiveModal(null);
   };
 

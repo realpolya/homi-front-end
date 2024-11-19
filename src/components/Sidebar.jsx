@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 //import { AuthedUserContext } from "../services/sub_services/userServices";
 
-export const Sidebar = ({ setShowRegister, setShowLogin, user }) => {
+export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
 //const { user } = useContext(AuthedUserContext);
 
   const authenticatedOptions = (
@@ -48,10 +48,16 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user }) => {
       <div className="p-4">
         <ul>
           <li>
-            <button onClick={() => setShowRegister(true)}>Register</button>
+            <button onClick={() => {
+              setShowRegister(true)
+              setOpen(false)
+            }}>Register</button>
           </li>
           <li>
-            <button onClick={() => setShowLogin(true)}>Log In</button>
+            <button onClick={() => {
+              setShowLogin(true)
+              setOpen(false)
+            }}>Log In</button>
           </li>
         </ul>
         <nav>
