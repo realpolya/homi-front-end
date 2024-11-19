@@ -23,7 +23,10 @@ const {
 } = properties
 
 const {
-  getBookings
+  getBookings,
+  getUpcoming,
+  postBooking,
+  getSingleBooking,
 } = bookings
 
 const {
@@ -47,7 +50,10 @@ const services = {
     putProperty,
 
     getBookings,
-    
+    getUpcoming,
+    postBooking,
+    getSingleBooking,
+
     getAmenities
 }
 
@@ -59,6 +65,7 @@ export {
     signOut,
     verifyToken,
     updateUser,
+
     getProperties,
     postProperty,
     getMyProperties,
@@ -68,5 +75,9 @@ export {
     putProperty,
 
     getBookings,
+    getUpcoming,
+    postBooking,
+    getSingleBooking,
+
     getAmenities
 }
