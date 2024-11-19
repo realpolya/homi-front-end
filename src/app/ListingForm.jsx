@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { dummyAmenities } from "../dummy-data/dummy-amenities";
 
-
 export const ListingForm = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -35,7 +34,7 @@ export const ListingForm = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-screen">
       <form
         onSubmit={handleSubmit}
         className="flex-grow max-w-4xl mx-auto p-8 text-white rounded-lg shadow-lg space-y-6"
@@ -79,7 +78,10 @@ export const ListingForm = () => {
         <h3 className="font-bold mb-2">Address</h3>
         <div className="grid grid-cols-2 gap-6">
           <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="street" className="block text-sm font-bold col-span-1">
+            <label
+              htmlFor="street"
+              className="block text-sm font-bold col-span-1"
+            >
               Street:
             </label>
             <input
@@ -92,7 +94,10 @@ export const ListingForm = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="city" className="block text-sm font-bold col-span-1">
+            <label
+              htmlFor="city"
+              className="block text-sm font-bold col-span-1"
+            >
               City:
             </label>
             <input
@@ -105,7 +110,10 @@ export const ListingForm = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="state" className="block text-sm font-bold col-span-1">
+            <label
+              htmlFor="state"
+              className="block text-sm font-bold col-span-1"
+            >
               State:
             </label>
             <input
@@ -168,10 +176,6 @@ export const ListingForm = () => {
           </button>
         </div>
       </form>
-
-      
-    </div>
+    </main>
   );
 };
-
-
