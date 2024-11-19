@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { signOut, signUp, signIn, getUser, verifyToken, updateUser, getAmenities, getProperties, getMyProperties, 
-  getMyArchived, getUserProperties, getSingleProperty, getBookings, getUpcoming, getSingleBooking } from "../services/index.js";
+  getMyArchived, getUserProperties, getSingleProperty, getBookings, getUpcoming, 
+  getSingleBooking, getHostBookings, getPropBookings } from "../services/index.js";
 
 export const Landing = () => {
   const [user, setUser] = useState(null);
@@ -89,8 +90,15 @@ export const Landing = () => {
 
     // const myUpcoming = await getUpcoming()
     // console.log('my upcoming bookings ', myUpcoming)
-    const oneBooking = await getSingleBooking(1)
-    console.log('one booking is ', oneBooking)
+
+    // const oneBooking = await getSingleBooking(1)
+    // console.log('one booking is ', oneBooking)
+
+    // const hostBookings = await getHostBookings()
+    // console.log('hosts bookings are ', hostBookings)
+
+    const propBookings = await getPropBookings(1)
+    console.log('bookings for property are ', propBookings)
     
   }
 

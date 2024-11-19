@@ -58,7 +58,7 @@ const postBooking = async (prop_id, formData) => {
 
 }
 
-// TODO: retrieve one booking
+
 const getSingleBooking = async (id) => {
 
     try {
@@ -76,13 +76,78 @@ const getSingleBooking = async (id) => {
 
 }
 
+
 // TODO: update one booking
+const putBooking = async (id, formData) => {
+
+    try {
+
+        console.log('services: updating booking with id ', id)
+        const response = await api.put(`bookings/${id}/`, formData)
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
 
 // TODO: delete one booking
+const deleteBooking = async (id) => {
 
-// TODO: host's bookings
+    try {
 
-// TODO: property's bookings 
+        console.log('services: deleting booking with id ', id)
+        const response = await api.delete(`bookings/${id}/`)
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
+
+
+const getHostBookings = async () => {
+
+    try {
+
+        console.log('services: getting bookings of my properties')
+        const response = await api.get('bookings/host/')
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
+
+
+const getPropBookings = async (prop_id) => {
+
+    try {
+
+        console.log('services: getting bookings of property with id', prop_id)
+        const response = await api.get(`bookings/prop/${prop_id}/`)
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
 
 /* --------------------------------Exports--------------------------------*/
 
@@ -91,4 +156,8 @@ export {
     getUpcoming,
     postBooking,
     getSingleBooking,
+    putBooking,
+    deleteBooking,
+    getHostBookings,
+    getPropBookings,
 };

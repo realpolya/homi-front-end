@@ -27,6 +27,10 @@ const {
   getUpcoming,
   postBooking,
   getSingleBooking,
+  putBooking,
+  deleteBooking,
+  getHostBookings,
+  getPropBookings,
 } = bookings
 
 const {
@@ -53,6 +57,10 @@ const services = {
     getUpcoming,
     postBooking,
     getSingleBooking,
+    putBooking,
+    deleteBooking,
+    getHostBookings,
+    getPropBookings,
 
     getAmenities
 }
@@ -78,6 +86,10 @@ export {
     getUpcoming,
     postBooking,
     getSingleBooking,
+    putBooking,
+    deleteBooking,
+    getHostBookings,
+    getPropBookings,
 
     getAmenities
 }
