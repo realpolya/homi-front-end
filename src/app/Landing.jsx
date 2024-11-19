@@ -1,7 +1,7 @@
 // FIXME: TEMPORARILY TESTING SERVICES HERE
 
 import { useState } from 'react';
-import { signOut, signUp, signIn, getUser, verifyToken, updateUser, getAmenities, getProperties, getMyProperties, getMyArchived } from "../services/index.js";
+import { signOut, signUp, signIn, getUser, verifyToken, updateUser, getAmenities, getProperties, getMyProperties, getMyArchived, getUserProperties } from "../services/index.js";
 
 export const Landing = () => {
   const [user, setUser] = useState(null);
@@ -74,8 +74,11 @@ export const Landing = () => {
     // const myProperties = await getMyProperties()
     // console.log('my properties are', myProperties)
 
-    const myArchived = await getMyArchived()
-    console.log('my archived props are ', myArchived)
+    // const myArchived = await getMyArchived()
+    // console.log('my archived props are ', myArchived)
+
+    const userProps = await getUserProperties(6)
+    console.log('users props are ', userProps)
 
     
   }
