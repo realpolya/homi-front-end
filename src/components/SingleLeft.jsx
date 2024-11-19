@@ -5,25 +5,12 @@ import { Calendar } from "./Calendar";
 
 export const SingleLeft = () => {
   return (
-    <div className="flex flex-col bg-white rounded-lg shadow-lg p-6 space-y-8 w-full">
-      {/* FivePicture Section */}
-      
-        <FivePicture />
-      
-
-
-
-
-
-      {/* This shows the the calendar and the listing reserve from from left to right */}
-      <div className="flex-1 columns-2 md:columns-2 bg-white p-4 rounded-lg shadow border border-teal-500">
-        <div className="flex-1 bg-white p-4 rounded-lg">
+    <div className="flex flex-col p-6 space-y-8 w-full w-1/2 bg-whiteColor p-6 rounded-lg min-h-screen">
+      <FivePicture />
+      {/* This shows the calendar and listing form side by side */}
+      <div className="flex flex-row space-x-6  p-4 rounded-lg items-stretch">
         <Calendar />
-          </div>
-
-        <div className="flex-1 bg-white p-4 rounded-lg shadow border border-teal-500">
-          <MiniListingForm />
-        </div>
+        <MiniListingForm />
       </div>
     </div>
   );
