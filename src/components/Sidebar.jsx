@@ -9,21 +9,23 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
 
   const authenticatedOptions = (
     <>
-      <NavLink className="nav-link" to="/bookings">
+    <ul>
+      <li><NavLink className="nav-link" to="/bookings">
         Bookings
-      </NavLink>
-      <NavLink className="nav-link" to="/listing-form">
+     </NavLink></li>
+    <li> <NavLink className="nav-link" to="/listing-form">
         Listing Form
-      </NavLink>
-      <NavLink className="nav-link" to="booking-form">
+      </NavLink></li>
+      <li><NavLink className="nav-link" to="listing/booking">
         Book a Property
-      </NavLink>
-      <NavLink className="nav-link" to="listing">
+      </NavLink></li>
+     <li><NavLink className="nav-link" to="listing">
         Listings
-      </NavLink>
-      <NavLink className="nav-link" to="/sign-out">
+      </NavLink></li>
+      <li><NavLink className="nav-link" to="/sign-out">
         Log Out
-      </NavLink>
+      </NavLink></li>
+      </ul>
     </>
   );
 
