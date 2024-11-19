@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { dummyAmenities } from "../dummy-data/dummy-amenities";
 
-
 export const ListingForm = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -73,6 +72,32 @@ export const ListingForm = () => {
             className="w-full p-2 h-24 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
             placeholder="Describe the property"
           ></textarea>
+        </div>
+
+        {/* Cancellation Policy */}
+        <div className="grid grid-cols-4 items-center gap-4">
+          <label
+            htmlFor="cancellationPolicy"
+            className="block text-sm font-bold col-span-1"
+          >
+            Cancellation Policy:
+          </label>
+          <select
+            id="cancellationPolicy"
+            name="cancellationPolicy"
+            value={formData.cancellationPolicy}
+            onChange={handleChange}
+            className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
+          >
+            <option value="" disabled>
+              Select a cancellation policy
+            </option>
+            <option value="flexible">Flexible: Full refund 1 day prior</option>
+            <option value="moderate">
+              Moderate: Full refund 5 days prior
+            </option>
+            <option value="strict">Strict: Full refund 7 days prior</option>
+          </select>
         </div>
 
         {/* Address Fields */}
@@ -168,10 +193,8 @@ export const ListingForm = () => {
           </button>
         </div>
       </form>
-
-      
     </div>
   );
 };
 
-
+export default ListingForm;
