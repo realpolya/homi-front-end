@@ -6,16 +6,15 @@ import "./index.css";
 import { AppRoutes } from "./Routes";
 import { SignUp } from './app/SignUp';
 import { SignIn } from './app/Signin';
+import { Navbar } from './components/NavBar';
 
 function App() {
   const [showRegister, setShowRegister] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
 
-
   return (
     <>
-    <button onClick={() => setShowRegister(true)}>Register</button>
-    <button onClick={() => setShowLogin(true)}>Log In</button>
+      <Navbar setShowRegister={setShowRegister} setShowLogin={setShowLogin}/>
       <AppRoutes />
       <Rodal visible={showRegister} onClose={() => setShowRegister(false)} closeOnEsc="true">
         <SignUp />

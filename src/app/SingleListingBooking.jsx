@@ -1,11 +1,13 @@
 import React from "react";
 import { SingleLeft } from "../components/SingleLeft";
+import { Amenities } from "../components/Amenities";
 import { SingleRight } from "../components/SingleRight";
-
-
 
 export const SingleListingBooking = () => {
   return (
+
+    <>
+   
     <div className=" w-full">
       {" "}
       {/* Apply background color */}
@@ -21,7 +23,9 @@ export const SingleListingBooking = () => {
         <div className="w-2/5 bg-whiteColor p-4 rounded-lg ">
           <SingleRight />
         </div>
+
       </div>
     </div>
+    </>
   );
 };
