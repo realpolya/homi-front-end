@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { signUp } from '../services/sub_services/userServices';
 
@@ -6,6 +7,16 @@ export const SignUp = ({ onSubmit }) => {
     username: '',
     email: '',
     password: '',
+
+import { useState } from "react";
+import { signUp } from "../services/sub_services/userServices";
+
+export const SignUp = ({ onSubmit }) => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+
   });
 
   const handleChange = (e) => {
@@ -18,18 +29,32 @@ export const SignUp = ({ onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const userData = await signUp(formData)
+
+    const userData = await signUp(formData);
+
     onSubmit(userData);
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+
       <h2 className="text-2xl font-bold text-gray-800">Welcome To homi.</h2>
       <h2>Register Here!</h2>
       
 
       <div>
-        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+
+      <h2 className="text-2xl font-bold text-gray-800">Welcome To Homi.</h2>
+      <h2>Register Here!</h2>
+
+      <div>
+        <label
+          htmlFor="username"
+          className="block text-sm font-medium text-gray-700"
+        >
+
           Username
         </label>
         <input
@@ -45,7 +70,13 @@ export const SignUp = ({ onSubmit }) => {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+
+
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700"
+        >
+
           Email
         </label>
         <input
@@ -61,7 +92,14 @@ export const SignUp = ({ onSubmit }) => {
       </div>
 
       <div>
+
         <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+=======
+        <label
+          htmlFor="password"
+          className="block text-sm font-medium text-gray-700"
+        >
+
           Password
         </label>
         <input
@@ -78,7 +116,11 @@ export const SignUp = ({ onSubmit }) => {
 
       <button
         type="submit"
+
         className="px-4 py-2 bg-buttonColor text-white rounded-md hover:bg-cardColor"
+
+        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+
       >
         Register
       </button>

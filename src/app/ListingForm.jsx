@@ -40,11 +40,81 @@ export const ListingForm = () => {
         className="w-full max-w-screen-lg p-8 rounded-lg shadow-lg text-white"
         style={{ backgroundColor: "#204E4A" }} // Form green background
       >
+
         <div className="grid grid-cols-2 gap-8">
           {/* Title */}
           <div className="flex items-center">
             <label htmlFor="title" className="block text-sm font-bold w-1/3">
               Title:
+
+        {/* Title */}
+        <div className="grid grid-cols-4 items-center gap-4">
+          <label htmlFor="title" className="block text-sm font-bold col-span-1">
+            Title:
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            className="w-full p-2 rounded-md text-gray-900 bg-white focus:outline-none col-span-3"
+            placeholder="Enter a descriptive title"
+          />
+        </div>
+
+        {/* Description */}
+        <div className="grid grid-cols-4 items-start gap-4">
+          <label
+            htmlFor="description"
+            className="block text-sm font-bold col-span-1"
+          >
+            Description:
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="w-full p-2 h-24 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
+            placeholder="Describe the property"
+          ></textarea>
+        </div>
+
+        {/* Cancellation Policy */}
+        <div className="grid grid-cols-4 items-center gap-4">
+          <label
+            htmlFor="cancellationPolicy"
+            className="block text-sm font-bold col-span-1"
+          >
+            Cancellation Policy:
+          </label>
+          <select
+            id="cancellationPolicy"
+            name="cancellationPolicy"
+            value={formData.cancellationPolicy}
+            onChange={handleChange}
+            className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
+          >
+            <option value="" disabled>
+              Select a cancellation policy
+            </option>
+            <option value="flexible">Flexible: Full refund 1 day prior</option>
+            <option value="moderate">Moderate: Full refund 5 days prior</option>
+            <option value="strict">Strict: Full refund 7 days prior</option>
+          </select>
+        </div>
+
+        {/* Address Fields */}
+        <h3 className="font-bold mb-2">Address</h3>
+        <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <label
+              htmlFor="street"
+              className="block text-sm font-bold col-span-1"
+            >
+              Street:
+
             </label>
             <input
               type="text"
