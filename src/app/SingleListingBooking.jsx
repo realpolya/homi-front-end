@@ -4,12 +4,12 @@ import { SingleRight } from "../components/SingleRight";
 
 export const SingleListingBooking = () => {
   return (
-    <div className="w-full">
+    <main className="w-full">
       {/* Flex container for columns */}
       <div className="flex flex-row gap-x-6">
         <SingleLeft />
         <SingleRight />
       </div>
-    </div>
+    </main>
   );
 };
