@@ -1,35 +1,33 @@
-import { useState } from 'react';
-import { Twirl as Hamburger } from 'hamburger-react'
-import { FaSearch } from 'react-icons/fa';
-import { Sidebar } from './Sidebar';
+import { useState } from "react";
+import { Twirl as Hamburger } from "hamburger-react";
+import { FaSearch } from "react-icons/fa";
+import { Sidebar } from "./Sidebar";
 
-export const Navbar = ({setShowRegister, setShowLogin}) => {
-  const [isOpen, setOpen] = useState(false)
-  
+export const Navbar = ({ setShowRegister, setShowLogin }) => {
+  const [isOpen, setOpen] = useState(false);
 
   return (
-     <nav className="flex justify-evenly relative">
+    <nav className="flex justify-evenly items-center w-full fixed top-0 left-0 bg-backgroundColor  z-10 px-4 py-2">
       <h1 className="text-4xl">homi</h1>
       <div className="flex items-center gap-x-2">
-          <label htmlFor='search-bar'>Where: </label>
-          <input
-            id='search-bar'
-            type="text"
-            className=" w-full px-4 py-1 pl-12 rounded shadow outline-none"
-          />
-          <button className="p-1 focus:outline-none text-textColor md:text-black">
-            <FaSearch />
-          </button>
+        <label htmlFor="search-bar">Where: </label>
+        <input
+          id="search-bar"
+          type="text"
+          className="w-full px-4 py-1 pl-12 rounded shadow outline-none"
+        />
+        <button className="p-1 focus:outline-none text-textColor md:text-black">
+          <FaSearch />
+        </button>
       </div>
       {/* will design the the open navbar */}
       <Hamburger toggled={isOpen} toggle={setOpen} />
-      {isOpen && <Sidebar setShowRegister={setShowRegister} setShowLogin={setShowLogin}/>}
-    </nav> 
+      {isOpen && (
+        <Sidebar
+          setShowRegister={setShowRegister}
+          setShowLogin={setShowLogin}
+        />
+      )}
+    </nav>
   );
 };
-
-
-
-
-
-
