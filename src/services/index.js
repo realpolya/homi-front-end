@@ -13,7 +13,9 @@ const {
 } = user;
 
 const {
-  getProperties
+  getProperties,
+  postProperty,
+  getMyProperties
 } = properties
 
 const {
@@ -33,6 +35,8 @@ const services = {
     updateUser,
 
     getProperties,
+    postProperty,
+    getMyProperties,
 
     getBookings,
     
@@ -48,6 +52,8 @@ export {
     verifyToken,
     updateUser,
     getProperties,
+    postProperty,
+    getMyProperties,
     getBookings,
     getAmenities
 }

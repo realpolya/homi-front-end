@@ -35,8 +35,40 @@ const getProperties = async (query=null) => {
 }
 
 // TODO: postProperty
+const postProperty = async (formData) => {
 
-// TODO: getMyProperties
+    try {
+
+        console.log('services: creating new property')
+        const response = await api.post('properties/', formData)
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
+
+
+const getMyProperties = async () => {
+
+    try {
+
+        console.log('services: getting my properties')
+        const response = await api.get('properties/mine/')
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
 
 // TODO: getMyArchived
 
@@ -49,4 +81,8 @@ const getProperties = async (query=null) => {
 
 /* --------------------------------Exports--------------------------------*/
 
-export { getProperties };
+export { 
+    getProperties,
+    postProperty,
+    getMyProperties
+};
