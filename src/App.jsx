@@ -16,10 +16,10 @@ function App() {
     <>
       <Navbar setShowRegister={setShowRegister} setShowLogin={setShowLogin}/>
       <AppRoutes />
-      <Rodal visible={showRegister} onClose={() => setShowRegister(false)} closeOnEsc="true">
+      <Rodal visible={showRegister} onClose={() => setShowRegister(false)} closeOnEsc={true}>
         <SignUp />
       </Rodal>
-      <Rodal visible={showLogin} onClose={() => setShowLogin(false)} closeOnEsc="true">
+      <Rodal visible={showLogin} onClose={() => setShowLogin(false)} closeOnEsc={true}>
         <SignIn />
       </Rodal>
     </>
