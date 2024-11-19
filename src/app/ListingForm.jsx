@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { dummyAmenities } from "../dummy-data/dummy-amenities";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer"
 
 export const ListingForm = () => {
   const [formData, setFormData] = useState({
