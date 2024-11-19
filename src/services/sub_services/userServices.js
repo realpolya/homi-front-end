@@ -1,10 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
 
-import axios from 'axios';
-
-/* --------------------------------Variables--------------------------------*/
-
-const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
+import api from './apiConfig.js';
 
 /* --------------------------------Functions--------------------------------*/
 
@@ -12,19 +8,9 @@ const signUp = async (formData) => {
     
     try {
 
-        const response = await axios.post(`${BACKEND_URL}users/register/`, formData);
-
-        if (response.data.error) {
-            console.log(response.data.error)
-            throw new Error(response.data.error);
-        }
-
-        if (response.data.access) {
-            localStorage.setItem('token', response.data.access);
-            const user = JSON.parse(atob(response.data.access.split('.')[1]));
-            console.log("Sign up services worked. User is", user)
-            return user;
-        }
+        const response = await api.post('users/register/', formData);
+        localStorage.setItem('token', response.data.access);
+        return response.data.user;
 
     } catch (err) {
         
@@ -35,23 +21,14 @@ const signUp = async (formData) => {
 
 } 
 
-// TODO:
+
 const signIn = async (formData) => {
 
     try {
 
-        const response = await axios.post(`${BACKEND_URL}/auth/sign-in`, formData);
-
-        if (response.data.error) {
-            console.log(response.data.error)
-            throw new Error(response.data.error);
-        }
-
-        if (response.data.token) {
-            localStorage.setItem('token', response.data.token);
-            const user = JSON.parse(atob(response.data.token.split('.')[1]));
-            return user;
-        }
+        const response = await api.post('users/login/', formData);
+        localStorage.setItem('token', response.data.access);
+        return response.data.user;
 
     } catch (err) {
 
@@ -62,24 +39,70 @@ const signIn = async (formData) => {
 
 }
 
-// TODO:
+
 const getUser = () => {
 
     const token = localStorage.getItem('token');
     if (!token) return null;
     const user = JSON.parse(atob(token.split('.')[1]));
+    console.log(user)
     return user;
+    
+}
+
+
+const verifyToken = async () => {
+    
+    const token = localStorage.getItem('token');
+
+    if (token) {
+        const response = await api.get('users/token/refresh/')
+        localStorage.setItem('token', response.data.access);
+        console.log('the user is ', response.data.user)
+        return response.data.user;
+    }
+    
+    console.log('No user')
+    return false;
+    
+}
+
+
+const signOut = () => {
+
+    try {
+        
+        localStorage.removeItem('token');
+        console.log("Signed out")
+        
+    } catch (error) {
+
+        console.log(err.response.data.error);
+        throw err;
+
+    }
 
 }
 
-// TODO:
-const signOut = () => {
 
-    localStorage.removeItem('token');
+const updateUser = async (formData) => {
+
+    try {
+
+        const response = await api.patch('users/profile/', formData);
+        console.log('changed user', response.data.user)
+        return verifyToken();
+
+    } catch (err) {
+        
+        console.log(err.response.data.error);
+        throw err
+
+    }
 
 }
 
 
 /* --------------------------------Exports--------------------------------*/
 
-export { signUp, signIn, getUser, signOut };
+export { signUp, signIn, getUser, signOut, verifyToken, updateUser };
