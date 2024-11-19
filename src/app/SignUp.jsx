@@ -24,7 +24,7 @@ export const SignUp = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="text-2xl font-bold text-gray-800">Welcome To Homi.</h2>
+      <h2 className="text-2xl font-bold text-gray-800">Welcome To homi.</h2>
       <h2>Register Here!</h2>
       
 
@@ -78,7 +78,7 @@ export const SignUp = ({ onSubmit }) => {
 
       <button
         type="submit"
-        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+        className="px-4 py-2 bg-buttonColor text-white rounded-md hover:bg-cardColor"
       >
         Register
       </button>
