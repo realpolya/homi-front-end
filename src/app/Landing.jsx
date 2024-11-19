@@ -1,9 +1,9 @@
 // FIXME: TEMPORARILY TESTING SERVICES HERE
-
 import { useState } from 'react';
 import { signOut, signUp, signIn, getUser, verifyToken, updateUser, getAmenities, getProperties, getMyProperties, 
   getMyArchived, getUserProperties, getSingleProperty, getBookings, getUpcoming, 
   getSingleBooking, getHostBookings, getPropBookings } from "../services/index.js";
+
 
 export const Landing = () => {
   const [user, setUser] = useState(null);
@@ -68,6 +68,7 @@ export const Landing = () => {
     // console.log('amenities are ', amenities)
     // console.log('first amenitys name is', amenities[0].name)
 
+
     // const properties = await getProperties()
     // const properties = await getProperties('type=ca')
     // console.log('properties are', properties)
@@ -102,6 +103,12 @@ export const Landing = () => {
     
   }
 
+
+
+    const properties = await getProperties();
+    console.log("properties are", properties);
+    console.log("first property is", properties[0]);
+  };
 
 
   return (
