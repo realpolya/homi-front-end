@@ -2,15 +2,15 @@
 import { useState } from 'react';
 import { signOut, signUp, signIn, getUser, verifyToken, updateUser } from "../services/index.js";
 
-export const Landing = () => {
 
-  const [user, setUser] = useState(null)
+export const Landing = () => {
+  const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
-      username: '',
-      email: '',
-      password: '',
-      passwordConf: '',
-  })
+    username: "",
+    email: "",
+    password: "",
+    passwordConf: "",
+  });
 
   const [logInFormData, setLogInFormData] = useState({
     username: '',
@@ -22,22 +22,16 @@ export const Landing = () => {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     try {
-
       console.log(formData);
       const newUserResponse = await signUp(formData);
-      console.log(newUserResponse)
+      console.log(newUserResponse);
       setUser(newUserResponse);
-
     } catch (err) {
-
-      console.log(err)
-    
+      console.log(err);
     }
-
-  }
+  };
 
   const handleChangeSignIn = (e) => {
     setLogInFormData({ ...logInFormData, [e.target.name]: e.target.value });
@@ -78,7 +72,7 @@ export const Landing = () => {
 
 
   return (
-    <div>Landing?
+    <main>Landing?
 
       {/* <form onSubmit={handleSubmit} className="sign-form">
 
@@ -170,11 +164,7 @@ export const Landing = () => {
           
       <button type="submit" onClick={handleSignOut}>Test button</button>
 
-    </div>
+    </main>
+    );
 
-
-
-  );
-
-
-}
+};

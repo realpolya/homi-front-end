@@ -78,13 +78,13 @@ export const Listing = () => {
   // }, [])
 
   return (
-    <div>
+    <main>
       <h1>Listings</h1>
       <div className="listing-cards-container">
         {listings.map((listing) => (
           <ListingCard key={listing.id} listing={listing} />
         ))}
       </div>
-    </div>
+    </main>
   );
 };
