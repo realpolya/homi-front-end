@@ -4,7 +4,11 @@ import { NavLink } from "react-router-dom";
 //import { AuthedUserContext } from "../services/sub_services/userServices";
 
 export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
+
+//const { user } = useContext(AuthedUserContext);
+
   //const { user } = useContext(AuthedUserContext);
+
 
   const authenticatedOptions = (
     <>
@@ -35,11 +39,15 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
           </NavLink>
         </li>
         <li>
+
+          <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}>
+
           <NavLink
             className="nav-link"
             to="/about"
             onClick={() => setOpen(false)}
           >
+
             About homi
           </NavLink>
         </li>
@@ -52,6 +60,18 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
       <div className="p-4">
         <ul>
           <li>
+
+            <button onClick={() => {
+              setShowRegister(true)
+              setOpen(false)
+            }}>Register</button>
+          </li>
+          <li>
+            <button onClick={() => {
+              setShowLogin(true)
+              setOpen(false)
+            }}>Log In</button>
+
             <button
               onClick={() => {
                 setShowRegister(true);
@@ -70,6 +90,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
             >
               Log In
             </button>
+
           </li>
         </ul>
         <nav>
