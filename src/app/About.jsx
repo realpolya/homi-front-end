@@ -73,17 +73,17 @@ const TeamMemberCard = ({ member }) => {
 
 export const About = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex-grow p-8">
+    <main className="flex flex-col min-h-screen">
+      <div className="flex-grow p-1">
         <h1 className="text-4xl text-left text-textColor mb-8">
           Meet your homi-es
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 p-10 ">
           {teamMembers.map((member, index) => (
             <TeamMemberCard key={index} member={member} />
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
