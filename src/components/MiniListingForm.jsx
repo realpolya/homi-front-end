@@ -9,7 +9,7 @@ export const MiniListingForm = ({ required }) => {
   const [checkOutDate, setCheckOutDate] = useState("");
   // This allows default to set for zero for pricing after pricing is inputed then 0 will update to the pricing of the reservation
   const [total, setTotal] = useState(0);
-
+const pricePerNight = 100
   const handleCheckInChange = (e) => {
     setCheckInDate(e.target.value);
   };
@@ -30,6 +30,31 @@ export const MiniListingForm = ({ required }) => {
   // const oneDay = 3456
   // const nightsTotal = Math.round(Math.abs((checkIn - checkOut) / pricePerNight))
   // }
+
+  const calculateTotal = () => {
+    if (!checkInDate || !checkOutDate) {
+      alert("You must select both check in and checkout date");
+      return;
+    }
+
+    // Parse dates to calculate the difference in days
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+
+    if (checkOut <= checkIn) {
+      alert("Please select a check in date!");
+      return;
+    }
+
+    const differenceInTime = checkOut - checkIn;
+    const numberOfNights = differenceInTime / (1000 * 60 * 60 * 24); 
+
+    // This will calcualte the total cost
+    const calculatedTotal = numberOfNights * pricePerNight;
+    setTotal(calculatedTotal);
+
+    alert(`You booked ${numberOfNights} night(s) and this will cost $${calculatedTotal}.`);
+  };
 
   return (
     <div className="flex justify-self-end border rounded-lg p-4 bg-white w-48 text-center min-h-[400px]">
@@ -67,7 +92,8 @@ export const MiniListingForm = ({ required }) => {
         <input
           type="number"
           id="total"
-          value={{ total }} // maybe make this a 0 for default
+          value={total}
+          readOnly
           onChange={handleTotalChange}
           required={required}
           className="border rounded-lg p-2 mb-4 w-full text-center"
@@ -76,7 +102,7 @@ export const MiniListingForm = ({ required }) => {
         <button
           type="button"
           // Had to change this into a function in order for this to functionable. I orgnally had onClick={{total}} with no handlchange
-          onClick={() => console.log(total)}
+          onClick={calculateTotal}
           className="bg-backgroundColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full"
         >
           reserve
