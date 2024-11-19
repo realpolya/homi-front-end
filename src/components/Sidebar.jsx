@@ -3,8 +3,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 //import { AuthedUserContext } from "../services/sub_services/userServices";
 
-export const Sidebar = ({ setShowRegister, setShowLogin, user }) => {
-//const { user } = useContext(AuthedUserContext);
+export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
+  //const { user } = useContext(AuthedUserContext);
 
   const authenticatedOptions = (
     <>
@@ -30,12 +30,16 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user }) => {
     <>
       <ul>
         <li>
-          <NavLink className="nav-link" to="/">
+          <NavLink className="nav-link" to="/" onClick={() => setOpen(false)}>
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink className="nav-link" to="/about">
+          <NavLink
+            className="nav-link"
+            to="/about"
+            onClick={() => setOpen(false)}
+          >
             About homi
           </NavLink>
         </li>
@@ -48,10 +52,24 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user }) => {
       <div className="p-4">
         <ul>
           <li>
-            <button onClick={() => setShowRegister(true)}>Register</button>
+            <button
+              onClick={() => {
+                setShowRegister(true);
+                setOpen(false);
+              }}
+            >
+              Register
+            </button>
           </li>
           <li>
-            <button onClick={() => setShowLogin(true)}>Log In</button>
+            <button
+              onClick={() => {
+                setShowLogin(true);
+                setOpen(false);
+              }}
+            >
+              Log In
+            </button>
           </li>
         </ul>
         <nav>
