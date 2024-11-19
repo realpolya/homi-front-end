@@ -9,9 +9,9 @@ import { SignIn } from "./app/Signin";
 import { Navbar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { getUser } from "./services/sub_services/userServices";
-import { Listings } from "./app/Listings";
-import { Bookings } from "./app/Bookings";
-import { Amenities } from "./components/Amenities";
+// import { Listings } from "./app/Listings";
+// import { Bookings } from "./app/Bookings";
+// import { Amenities } from "./components/Amenities";
 
 
 
@@ -20,9 +20,9 @@ import { Amenities } from "./components/Amenities";
 function App() {
   const [activeModal, setActiveModal] = useState(null);
   const [user, setUser] = useState(null);
-  const [listings, setListings] = useState([]);
-  const [bookings, setBookings] = useState([]);
-  const [amenities, setAmenities] = useState([]);
+  // const [listings, setListings] = useState([]);
+  // const [bookings, setBookings] = useState([]);
+  // const [amenities, setAmenities] = useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -36,41 +36,41 @@ function App() {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        const listingsData = await listings();
-        setListings(listingsData);
-      } catch (err) {
-        console.error("Failed to get user data", err);
-      }
-    };
-    fetchListings();
-  }, []);
+  // useEffect(() => {
+  //   const fetchListings = async () => {
+  //     try {
+  //       const listingsData = await listings();
+  //       setListings(listingsData);
+  //     } catch (err) {
+  //       console.error("Failed to get listings", err);
+  //     }
+  //   };
+  //   fetchListings();
+  // }, []);
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const bookingsData = await bookings();
-        setBookings(bookingsData);
-      } catch (err) {
-        console.error("Failed to get user data", err);
-      }
-    };
-    fetchBookings();
-  }, []);
+  // useEffect(() => {
+  //   const fetchBookings = async () => {
+  //     try {
+  //       const bookingsData = await bookings();
+  //       setBookings(bookingsData);
+  //     } catch (err) {
+  //       console.error("Failed to get bookings", err);
+  //     }
+  //   };
+  //   fetchBookings();
+  // }, []);
 
-  useEffect(() => {
-    const fetchAmenities = async () => {
-      try {
-        const amenitiesData = await amenities();
-        setAmenities(amenitiesData);
-      } catch (err) {
-        console.error("Failed to get user data", err);
-      }
-    };
-    fetchAmenities();
-  }, []);
+  // useEffect(() => {
+  //   const fetchAmenities = async () => {
+  //     try {
+  //       const amenitiesData = await amenities();
+  //       setAmenities(amenitiesData);
+  //     } catch (err) {
+  //       console.error("Failed to get amenities", err);
+  //     }
+  //   };
+  //   fetchAmenities();
+  // }, []);
 
   const handleSignUp = (data) => {
     setUser(data);
