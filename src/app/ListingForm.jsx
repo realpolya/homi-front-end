@@ -34,87 +34,17 @@ export const ListingForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <main className="flex justify-center items-center min-h-screen">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-screen-lg p-8 rounded-lg shadow-lg text-white"
-        style={{ backgroundColor: "#204E4A" }} // Form green background
+        style={{ backgroundColor: "#204E4A" }}
       >
-
         <div className="grid grid-cols-2 gap-8">
           {/* Title */}
-          <div className="flex items-center">
-            <label htmlFor="title" className="block text-sm font-bold w-1/3">
-              Title:
-
-        {/* Title */}
-        <div className="grid grid-cols-4 items-center gap-4">
-          <label htmlFor="title" className="block text-sm font-bold col-span-1">
-            Title:
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="w-full p-2 rounded-md text-gray-900 bg-white focus:outline-none col-span-3"
-            placeholder="Enter a descriptive title"
-          />
-        </div>
-
-        {/* Description */}
-        <div className="grid grid-cols-4 items-start gap-4">
-          <label
-            htmlFor="description"
-            className="block text-sm font-bold col-span-1"
-          >
-            Description:
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="w-full p-2 h-24 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
-            placeholder="Describe the property"
-          ></textarea>
-        </div>
-
-        {/* Cancellation Policy */}
-        <div className="grid grid-cols-4 items-center gap-4">
-          <label
-            htmlFor="cancellationPolicy"
-            className="block text-sm font-bold col-span-1"
-          >
-            Cancellation Policy:
-          </label>
-          <select
-            id="cancellationPolicy"
-            name="cancellationPolicy"
-            value={formData.cancellationPolicy}
-            onChange={handleChange}
-            className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
-          >
-            <option value="" disabled>
-              Select a cancellation policy
-            </option>
-            <option value="flexible">Flexible: Full refund 1 day prior</option>
-            <option value="moderate">Moderate: Full refund 5 days prior</option>
-            <option value="strict">Strict: Full refund 7 days prior</option>
-          </select>
-        </div>
-
-        {/* Address Fields */}
-        <h3 className="font-bold mb-2">Address</h3>
-        <div className="grid grid-cols-2 gap-6">
           <div className="grid grid-cols-4 items-center gap-4">
-            <label
-              htmlFor="street"
-              className="block text-sm font-bold col-span-1"
-            >
-              Street:
-
+            <label htmlFor="title" className="block text-sm font-bold col-span-1">
+              Title:
             </label>
             <input
               type="text"
@@ -122,17 +52,14 @@ export const ListingForm = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="w-full p-2 rounded-md text-gray-900 bg-white focus:outline-none"
+              className="w-full p-2 rounded-md text-gray-900 bg-white focus:outline-none col-span-3"
               placeholder="Enter a descriptive title"
             />
           </div>
 
           {/* Description */}
-          <div className="flex items-center">
-            <label
-              htmlFor="description"
-              className="block text-sm font-bold w-1/3"
-            >
+          <div className="grid grid-cols-4 items-start gap-4">
+            <label htmlFor="description" className="block text-sm font-bold col-span-1">
               Description:
             </label>
             <textarea
@@ -140,19 +67,43 @@ export const ListingForm = () => {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full p-2 h-24 rounded-md bg-white text-gray-900 focus:outline-none"
+              className="w-full p-2 h-24 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
               placeholder="Describe the property"
             ></textarea>
           </div>
 
+          {/* Cancellation Policy */}
+          <div className="grid grid-cols-4 items-center gap-4">
+            <label
+              htmlFor="cancellationPolicy"
+              className="block text-sm font-bold col-span-1"
+            >
+              Cancellation Policy:
+            </label>
+            <select
+              id="cancellationPolicy"
+              name="cancellationPolicy"
+              value={formData.cancellationPolicy}
+              onChange={handleChange}
+              className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
+            >
+              <option value="" disabled>
+                Select a cancellation policy
+              </option>
+              <option value="flexible">Flexible: Full refund 1 day prior</option>
+              <option value="moderate">Moderate: Full refund 5 days prior</option>
+              <option value="strict">Strict: Full refund 7 days prior</option>
+            </select>
+          </div>
+
           {/* Address Fields */}
-          <div>
+          <div className="col-span-2">
             <h3 className="font-bold mb-2">Address</h3>
             {["Street", "City", "State", "Zip"].map((field) => (
-              <div className="flex items-center mb-4" key={field.toLowerCase()}>
+              <div className="grid grid-cols-4 items-center gap-4 mb-4" key={field.toLowerCase()}>
                 <label
                   htmlFor={field.toLowerCase()}
-                  className="block text-sm font-bold w-1/3"
+                  className="block text-sm font-bold col-span-1"
                 >
                   {field}:
                 </label>
@@ -162,75 +113,37 @@ export const ListingForm = () => {
                   value={formData[field.toLowerCase()]}
                   onChange={handleChange}
                   placeholder={`Enter ${field.toLowerCase()}`}
-                  className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none"
+                  className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
                 />
               </div>
             ))}
           </div>
 
-          {/* Cancellation Policy and Other Fields */}
-          <div>
-            <div className="flex items-center mb-4">
-              <label
-                htmlFor="cancellationPolicy"
-                className="block text-sm font-bold w-1/3"
-              >
-                Cancellation Policy:
+          {/* Other Fields */}
+          {[
+            { label: "Max Guests", name: "maxGuests" },
+            { label: "Cleaning Fee", name: "cleaningFee" },
+            { label: "Price Per Night", name: "pricePerNight" },
+          ].map((field) => (
+            <div className="grid grid-cols-4 items-center gap-4" key={field.name}>
+              <label htmlFor={field.name} className="block text-sm font-bold col-span-1">
+                {field.label}:
               </label>
-              <select
-                id="cancellationPolicy"
-                name="cancellationPolicy"
-                value={formData.cancellationPolicy}
+              <input
+                type="number"
+                name={field.name}
+                value={formData[field.name]}
                 onChange={handleChange}
-                className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none"
-              >
-                <option value="" disabled>
-                  Select a cancellation policy
-                </option>
-                <option value="flexible">
-                  Flexible: Full refund 1 day prior
-                </option>
-                <option value="moderate">
-                  Moderate: Full refund 5 days prior
-                </option>
-                <option value="strict">Strict: Full refund 7 days prior</option>
-              </select>
+                placeholder={`Enter ${field.label.toLowerCase()}`}
+                className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none col-span-3"
+              />
             </div>
-
-            {[
-              { label: "Max Guests", name: "maxGuests" },
-              { label: "Cleaning Fee", name: "cleaningFee" },
-              { label: "Price Per Night", name: "pricePerNight" },
-            ].map((field) => (
-              <div className="flex items-center mb-4" key={field.name}>
-                <label
-                  htmlFor={field.name}
-                  className="block text-sm font-bold w-1/3"
-                >
-                  {field.label}:
-                </label>
-                <input
-                  type="number"
-                  name={field.name}
-                  value={formData[field.name]}
-                  onChange={handleChange}
-                  placeholder={`Enter ${field.label.toLowerCase()}`}
-                  className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none"
-                />
-              </div>
-            ))}
-          </div>
+          ))}
 
           {/* Amenities */}
           <div className="col-span-2">
             <h3 className="font-bold mb-2">Amenities</h3>
-            <div
-              className="overflow-y-auto max-h-48 p-4 bg-gray-100 rounded-full"
-              style={{
-                border: "2px solid #ccc",
-                borderRadius: "30px",
-              }}
-            >
+            <div className="overflow-y-auto max-h-48 p-4 bg-gray-100 rounded-lg border border-gray-300">
               <div className="grid grid-cols-4 gap-4">
                 {dummyAmenities.map((amenity) => (
                   <label
@@ -271,8 +184,6 @@ export const ListingForm = () => {
           </button>
         </div>
       </form>
-    </div>
+    </main>
   );
 };
-
-export default ListingForm;
