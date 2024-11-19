@@ -3,6 +3,8 @@ import { SingleLeft } from "../components/SingleLeft";
 import { Amenities } from "../components/Amenities";
 import { SingleRight } from "../components/SingleRight";
 
+
+
 export const SingleListingBooking = () => {
   return (
     <div className="w-full">
@@ -12,5 +14,6 @@ export const SingleListingBooking = () => {
         <SingleRight />
       </div>
     </div>
+    </>
   );
 };
