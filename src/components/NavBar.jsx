@@ -27,6 +27,7 @@ export const Navbar = ({ setShowRegister, setShowLogin }) => {
       <Hamburger toggled={isOpen} toggle={setOpen} />
       {isOpen && (
         <Sidebar
+          setOpen={setOpen}
           setShowRegister={setShowRegister}
           setShowLogin={setShowLogin}
         />

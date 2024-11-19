@@ -1,4 +1,5 @@
 // FIXME: TEMPORARILY TESTING SERVICES HERE
+<<<<<<< HEAD
 import { useState } from "react";
 import {
   signOut,
@@ -8,6 +9,11 @@ import {
   verifyToken,
   updateUser,
 } from "../services/index.js";
+=======
+import { useState } from 'react';
+import { signOut, signUp, signIn, getUser, verifyToken, updateUser, getAmenities } from "../services/index.js";
+
+>>>>>>> rb
 
 export const Landing = () => {
   const [user, setUser] = useState(null);
@@ -64,11 +70,20 @@ export const Landing = () => {
     return !(logInFormData.username && logInFormData.password);
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     // return signOut()
     // getUser()
+<<<<<<< HEAD
     verifyToken();
   };
+=======
+    const amenities = await getAmenities()
+    console.log('amenities are ', amenities)
+    console.log('first amenitys name is', amenities[0].name)
+    
+  }
+
+>>>>>>> rb
 
   return (
     <main>
