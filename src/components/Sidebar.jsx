@@ -5,9 +5,6 @@ import { NavLink } from "react-router-dom";
 
 export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
 
-//const { user } = useContext(AuthedUserContext);
-
-  //const { user } = useContext(AuthedUserContext);
 
 
   const authenticatedOptions = (
@@ -40,7 +37,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
         </li>
         <li>
 
-          <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}>
+          <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}></NavLink>
 
           <NavLink
             className="nav-link"
