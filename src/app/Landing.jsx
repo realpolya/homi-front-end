@@ -66,7 +66,8 @@ export const Landing = () => {
     // console.log('amenities are ', amenities)
     // console.log('first amenitys name is', amenities[0].name)
 
-    const properties = await getProperties()
+    // const properties = await getProperties()
+    const properties = await getProperties('type=ca')
     console.log('properties are', properties)
     console.log('first property is', properties[0])
     
@@ -167,9 +168,11 @@ export const Landing = () => {
           </button>
         </div>
       </form>
+
       <button type="submit" onClick={handleSignOut}>
         Test button
       </button>
+
     </main>
   );
 };
