@@ -4,12 +4,21 @@ import api from './apiConfig.js';
 
 /* --------------------------------Functions--------------------------------*/
 
-// TODO: get persons's bookings
-const getBookings = () => {
 
-    
+const getBookings = async () => {
 
-    console.log('getting bookings')
+    try {
+
+        console.log('services: getting my bookings')
+        const response = await api.get('bookings/')
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
 
 }
 
