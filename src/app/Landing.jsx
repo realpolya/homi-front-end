@@ -102,33 +102,29 @@ export const Landing = () => {
             />
           </div>
 
-        <div className="sign-form-div">
-          <label className="sign-form-label" htmlFor="password">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            name="password"
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="sign-form-div">
+            <label className="sign-form-label" htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={formData.password}
+              name="password"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="sign-form-div">
-          <label className="sign-form-label" htmlFor="passwordConf">
-            Confirm Password:
-          </label>
-          <input
-            type="password"
-            id="passwordConf"
-            value={formData.passwordConf}
-            name="passwordConf"
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="sign-form-div">
+            <label className="sign-form-label" htmlFor="passwordConf">Confirm Password:</label>
+            <input
+              type="password"
+              id="passwordConf"
+              value={formData.passwordConf}
+              name="passwordConf"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
           <div className="sign-form-div-buttons">
             <button type="submit" disabled={isFormInvalid()}>Sign Up</button>
