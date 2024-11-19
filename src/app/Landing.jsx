@@ -1,4 +1,5 @@
 // FIXME: TEMPORARILY TESTING SERVICES HERE
+
 import { useState } from "react";
 import {
   signOut,
@@ -8,6 +9,7 @@ import {
   verifyToken,
   updateUser,
   getAmenities,
+  getProperties,
 } from "../services/index.js";
 
 export const Landing = () => {
@@ -68,9 +70,14 @@ export const Landing = () => {
   const handleSignOut = async () => {
     // return signOut()
     // getUser()
-    const amenities = await getAmenities();
-    console.log("amenities are ", amenities);
-    console.log("first amenitys name is", amenities[0].name);
+
+    // const amenities = await getAmenities()
+    // console.log('amenities are ', amenities)
+    // console.log('first amenitys name is', amenities[0].name)
+
+    const properties = await getProperties();
+    console.log("properties are", properties);
+    console.log("first property is", properties[0]);
   };
 
   return (
