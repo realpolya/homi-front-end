@@ -18,16 +18,20 @@ export const FivePicture = () => {
 
   return (
     <div className="grid grid-cols-3 grid-rows-2 gap-4 rounded-lg  p-4">
+
       { photos ? 
       (photos.map(photo => {
+
         return <img
-        src={photo.link}
-        alt={listing.title}
-        className="w-full h-full object-cover rounded-lg"
+          src={photo.link}
+          alt={listing.title}
+          className="w-full h-full object-cover rounded-lg"
         />
+        
       })) : 
       (<p>Photos not loaded yet...</p>)
       }
+
     </div>
   );
 
