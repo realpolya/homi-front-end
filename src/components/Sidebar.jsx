@@ -1,16 +1,67 @@
 import React from 'react'
+import { NavLink } from "react-router-dom";
 
-export const Sidebar = ({setShowRegister, setShowLogin}) => {
+
+
+export const Sidebar = ({setShowRegister, setShowLogin, user}) => {
+  const [isUser, setIsUser] = useState(null)
+
+  const userLogin = () => {
+    setIsUser({username: ""})
+  }
+
+  const authenticatedOptions = (
+    <>
+      <NavLink className="nav-link" to="/bookings">
+        Bookings
+      </NavLink>
+      <NavLink className="nav-link" to="/listing-form">
+        Listing Form
+      </NavLink>
+      <NavLink className="nav-link" to="booking-form">
+        Book a Property
+      </NavLink>
+      <NavLink className="nav-link" to="listing">
+        Listings
+      </NavLink>
+      <NavLink className="nav-link" to="/sign-out">
+        Log Out
+      </NavLink>
+    </>
+  );
+
+  const unauthenticatedOptions = (
+    <>
+<ul>
+<li><NavLink className="nav-link" to="/">
+        Home
+      </NavLink></li>
+      <li><NavLink className="nav-link" to="/about">
+        About homi
+        </NavLink></li>
+      </ul> 
+    </>
+  );
+
+
+
+
   return (
-    <div className="absolute top-full left-0 w-full bg-white shadow-md transform transition-transform duration-300 ease-in-out">
+    <nav className="absolute top-full left-0 w-full space-y-4 text-lg font-semibold bg-white shadow-md transform transition-transform duration-300 ease-in-out">
       <div className="p-4">
-        <ul className="space-y-4 text-lg font-semibold">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><button onClick={() => setShowRegister(true)}>Register</button></li>
-          <li><button onClick={() => setShowLogin(true)}>Log In</button></li>
+        <ul>
+       <li><button onClick={() => setShowRegister(true)}>Register</button></li>
+        <li><button onClick={() => setShowLogin(true)}>Log In</button></li>
         </ul>
+      <nav>
+      {user && <div className="link welcome">Welcome, {user.username}</div>}
+      <div className="nav-links">
+        {user ? authenticatedOptions : unauthenticatedOptions}
+        </div>
+        </nav>
       </div>
-    </div>
+      </nav>
+   
   );
 }
+
