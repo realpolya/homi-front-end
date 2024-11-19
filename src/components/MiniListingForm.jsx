@@ -4,9 +4,9 @@ export const MiniListingForm = ({ required }) => {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [total, setTotal] = useState(0);
-
-  const pricePerNight = 100; // Set a fixed price per night
-
+// This is just giving price per night for each listingas if it was a hotel. However each listing is a different price but this works for now
+  const pricePerNight = 100;
+// Check in and check out date update functionality 
   const handleCheckInChange = (e) => {
     setCheckInDate(e.target.value);
   };
@@ -14,10 +14,10 @@ export const MiniListingForm = ({ required }) => {
   const handleCheckOutChange = (e) => {
     setCheckOutDate(e.target.value);
   };
-
+// This shows you have to select both check in and check out date in order to reserve a listing
   const calculateTotal = () => {
     if (!checkInDate || !checkOutDate) {
-      alert("You must select both check-in and check-out dates.");
+      alert("select both check-in and check-out dates.");
       return;
     }
 
@@ -28,13 +28,13 @@ export const MiniListingForm = ({ required }) => {
       alert("Check-out date must be after check-in date.");
       return;
     }
-
+// Chat gpt reserach: Chatgpt shows it is best to do the multiplation in miliseconds to days to get total price
     const differenceInTime = checkOut - checkIn;
-    const numberOfNights = differenceInTime / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+    const numberOfNights = differenceInTime / (1000 * 60 * 60 * 24); 
     const calculatedTotal = numberOfNights * pricePerNight;
 
-    setTotal(calculatedTotal); // Update the total cost dynamically
-    alert(`You booked ${numberOfNights} night(s) for a total of $${calculatedTotal}.`);
+    setTotal(calculatedTotal); 
+    alert(`You reserved ${numberOfNights} this listing for the total price of $${calculatedTotal}.`);
   };
 
   return (
@@ -70,7 +70,9 @@ export const MiniListingForm = ({ required }) => {
         <input
           type="number"
           id="total"
-          value={total} // Display the calculated total
+          // This allows display of total after calculation
+          value={total} 
+          // This keeps from any client side inputting a number in the price box
           readOnly
           required={required}
           className="border rounded-lg p-2 mb-4 w-full text-center bg-gray-100"
