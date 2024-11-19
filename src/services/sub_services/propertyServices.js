@@ -125,6 +125,22 @@ const getSingleProperty = async (id) => {
 }
 
 // TODO: putProperty (achiving properties is included here)
+const putProperty = async (id, formData) => {
+
+    try {
+
+        console.log("services: updating property with id ", id)
+        const response = await api.put(`properties/${id}/`, formData)
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
 
 
 /* --------------------------------Exports--------------------------------*/
@@ -135,5 +151,6 @@ export {
     getMyProperties,
     getMyArchived,
     getUserProperties,
-    getSingleProperty
+    getSingleProperty,
+    putProperty
 };
