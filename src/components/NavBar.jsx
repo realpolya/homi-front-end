@@ -4,7 +4,8 @@ import { FaSearch } from 'react-icons/fa';
 import { Sidebar } from './Sidebar';
 
 export const Navbar = ({setShowRegister, setShowLogin}) => {
-    const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false)
+  
 
   return (
      <nav className="flex justify-evenly relative">
@@ -20,6 +21,7 @@ export const Navbar = ({setShowRegister, setShowLogin}) => {
             <FaSearch />
           </button>
       </div>
+      {/* will design the the open navbar */}
       <Hamburger toggled={isOpen} toggle={setOpen} />
       {isOpen && <Sidebar setShowRegister={setShowRegister} setShowLogin={setShowLogin}/>}
     </nav> 
