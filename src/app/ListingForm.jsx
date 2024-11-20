@@ -61,9 +61,17 @@ export const ListingForm = () => {
   // Add a new input field
   const addImageInput = () => {
     if (photos.length < 5) {
-      setPhotos([...photos, { link: "" }]);
+      setPhotos(prevPhotos =>([...prevPhotos, { link: "" }]));
     }
   };
+
+  const removeImageInput = (idx) => {
+    if (photos.length > 1) {
+      const updatedPhotos = [...photos];
+      updatedPhotos.splice(idx, 1)
+      setPhotos(updatedPhotos);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -138,15 +146,15 @@ export const ListingForm = () => {
             >
               Description:
             </label>
-            <textarea
+            <input
+              type="textarea"
               id="description"
               name="description"
               value={formData.description}
               onChange={handleChange}
               className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none"
               placeholder="Describe the property"
-              style={{ minHeight: "4rem" }} // Use minHeight instead of fixed height
-            ></textarea>
+            />
           </div>
 
           {/* State Dropdown */}
@@ -405,33 +413,41 @@ export const ListingForm = () => {
           </div>
 
           <div className="mb-6">
-            <h2 className="text-center text-lg font-bold text-gray-200 mb-4">
-              Add Images
-            </h2>
-            {photos.map((photo, index) => (
-              <div key={index}>
-                <label className="text-sm font-medium text-gray-200 mb-2">
-                  Image {index + 1} URL:
-                </label>
-                <input
-                  type="text"
-                  value={photo.link}
-                  onChange={(e) => handlePhotoChange(index, e.target.value)}
-                  placeholder="Enter image URL"
-                  className="text-sm font-medium text-gray-900 text-center"
-                />
-              </div>
-            ))}
-            {photos.length < 5 && (
-              <button
-                type="button"
-                onClick={addImageInput}
-                className="mt-4 px-4 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary-dark"
-              >
-                Add Image
-              </button>
-            )}
-          </div>
+  <h2 className="text-center text-lg font-bold text-gray-200 mb-4">
+    Add Images
+  </h2>
+  {photos.map((photo, index) => (
+    <div key={index} className="flex items-center space-x-4 mb-4">
+      <label className="text-sm font-medium text-gray-200 mb-2">
+        Image {index + 1} URL:
+      </label>
+      <input
+        type="text"
+        value={photo.link}
+        onChange={(e) => handlePhotoChange(index, e.target.value)}
+        placeholder="Enter image URL"
+        className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none"
+      />
+      {index === 0 ? null : (<button
+        type="button"
+        onClick={() => removeImageInput(index)}
+        className="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-400"
+      >
+        Remove Photo
+      </button>)}
+    </div>
+  ))}
+  {photos.length < 5 && (
+    <button
+      type="button"
+      onClick={addImageInput}
+      className="mt-4 px-4 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary-dark"
+    >
+      Add Another Image
+    </button>
+  )}
+</div>
+
 
           {/* Amenities */}
           <div className="col-span-2 flex justify-center">
@@ -442,6 +458,7 @@ export const ListingForm = () => {
                 style={{
                   border: "2px solid #ccc",
                   borderRadius: "30px",
+                  height: 255,
                 }}
               >
                 <div className="grid grid-cols-3 gap-4">
