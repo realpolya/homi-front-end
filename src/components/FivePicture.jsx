@@ -39,11 +39,12 @@ export const FivePicture = () => {
       ) : (null)}
 
       { photos ? 
-      (photos.map(photo => {
+      (photos.map((photo, i) => {
 
         return <img
           src={photo.link}
           alt={listing.title}
+          key={i}
           className="w-full h-full object-cover rounded-lg aspect-square"
         />
 
