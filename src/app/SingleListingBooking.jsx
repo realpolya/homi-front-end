@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 
 import { SingleLeft } from "../components/SingleLeft";
 import { SingleRight } from "../components/SingleRight";
@@ -37,9 +37,15 @@ export const SingleListingBooking = () => {
   return (
     <SingleContext.Provider value={singleObject} >
 
-      <main className="w-full flex flex-row gap-x-6">
-        <SingleLeft />
-        <SingleRight />
+      <main>
+        <div>
+          <h1>Love</h1>
+          <Link>back to listings</Link>
+        </div>
+        <div className="w-full h-[90%] flex flex-row gap-x-6">
+          <SingleLeft />
+          <SingleRight />
+        </div>
       </main>
 
     </SingleContext.Provider>
