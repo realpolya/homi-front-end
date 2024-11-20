@@ -34,32 +34,29 @@ export const Dashboard = () => {
     }
   }, [isHost]); // Re-run when `isHost` changes
 
-
-
   useEffect(() => {
     if (isHost) {
       const fetchHostProperties = async () => {
         try {
           const properties = await getMyProperties();
-
           console.log(properties);
+
           setMyProperties(
             properties.map((prop) => ({
               id: prop.id,
               prop,
             }))
           );
-
-          setMyProperties(properties);
-
-
-          setLoading(false);
-
+        } catch (error) {
+          console.error("Error fetching properties:", error);
+          setError("Failed to load properties. Please try again.");
+        } finally {
+          setLoading(false); // Ensure loading state is updated
         }
       };
       fetchHostProperties();
     }
-  }, [isHost]); // Only run when `isHost` changes
+  }, [isHost]);
 
   return (
     <main className="flex flex-center h-full gap-x-6">
