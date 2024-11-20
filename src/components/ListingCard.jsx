@@ -11,7 +11,7 @@ export function ListingCard({ listing }) {
     >
       <div className="relative w-full h-36">
         <img
-          src={listing.first_photo?.link || "default-image.jpg"}
+          src={listing.first_photo?.link || "/img/defaulthouse.jpg"}
           alt={`Image of ${listing.title}`}
           className="w-full h-full object-cover object-center"
           loading="lazy"
