@@ -97,7 +97,7 @@ export const MyUserInfo = ({ isHost }) => {
         </div>
 
         {/* Update Profile Button */}
-        <div className="mt-6">
+        <div className="flex justify-center">
           <button
             onClick={openModal}
             className="bg-buttonColor text-white py-2 px-4 rounded hover:bg-alternativeColor"
