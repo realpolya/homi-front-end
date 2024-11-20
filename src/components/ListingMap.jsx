@@ -10,7 +10,6 @@ const mapboxStyle = 'mapbox://styles/polinastepanova/clgsbvw0q001l01qm6uwhceyp/d
 export function ListingMap() {
 
     mapboxgl.accessToken = MAPBOX_KEY;
-    console.log(MAPBOX_KEY)
 
     const mapContainerRef = useRef(null)
 
@@ -38,23 +37,6 @@ export function ListingMap() {
             setLng(listing.address.longitude)
 
         }
-
-        const geojson = {
-            type: 'FeatureCollection',
-            features: [
-                {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [lng, lat]
-                    },
-                    properties: {
-                        title: 'Project',
-                        description: 'Project Location'
-                    }
-                }
-            ]
-        };
 
         const map = new mapboxgl.Map({
             container: mapContainerRef.current,
