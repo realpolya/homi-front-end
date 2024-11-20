@@ -11,7 +11,9 @@ export const Dashboard = () => {
   const isHost = location.pathname.includes("host"); // Check if the path is for a host
   const [upcomingBookings, setUpcomingBookings] = useState([]);
   const [myProperties, setMyProperties] = useState([]);
-  const [loading, setLoading] = useState(true); // Track loading state for host properties
+
+  const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState("");
 
   // Fetch upcoming bookings when the component mounts
@@ -28,21 +30,31 @@ export const Dashboard = () => {
         }
       };
 
-      fetchUpcomingBookings(); // Fetch the bookings
+      fetchUpcomingBookings();
     }
   }, [isHost]); // Re-run when `isHost` changes
+
+
 
   useEffect(() => {
     if (isHost) {
       const fetchHostProperties = async () => {
         try {
           const properties = await getMyProperties();
+
+          console.log(properties);
+          setMyProperties(
+            properties.map((prop) => ({
+              id: prop.id,
+              prop,
+            }))
+          );
+
           setMyProperties(properties);
-        } catch (error) {
-          setError("Error loading your properties.");
-          console.error(error);
-        } finally {
-          setLoading(false); // Set loading to false after fetching
+
+
+          setLoading(false);
+
         }
       };
       fetchHostProperties();
@@ -59,7 +71,20 @@ export const Dashboard = () => {
       {/* Middle Column */}
       <div className="w-3/6 bg-alternativeColor p-4 rounded-lg">
         {isHost ? (
-          <p>Your Active Listings</p>
+          <div>
+            <p>Your Active Listings</p>
+            <div className="flex flex-wrap gap-4">
+              {loading ? (
+                <p>Loading...</p>
+              ) : myProperties.length > 0 ? (
+                myProperties.map((property) => (
+                  <ListingCard key={property.id} listing={property.prop} />
+                ))
+              ) : (
+                <p>No active listings.</p>
+              )}
+            </div>
+          </div>
         ) : (
           <div>
             <p>Your Upcoming Bookings</p>
