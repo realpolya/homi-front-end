@@ -32,14 +32,14 @@ export const Landing = () => {
 
   
   return (
-    <main className="flex flex-row w-full h-full">
+    <main className="flex lg:flex-row flex-col w-full h-full">
 
-        <div className="m-4 w-1/2 h-full flex-column">
+        <div className="m-4 w-1/2 lg:h-full flex-col">
           <h1 className="text-left text-2xl h-[10%]">homi is where you find your next homey stay</h1>
           < LandingMap />
         </div>
 
-        <div className="m-4 w-1/2 h-full bg-alternativeColor rounded-lg flex flex-col justify-center">
+        <div className="m-4 lg:w-1/2 xl:h-full h-auto overflow-y-auto bg-alternativeColor rounded-lg flex flex-col xl:justify-center">
 
             <p className="text-left p-6 text-2xl w-full text-lightTextColor hover:text-logoColor"><Link to="/listings">Recent Listings</Link></p>
 
@@ -47,7 +47,7 @@ export const Landing = () => {
               loading ? (
                 <p className="text-lightTextColor">No properties yet...</p>
               ) : (
-                <div className="h-full w-full grid grid-rows-2 grid-cols-2 gap-4">
+                <div className="h-full w-full xl:grid xl:grid-rows-2 xl:grid-cols-2 gap-4">
                   {recentListings.length === 0 ? (null) : (
 
                     recentListings.map((listing) => {

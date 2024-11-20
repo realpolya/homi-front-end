@@ -7,7 +7,8 @@ export function ListingCard({ listing }) {
     <Link
       to={`/listing/${listing.id}`}
       className="block 
-        w-72 h-72
+        2xl:w-72 2xl:h-72
+        w-60 h-60
         rounded-lg overflow-hidden 
         shadow-md hover:shadow-lg 
         transition-shadow m-5
