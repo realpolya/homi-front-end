@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { signIn } from "../services/sub_services/userServices";
+import { Link } from "react-router-dom";
 
-export const SignIn = ({ onSubmit }) => {
+
+
+
+
+
+export const SignIn = ({ onSubmit, setActiveModal }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -26,6 +32,7 @@ export const SignIn = ({ onSubmit }) => {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit} className="space-y-4">
 
       <h2 className="text-2xl font-bold text-textColor text-center mb-4">Log In</h2>
@@ -76,9 +83,14 @@ export const SignIn = ({ onSubmit }) => {
           Log In
         </button>
       </div>
-      <p>Don't have an account?<a href="/">Register</a></p>
-      
+      <br />
     </form>
+    <p>
+          Don't have an account?{" "}
+          <button onClick={() => setActiveModal("register")} className="text-buttonColor hover:underline">
+            Register
+          </button></p>
+    </>
   );
 };
 
