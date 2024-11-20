@@ -4,12 +4,15 @@ import { MyUserInfo } from "../components/MyUserInfo";
 import { HostBookings } from "../components/MyBookingsListings";
 import { BookingMap } from "../components/BookingMap";
 import { ListingCard } from "../components/ListingCard";
-import { getUpcoming } from "../services"; // Import your service
+import { getUpcoming, getMyProperties } from "../services"; // Import your service
 
 export const Dashboard = () => {
   const location = useLocation();
   const isHost = location.pathname.includes("host"); // Check if the path is for a host
   const [upcomingBookings, setUpcomingBookings] = useState([]);
+  const [myProperties, setMyProperties] = useState([]);
+  const [loading, setLoading] = useState(true); // Track loading state for host properties
+  const [error, setError] = useState("");
 
   // Fetch upcoming bookings when the component mounts
   useEffect(() => {
@@ -28,6 +31,23 @@ export const Dashboard = () => {
       fetchUpcomingBookings(); // Fetch the bookings
     }
   }, [isHost]); // Re-run when `isHost` changes
+
+  useEffect(() => {
+    if (isHost) {
+      const fetchHostProperties = async () => {
+        try {
+          const properties = await getMyProperties();
+          setMyProperties(properties);
+        } catch (error) {
+          setError("Error loading your properties.");
+          console.error(error);
+        } finally {
+          setLoading(false); // Set loading to false after fetching
+        }
+      };
+      fetchHostProperties();
+    }
+  }, [isHost]); // Only run when `isHost` changes
 
   return (
     <main className="flex flex-center h-full gap-x-6">
