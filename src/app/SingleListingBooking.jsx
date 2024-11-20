@@ -54,7 +54,7 @@ export const SingleListingBooking = () => {
           <Link to="/listings" className="text-logoColor underline hover:text-textColor">back to listings</Link>
         </div>
         <div className="w-full h-[90%] flex flex-row gap-x-6">
-          <SingleLeft />
+          <SingleLeft listingId={listingId}/>
           <SingleRight />
         </div>
       </main>
