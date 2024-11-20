@@ -11,7 +11,9 @@ export const Dashboard = () => {
   const isHost = location.pathname.includes("host"); // Check if the path is for a host
   const [upcomingBookings, setUpcomingBookings] = useState([]);
   const [myProperties, setMyProperties] = useState([]);
+
   const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState("");
 
   // Fetch upcoming bookings when the component mounts
@@ -32,12 +34,14 @@ export const Dashboard = () => {
     }
   }, [isHost]); // Re-run when `isHost` changes
 
-  // Fetch properties for hosts
+
+
   useEffect(() => {
     if (isHost) {
       const fetchHostProperties = async () => {
         try {
           const properties = await getMyProperties();
+
           console.log(properties);
           setMyProperties(
             properties.map((prop) => ({
@@ -45,11 +49,12 @@ export const Dashboard = () => {
               prop,
             }))
           );
-        } catch (error) {
-          setError("Error loading your properties.");
-          console.error(error);
-        } finally {
+
+          setMyProperties(properties);
+
+
           setLoading(false);
+
         }
       };
       fetchHostProperties();
