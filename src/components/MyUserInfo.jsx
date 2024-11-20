@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { verifyToken } from "../services"; // Assuming this service provides the backend fetch functionality.
+import { verifyToken } from "../services";
+import { UpdateUserForm } from "./UpdateUserForm";
 
-export const MyUserInfo = () => {
-  const [user, setUser] = useState(null); // Store user data
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+export const MyUserInfo = ({ isHost }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadUserData = async () => {
       try {
-        const userData = await verifyToken(); // Fetch user data from backend
-        setUser(userData); // Extract "user" object from the response
+        const userData = await verifyToken();
+        setUser(userData);
       } catch (err) {
         setError("Failed to load user information.");
         console.error(err);
@@ -22,9 +24,23 @@ export const MyUserInfo = () => {
     loadUserData();
   }, []);
 
-  if (loading) return <p>Loading...</p>; // Show loading state
-  if (error) return <p>{error}</p>; // Show error message
-  if (!user) return <p>No user data available.</p>; // Handle missing user
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  // If the path is host-specific and the user is not a host, return a message
+  if (isHost && !user?.profile?.is_host) {
+    return <p>You do not have access to this page.</p>;
+  }
+
+  if (!user) return <p>No user data available.</p>;
 
   return (
     <div className="max-w-sm mx-auto p-6 bg-white flex flex-col items-center">
@@ -51,8 +67,8 @@ export const MyUserInfo = () => {
 
         <div className="mb-4">
           <p className="text-gray-500 text-sm">Name:</p>
-          <p className="text-textColor">{`${user.first_name || ""} ${
-            user.last_name || ""
+          <p className="text-textColor">{`${user.first_name || "update"} ${
+            user.last_name || "profile"
           }`}</p>
         </div>
 
@@ -64,17 +80,38 @@ export const MyUserInfo = () => {
         )}
 
         <div className="mb-4">
-          <p className="text-gray-500 text-sm">Host Status:</p>
-          <p className="text-textColor">
-            {user.profile?.is_host ? "Host" : "Not a Host"}
-          </p>
+          {user.profile?.is_host ? (
+            <>
+              <p className="text-gray-500 text-sm">Profits:</p>
+              <p className="text-textColor">
+                ${user.profile?.profits?.toFixed(2)}
+              </p>
+            </>
+          ) : (
+            <div className="flex justify-center">
+              <button className="bg-buttonColor text-white py-2 px-4 rounded hover:bg-alternativeColor">
+                Become a Host!
+              </button>
+            </div>
+          )}
         </div>
 
-        <div className="mb-4">
-          <p className="text-gray-500 text-sm">Profits:</p>
-          <p className="text-textColor">${user.profile?.profits?.toFixed(2)}</p>
+        {/* Update Profile Button */}
+        <div className="mt-6">
+          <button
+            onClick={openModal}
+            className="bg-buttonColor text-white py-2 px-4 rounded hover:bg-alternativeColor"
+          >
+            Update Profile
+          </button>
         </div>
       </div>
+      {/* Modal */}
+      <UpdateUserForm
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        user={user}
+      />
     </div>
   );
 };
