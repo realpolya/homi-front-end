@@ -39,12 +39,33 @@ export function ListingMap() {
 
         }
 
+        const geojson = {
+            type: 'FeatureCollection',
+            features: [
+                {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [lng, lat]
+                    },
+                    properties: {
+                        title: 'Project',
+                        description: 'Project Location'
+                    }
+                }
+            ]
+        };
+
         const map = new mapboxgl.Map({
             container: mapContainerRef.current,
             style: mapboxStyle,
             center: [lng, lat], // starting position [lng, lat]. Note that lat must be set between -90 and 90
             zoom: 14
         });
+
+        new mapboxgl.Marker({ color: '#65B6A3', rotation: 0 })
+        .setLngLat([lng, lat])
+        .addTo(map);
 
         return () => map.remove();
 
