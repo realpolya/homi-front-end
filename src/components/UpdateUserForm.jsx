@@ -63,7 +63,7 @@ export const UpdateUserForm = ({ isOpen, closeModal, user, refreshUser }) => {
 
   return (
     isOpen && (
-      <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+      <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
         <div className="bg-white rounded-lg p-6 w-full max-w-4xl">
           <h2 className="text-xl font-semibold mb-6">Update Profile</h2>
 
