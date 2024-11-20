@@ -13,7 +13,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
 
   const authenticatedOptions = (
     <>
-    <ul className="flex flex-col gap-2 w-rounded-lg bg-backgroundColor p-2">
+    <ul className="flex-col w-rounded-lg   p-4">
     <li>
           <NavLink className="nav-link" to="/dashboard/guest" onClick={() => setOpen(false)}>
             Home
@@ -80,8 +80,10 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
   );
 
   return (
-    <nav className="absolute top-full left-0 w-full space-y-4 text-lg font-semibold bg-white shadow-md transform transition-transform duration-300 ease-in-out">
-      <div className="p-4">
+    <nav className={`absolute top-20 right-20 h-full w-1/4 max-w-sm bg-logoColor shadow-md transform transition-transform duration-300 ease-in-out ${
+      setOpen ? "translate-y-6" : "translate-x-full"
+    }`}>
+      <div className="p-6">
         <nav>
           {user && <div className="link welcome">Welcome, {user.username}</div>}
           <div className="nav-links">
