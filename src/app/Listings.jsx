@@ -72,13 +72,22 @@ export const Listings = () => {
       <h1 className="text-left mb-6 text-2xl">All Listings</h1>
 
       <SortBar setListings={setListings} setSorting={setSorting}/>
-      {loading ? (<p>No properties yet</p>) : (<div className="listing-cards-container flex flex-row flex-wrap">
-        {listings.length &&
-          listings.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
-          ))}
-      
-      </div>)}
+
+      {
+        loading ? (
+          <p>No properties yet...</p>
+        ) : (
+          <div className="listing-cards-container flex flex-row flex-wrap">
+            {listings.length === 0 ? (
+              <p>No listings matched your criteria...</p>
+            ) : (
+              listings.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} />
+              ))
+            )}
+          </div>
+        )
+      }
       
     </main>
 
