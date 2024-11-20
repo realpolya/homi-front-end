@@ -47,10 +47,12 @@ export function ListingMap() {
     
     
     return (
-        <>
+        <div className="w-full h-1/3 p-4">
             { loading && (<p>No map yet</p>)}
-            <div ref={mapContainerRef} style={{ width: '500px', height: '500px' }}></div>
-        </>
+            <div ref={mapContainerRef} 
+            className="w-full h-full rounded-lg"
+            ></div>
+        </div>
         
     )
 }
