@@ -13,7 +13,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
 
   const authenticatedOptions = (
     <>
-    <ul>
+    <ul className="flex flex-col gap-2 w-rounded-lg bg-backgroundColor p-2">
     <li>
           <NavLink className="nav-link" to="/dashboard/guest" onClick={() => setOpen(false)}>
             Home
