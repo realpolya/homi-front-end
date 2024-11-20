@@ -60,7 +60,6 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
               setShowLogin(true)
               setOpen(false)
             }}>Log In</button>
-
           </li>
       </ul>
     </>
