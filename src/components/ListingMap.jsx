@@ -32,19 +32,24 @@ export function ListingMap() {
 
         setLoading(false)
 
+        if (listing && listing.address) {
+
+            setLat(listing.address.latitude)
+            setLng(listing.address.longitude)
+
+        }
+
         const map = new mapboxgl.Map({
-            container: mapContainerRef.current, // container ID
+            container: mapContainerRef.current,
             style: mapboxStyle,
             center: [lng, lat], // starting position [lng, lat]. Note that lat must be set between -90 and 90
-            zoom: 11 // starting zoom
+            zoom: 14
         });
 
         return () => map.remove();
 
     }, [listing, mapContainerRef, MAPBOX_KEY])
 
-    
-    
     
     return (
         <div className="w-full h-1/3 p-4">
