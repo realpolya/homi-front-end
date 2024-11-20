@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { LandingMap } from '../components/LandingMap.jsx'
@@ -12,6 +12,24 @@ export const Landing = () => {
   const [loading, setLoading] = useState(true)
 
   const { properties } = useContext(AppContext);
+
+
+  useEffect(() => {
+
+    if (properties) {
+      let fourListings;
+      fourListings = Array.from(properties)
+
+      if (properties.length > 4) {
+        fourListings.length = 4
+      }
+
+      setRecentListings(fourListings);
+      setLoading(false)
+    }
+
+  }, [properties])
+
   
   return (
     <main className="flex flex-row w-full h-full">
@@ -21,7 +39,7 @@ export const Landing = () => {
           < LandingMap />
         </div>
 
-        <div className="m-4 w-1/2 h-full bg-alternativeColor rounded-lg">
+        <div className="m-4 w-1/2 h-full bg-alternativeColor rounded-lg flex flex-col justify-center">
 
             <p className="text-left p-6 text-2xl w-full text-lightTextColor hover:text-logoColor"><Link to="/listings">Recent Listings</Link></p>
 
@@ -29,11 +47,13 @@ export const Landing = () => {
               loading ? (
                 <p className="text-lightTextColor">No properties yet...</p>
               ) : (
-                <div className="listing-cards-container flex flex-row flex-wrap">
-                  {listings.length === 0 ? (null) : (
-                    listings.map((listing) => (
-                      <ListingCard key={listing.id} listing={listing} />
-                    ))
+                <div className="h-full w-full grid grid-rows-2 grid-cols-2 gap-4">
+                  {recentListings.length === 0 ? (null) : (
+
+                    recentListings.map((listing) => {
+                      return <ListingCard key={listing.id} listing={listing} />
+                    })
+
                   )}
                 </div>
               )
