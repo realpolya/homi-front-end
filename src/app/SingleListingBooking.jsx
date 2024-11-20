@@ -12,6 +12,7 @@ export const SingleListingBooking = () => {
 
   const location = useLocation();
   const [listing, setListing] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // extract id from url :listingId
   const { listingId } = useParams();
@@ -30,7 +31,17 @@ export const SingleListingBooking = () => {
       fetchListing(listingId)
     }
 
-  }, [])
+  }, [location.pathname])
+
+
+  useEffect(() => {
+
+    if (listing) {
+      setLoading(false)
+    }
+    
+  }, [listing])
+
 
   const singleObject = { listing }
 
@@ -38,9 +49,9 @@ export const SingleListingBooking = () => {
     <SingleContext.Provider value={singleObject} >
 
       <main>
-        <div>
-          <h1>Love</h1>
-          <Link>back to listings</Link>
+        <div className="w-full flex flex-col sm:flex-row justify-between mb-6">
+          {loading ? (null) : (<h1 className="text-left text-2xl">{listing.title}</h1>)}
+          <Link to="/listings" className="text-logoColor underline hover:text-textColor">back to listings</Link>
         </div>
         <div className="w-full h-[90%] flex flex-row gap-x-6">
           <SingleLeft />

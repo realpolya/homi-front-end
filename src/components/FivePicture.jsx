@@ -28,7 +28,7 @@ export const FivePicture = () => {
 
 
   return (
-    <div className="grid grid-cols-3 grid-rows-2 gap-4 rounded-lg h-[40%]">
+    <div className="grid grid-cols-3 grid-rows-2 gap-4 rounded-lg h-[38%]">
 
       { firstPhoto ? (
         <img
