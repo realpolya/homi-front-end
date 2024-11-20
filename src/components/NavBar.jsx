@@ -9,7 +9,7 @@ export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
   const navigate = useNavigate();
   const [isOpen, setOpen] = useState(false);
   const [whereData, setWhereData] = useState('')
-
+  
   const handleWhereChange = (e) => setWhereData(e.target.value)
   const handleSubmit = (e) => {
 

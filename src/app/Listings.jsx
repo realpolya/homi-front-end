@@ -12,28 +12,49 @@ export const Listings = () => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sorting, setSorting] = useState(true);
+  const [searchData, setSearchData] = useState('')
 
-  const whereData = location.state?.whereData;
-  console.log("WhereData is ", whereData)
-
+  
   const fetchWhereData = async (data) => {
-
+    
     const query = `where=${data}`
     console.log('fetchWhereData is firing ', query)
     const fetchedData = await services.getProperties(query)
     console.log('fetched where data is ', fetchedData)
     setListings(fetchedData)
-    return fetchedData
-
+    
   }
 
+  // restore properties
   useEffect(() => {
 
-    if (whereData.length > 0) {
-
-      const whereListings = fetchWhereData(whereData);
+    if (!sorting) {
+      setListings(properties);
+      setSearchData('');
       setLoading(false);
+    }
 
+  }, [sorting, properties])
+
+  
+  // active searching
+  useEffect(() => {
+    
+    if (location.state) {
+      setSearchData(location.state.whereData)
+      setSorting(true)
+    } 
+    
+  }, [location.state])
+
+  // fetch or do initial load
+  useEffect(() => {
+
+    if (searchData.length > 0) {
+
+      fetchWhereData(searchData);
+      setLoading(false);
+      
     }
     else if (properties) {
 
@@ -42,7 +63,8 @@ export const Listings = () => {
  
     }
 
-  }, [location.pathname, properties, sorting, whereData]);
+  }, [location.pathname, properties, searchData]);
+
 
   return (
 

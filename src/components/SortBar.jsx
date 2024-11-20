@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../services/sub_services/apiConfig';
 import services from '../services/index.js'
 
 export function SortBar({ setListings, setSorting }) {
+
+  let location = useLocation()
+  const navigate = useNavigate()
+
   const [filterData, setFilterData] = useState('');
   const [sortData, setSortData] = useState('');
   const [checkInDate, setCheckInDate] = useState('');
@@ -12,16 +17,23 @@ export function SortBar({ setListings, setSorting }) {
     console.log('restoring listings')
     setSorting(false)
     setFilterData('')
+    setSortData('')
+    setCheckInDate('')
+    setCheckOutDate('')
+    window.history.replaceState({}, document.title, window.location.pathname);
+    // navigate("/listings", { replace: true, state: null })
   };
 
   const handleFilterChange = (e) => {
     setFilterData(e.target.value);
     fetchProperties({ type: e.target.value });
+    setSorting(true)
   };
 
   const handleSortChange = (e) => {
     setSortData(e.target.value);
     fetchProperties({ sort: e.target.value });
+    setSorting(true)
   };
 
   const handleCheckInChange = (e) => setCheckInDate(e.target.value);
@@ -31,6 +43,7 @@ export function SortBar({ setListings, setSorting }) {
     e.preventDefault();
     if (checkInDate && checkOutDate) {
       fetchProperties({ start_date: checkInDate, end_date: checkOutDate });
+      setSorting(true)
     }
   };
 
