@@ -65,18 +65,18 @@ export const Dashboard = () => {
   }, [isHost]);
 
   return (
-    <main className="flex flex-center h-full gap-x-6">
+    <main className="flex flex-center  h-full gap-x-6">
       {/* Left Column */}
-      <div className="w-2/6 bg-whiteColor p-4 rounded-lg">
+      <div className="w-2/6 bg-whiteColor p-4 rounded-lg overflow-y-auto">
         <MyUserInfo isHost={isHost} />
       </div>
 
       {/* Middle Column */}
-      <div className="w-3/6 bg-alternativeColor p-4 rounded-lg">
+      <div className="w-3/6  overflow-y-auto bg-alternativeColor p-4 rounded-lg">
         {isHost ? (
           <div>
             <p>Your Active Listings</p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex   flex-wrap gap-4">
               {loading ? (
                 <p>Loading...</p>
               ) : myProperties.length > 0 ? (
@@ -105,7 +105,7 @@ export const Dashboard = () => {
       </div>
 
       {/* Right Column */}
-      <div className="w-2/6 bg-whiteColor p-4 rounded-lg">
+      <div className="w-2/6 bg-whiteColor p-4 rounded-lg overflow-y-auto">
         {isHost ? <HostBookings hostBookings={hostBookings} /> : <BookingMap />}
       </div>
     </main>
