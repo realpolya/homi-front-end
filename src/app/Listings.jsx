@@ -69,7 +69,7 @@ export const Listings = () => {
   return (
 
     <main>
-      <h1>Listings</h1>
+      <h1 className="text-left mb-6 text-2xl">All Listings</h1>
 
       <SortBar setListings={setListings} setSorting={setSorting}/>
       {loading ? (<p>No properties yet</p>) : (<div className="listing-cards-container flex flex-row flex-wrap">

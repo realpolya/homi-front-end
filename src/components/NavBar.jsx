@@ -42,7 +42,7 @@ export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
   }
 
   return (
-    <nav ref={navbarRef} className="flex justify-evenly items-center w-full fixed top-0 left-0 bg-backgroundColor  z-10 px-4 py-2">
+    <nav ref={navbarRef} className="flex justify-evenly items-center w-full fixed top-0 left-0 bg-backgroundColor  z-10 px-4 py-3">
 
       <NavLink to="/" className="text-5xl text-logoColor">
         homi
@@ -55,7 +55,7 @@ export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
           type="text"
           value={whereData}
           onChange={handleWhereChange}
-          className="w-full px-4 py-1 pl-12 rounded shadow outline-none"
+          className="w-full px-4 py-1 pl-2 rounded shadow outline-none"
         />
         <button className="p-1 focus:outline-none text-textColor md:text-black" 
         type="submit">
