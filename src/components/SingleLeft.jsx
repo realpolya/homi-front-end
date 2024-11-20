@@ -16,7 +16,7 @@ export const SingleLeft = () => {
 
     if (listing) {
 
-      setHost(listing.user)
+      setHost(listing.user_info.username)
       setPrice(listing.price_per_night)
 
     }
@@ -30,7 +30,7 @@ export const SingleLeft = () => {
       <FivePicture />
 
       <div className="w-full flex flex-col sm:flex-row justify-between mb-6">
-        <p>Hosted by {host}</p>
+        <p>Hosted by <span className="text-logoColor font-semibold">{host}</span></p>
         <p><span className="text-alternativeColor font-semibold">${price}</span> per night</p>
       </div>
 
