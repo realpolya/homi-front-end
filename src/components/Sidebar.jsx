@@ -4,13 +4,13 @@ import { NavLink, useNavigate} from "react-router-dom";
 import services from '../services/index.js'
 
 export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
-const  navigate = useNavigate();
-const handleLogout = () => {
-  services.signOut()
-  navigate('/')
-  window.location.reload();
+  const  navigate = useNavigate();
+  const handleLogout = () => {
+    services.signOut()
+    setOpen(false)
+    navigate('/')
+  }
 
-}
   const authenticatedOptions = (
     <>
     <ul>
