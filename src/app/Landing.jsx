@@ -14,14 +14,16 @@ export const Landing = () => {
   const { properties } = useContext(AppContext);
   
   return (
-    <main>
-      <h1 className="text-left p-4 text-2xl">Welcome to Homi</h1>
-      <div className="flex flex-row w-full h-5/6">
-        < LandingMap />
+    <main className="flex flex-row w-full h-full">
 
-        <div className="m-4 bg-alternativeColor w-1/2 h-full rounded-lg w-1/2">
+        <div className="m-4 w-1/2 h-full flex-column">
+          <h1 className="text-left text-2xl h-[10%]">homi is where you find your next homey stay</h1>
+          < LandingMap />
+        </div>
 
-            <p className="text-left p-6 text-2xl w-full text-lightTextColor"><Link to="/listings">Recent Listings</Link></p>
+        <div className="m-4 w-1/2 h-full bg-alternativeColor rounded-lg">
+
+            <p className="text-left p-6 text-2xl w-full text-lightTextColor hover:text-logoColor"><Link to="/listings">Recent Listings</Link></p>
 
             {
               loading ? (
@@ -39,7 +41,6 @@ export const Landing = () => {
 
         </div>
 
-      </div>
     </main>
   );
 };
