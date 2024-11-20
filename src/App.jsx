@@ -9,12 +9,9 @@ import { SignUp } from "./app/SignUp";
 import { SignIn } from "./app/Signin";
 import { Navbar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
-
-
 import services from "./services/index.js";
 
 const AppContext = createContext(null);
-
 
 function App() {
 
@@ -54,7 +51,8 @@ function App() {
 
   }, [location.pathname]);
 
-  
+ 
+
   const handleSignUp = (data) => {
     setUser(data);
     setActiveModal(null);
@@ -140,3 +138,4 @@ export { AppContext }
 // const handleSignOut = () => {
 //   setUser(null);
 // };
+
