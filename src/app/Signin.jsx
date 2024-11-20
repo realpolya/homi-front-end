@@ -28,11 +28,9 @@ export const SignIn = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
 
-      <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">Log In</h2>
+      <h2 className="text-2xl font-bold text-textColor text-center mb-4">Log In</h2>
 
-      <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
-        Log In
-      </h2>
+      
 
 
       <div className="flex flex-col">
@@ -78,6 +76,8 @@ export const SignIn = ({ onSubmit }) => {
           Log In
         </button>
       </div>
+      <p>Don't have an account?<a href="/">Register</a></p>
+      
     </form>
   );
 };
