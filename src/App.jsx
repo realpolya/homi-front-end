@@ -82,11 +82,17 @@ function App() {
     setActiveModal(null);
   };
 
+  const handleSignOut = (data) => {
+    setUser(data)
+    setActiveModal(null)
+  }
+
   return (
     <>
       <Navbar
         setShowRegister={() => setActiveModal("register")}
         setShowLogin={() => setActiveModal("login")}
+        setShowSignOut={() => setActiveModal("signOut")}
         user={user}
       />
       <AppRoutes />
@@ -121,6 +127,21 @@ function App() {
         }}
       >
         <SignIn onSubmit={handleSignIn} />
+      </Rodal>
+    {/* signout waiting to be added */} 
+       <Rodal
+        visible={activeModal === "signout"}
+        onClose={() => setActiveModal(null)}
+        closeOnEsc={true}
+        closeMaskOnClick={true}
+        customStyles={{
+          width: "400px",
+          height: "350px",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+      <Signout onSubmit={handleSignOut} />
       </Rodal>
 
       <Footer />
