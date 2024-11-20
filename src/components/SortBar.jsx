@@ -2,7 +2,7 @@ import { useState } from 'react';
 import api from '../services/sub_services/apiConfig';
 import services from '../services/index.js'
 
-function SortBar({ setListings, setSorting }) {
+export function SortBar({ setListings, setSorting }) {
   const [filterData, setFilterData] = useState('');
   const [sortData, setSortData] = useState('');
   const [checkInDate, setCheckInDate] = useState('');
@@ -131,5 +131,3 @@ function SortBar({ setListings, setSorting }) {
     </section>
   );
 }
-
-export default SortBar;

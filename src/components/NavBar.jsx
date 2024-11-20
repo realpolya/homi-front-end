@@ -14,7 +14,9 @@ export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
   const handleSubmit = (e) => {
 
     e.preventDefault();
+    console.log('in navbar where data is ', whereData)
     navigate("/listings", { state: { whereData } })
+    setWhereData('')
 
   }
 
@@ -30,10 +32,12 @@ export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
         <input
           id="search-bar"
           type="text"
+          value={whereData}
+          onChange={handleWhereChange}
           className="w-full px-4 py-1 pl-12 rounded shadow outline-none"
         />
         <button className="p-1 focus:outline-none text-textColor md:text-black" 
-        onClick={handleWhereChange}>
+        type="submit">
             <FaSearch />
         </button>
       </form>
