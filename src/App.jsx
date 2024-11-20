@@ -9,15 +9,15 @@ import { SignIn } from "./app/Signin";
 import { Navbar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { verifyToken } from "./services/sub_services/userServices.js";
-import { signOut } from "./services/index.js";
-import { getProperties, getBookings, getAmenities } from "./services/index.js";
+//import { signOut } from "./services/index.js";
+//import { getProperties, getBookings, getAmenities } from "./services/index.js";
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
   const [user, setUser] = useState(null);
-  const [getProperties, setGetProperties] = useState([]);
-  const [getBookings, setGetBookings] = useState([]);
-  const [getAmenities, setGetAmenities] = useState([]);
+  // const [getProperties, setGetProperties] = useState([]);
+  // const [getBookings, setGetBookings] = useState([]);
+  // const [getAmenities, setGetAmenities] = useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -28,33 +28,33 @@ function App() {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      const listingsData = await getProperties();
-      setGetProperties(listingsData);
-    };
-    fetchListings();
-  }, []);
+  // useEffect(() => {
+  //   const fetchListings = async () => {
+  //     const listingsData = await getProperties();
+  //     setGetProperties(listingsData);
+  //   };
+  //   fetchListings();
+  // }, []);
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      const bookingsData = await getBookings();
-      setGetBookings(bookingsData);
-    };
-    fetchBookings();
-  }, []);
+  // useEffect(() => {
+  //   const fetchBookings = async () => {
+  //     const bookingsData = await getBookings();
+  //     setGetBookings(bookingsData);
+  //   };
+  //   fetchBookings();
+  // }, []);
 
-  useEffect(() => {
-    const fetchAmenities = async () => {
-      const amenitiesData = await getAmenities();
-      setGetAmenities(amenitiesData);
-    };
-    fetchAmenities();
-  }, []);
+  // useEffect(() => {
+  //   const fetchAmenities = async () => {
+  //     const amenitiesData = await getAmenities();
+  //     setGetAmenities(amenitiesData);
+  //   };
+  //   fetchAmenities();
+  // }, []);
 
-  const handleSignOut = () => {
-    setUser(null);
-  };
+  // const handleSignOut = () => {
+  //   setUser(null);
+  // };
 
   const handleSignUp = (data) => {
     setUser(data);
@@ -94,7 +94,7 @@ function App() {
         onClose={() => setActiveModal(null)}
         customStyles={{ width: "400px", height: "350px", borderRadius: "10px" }}
       >
-        <button onClick={signOut}>Sign Out</button>
+        {/* <button onClick={signOut}>Sign Out</button> */}
       </Rodal>
       <Footer />
     </>
