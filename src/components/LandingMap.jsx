@@ -15,13 +15,11 @@ export const LandingMap = () => {
     mapboxgl.accessToken = MAPBOX_KEY;
     const landingMapRef = useRef(null)
 
-    // const [lat, setLat] = useState([40.7128])
-    // const [lng, setLng] = useState([-74.0060])
+    const [lat, setLat] = useState([40.7128])
+    const [lng, setLng] = useState([-74.0060])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-
-        console.log('hi', landingMapRef.current)
 
         if (!landingMapRef.current) {
             console.log('map container is not available at the moment')
@@ -29,8 +27,7 @@ export const LandingMap = () => {
         }
 
         setLoading(false)
-        console.log('loading is false')
-
+        
         const map = new mapboxgl.Map({
             container: landingMapRef.current,
             style: mapboxStyle,
