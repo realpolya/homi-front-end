@@ -28,7 +28,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
       <li><NavLink className="nav-link" to="listing/booking" onClick={() => setOpen(false)}>
         Book a Property
       </NavLink></li>
-     <li><NavLink className="nav-link" to="listing" onClick={() => setOpen(false)}>
+     <li><NavLink className="nav-link" to="listings" onClick={() => setOpen(false)}>
         Listings
       </NavLink></li>
       <li><NavLink className="nav-link" to="/" onClick={handleLogout}>
@@ -80,10 +80,10 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
   );
 
   return (
-    <nav className={`absolute top-20 right-20 h-full w-1/4 max-w-sm bg-logoColor shadow-md transform transition-transform duration-300 ease-in-out ${
+    <nav className={`absolute top-20 right-20 h-full w-1/4 max-w-sm font-serif text-whiteColor bg-alternativeColor rounded-2xl shadow-md transform transition-transform duration-300 ease-in-out  ${
       setOpen ? "translate-y-6" : "translate-x-full"
     }`}>
-      <div className="p-6">
+      <div className=" bg-alternativeColor rounded-2xl p-6">
         <nav>
           {user && <div className="link welcome">Welcome, {user.username}</div>}
           <div className="nav-links">

@@ -107,8 +107,8 @@ export const ListingForm = () => {
     <div className="flex justify-center items-center min-h-screen">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-screen-lg p-8 rounded-lg shadow-lg text-white"
-        style={{ backgroundColor: "#204E4A" }}
+        className="w-full max-w-screen-lg p-8 bg-alternativeColor rounded-lg shadow-lg text-white"
+       
       >
         <div className="grid grid-cols-2 gap-8">
           {/* Title */}
