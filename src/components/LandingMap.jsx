@@ -35,7 +35,7 @@ export const LandingMap = () => {
             container: landingMapRef.current,
             style: mapboxStyle,
             center: [-98.5795, 39.8283], // starting position [lng, lat]. Note that lat must be set between -90 and 90
-            zoom: 2.6
+            zoom: 2.7
         });
 
         // new mapboxgl.Marker({ color: '#65B6A3', rotation: 0 })
@@ -48,7 +48,7 @@ export const LandingMap = () => {
 
     return (
 
-        <div className="p-4 w-1/2 h-full">
+        <div className="m-4 w-1/2 h-full">
             { loading && (<p>No map yet</p>)}
 
             <div ref={landingMapRef} 
