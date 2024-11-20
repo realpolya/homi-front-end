@@ -8,7 +8,7 @@ import { SignUp } from "./app/SignUp";
 import { SignIn } from "./app/Signin";
 import { Navbar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
-//import { verifyToken } from "./services/sub_services/userServices.js";
+import { verifyToken } from "./services/sub_services/userServices.js";
 //import { signOut } from "./services/index.js";
 //import { getProperties, getBookings, getAmenities } from "./services/index.js";
 
@@ -28,13 +28,13 @@ function App() {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      const listingsData = await getProperties();
-      setGetProperties(listingsData);
-    };
-    fetchListings();
-  }, []);
+  // useEffect(() => {
+  //   const fetchProperties = async () => {
+  //     const propertiesData = await getProperties();
+  //     setGetProperties(propertiesData);
+  //   };
+  //   fetchProperties();
+  // }, []);
 
   // useEffect(() => {
   //   const fetchBookings = async () => {
