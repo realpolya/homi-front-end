@@ -71,14 +71,23 @@ export const LandingMap = () => {
             zoom: 2.7
         });
 
-        // new mapboxgl.Marker({ color: '#65B6A3', rotation: 0 })
-        // .setLngLat([lng[0], lat[0]])
-        // .addTo(map);
+        
+        if (markers.length > 0) {
+            
+            markers.forEach(marker => {
+
+                new mapboxgl.Marker({ color: '#65B6A3', rotation: 0 })
+                .setLngLat([marker.longitude, marker.latitude])
+                .addTo(map);
+
+            })
+
+        }
 
 
         return () => map.remove();
 
-    }, [landingMapRef, MAPBOX_KEY])
+    }, [landingMapRef, MAPBOX_KEY, markers])
 
 
     return (
