@@ -82,7 +82,7 @@ export const Listings = () => {
               <p>No listings matched your criteria...</p>
             ) : (
               listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
+                <ListingCard key={listing.id} listing={listing} origin={"listings"} />
               ))
             )}
           </div>
