@@ -29,7 +29,7 @@ export const Dashboard = () => {
       const fetchUpcomingBookings = async () => {
         try {
           const bookings = await getUpcoming();
-          console.log(bookings);
+          console.log("User bookings", bookings);
           setUpcomingBookings(bookings);
         } catch (error) {
           console.error("Error fetching upcoming bookings:", error);
@@ -130,9 +130,10 @@ export const Dashboard = () => {
             <p className="text-lightTextColor">Your Upcoming Bookings</p>
             <div className="flex flex-wrap gap-4">
               {upcomingBookings.length > 0 ? (
-                upcomingBookings.map((booking) => (
-                  <ListingCard key={booking.id} listing={booking.prop} />
-                ))
+                upcomingBookings.map((booking) => {
+                  console.log("Daria's booking", booking);
+                  return <ListingCard key={booking.id} listing={booking.prop} origin={"dashboard"} />
+                })
               ) : (
                 <p>No upcoming bookings.</p>
               )}
