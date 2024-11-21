@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AppContext } from '../App.jsx'
 import { useLocation } from "react-router-dom";
 import { MyUserInfo } from "../components/MyUserInfo";
