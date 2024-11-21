@@ -38,8 +38,8 @@ export const MiniListingForm = ({ required }) => {
   };
 
   return (
-    <div className="flex justify-self-end border rounded-lg p-4 bg-white w-48 text-center min-h-[400px] z-50">
-      <form>
+    <div className="flex flex-col justify-start items-center  p-4 bg-white w-full sm:w-[300px] text-center min-h-[400px] z-50">
+      <form className="w-full">
         <label htmlFor="checkInDate" className="block text-sm font-medium mb-1">
           Check-in Date:
         </label>
@@ -49,7 +49,7 @@ export const MiniListingForm = ({ required }) => {
           value={checkInDate}
           onChange={handleCheckInChange}
           required={required}
-          className="border rounded-lg p-2 mb-4 text-center"
+          className="border rounded-lg p-2 mb-4 w-full text-center"
         />
 
         <label
@@ -61,11 +61,10 @@ export const MiniListingForm = ({ required }) => {
         <input
           type="date"
           id="checkOutDate"
-          // From ternary check out handle change
           value={checkOutDate}
           onChange={handleCheckOutChange}
           required={required}
-          className="border rounded-lg p-2 mb-4 text-center"
+          className="border rounded-lg p-2 mb-4 w-full text-center"
         />
 
         <label htmlFor="total" className="block text-sm font-medium mb-1">
@@ -106,7 +105,7 @@ export const MiniListingForm = ({ required }) => {
 
 // TODO: apply conditional rendering to mini listing form
 // {user ? (
-//   <div className="flex justify-self-end border rounded-lg p-4 bg-white w-48 text-center min-h-[400px]">                
+//   <div className="flex justify-self-end border rounded-lg p-4 bg-white w-48 text-center min-h-[400px]">
 //     <button
 //     type="button"
 //     onClick={() => { navigate(`/listing-form/${listingId}/edit/`) }}
