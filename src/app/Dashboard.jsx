@@ -29,7 +29,6 @@ export const Dashboard = () => {
       const fetchUpcomingBookings = async () => {
         try {
           const bookings = await getUpcoming();
-          console.log("User bookings", bookings);
           setUpcomingBookings(bookings);
         } catch (error) {
           console.error("Error fetching upcoming bookings:", error);
@@ -131,8 +130,11 @@ export const Dashboard = () => {
             <div className="flex flex-wrap gap-4">
               {upcomingBookings.length > 0 ? (
                 upcomingBookings.map((booking) => {
-                  console.log("Daria's booking", booking);
-                  return <ListingCard bookingId={booking.id} listing={booking.prop} origin={"dashboard"} />
+                  return <ListingCard 
+                    bookingId={booking.id} 
+                    listing={booking.prop} 
+                    origin={"dashboard"}
+                    booking={booking} />
                 })
               ) : (
                 <p>No upcoming bookings.</p>
