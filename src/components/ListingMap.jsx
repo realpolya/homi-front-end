@@ -46,7 +46,7 @@ export function ListingMap() {
         });
 
         const el = document.createElement('div');
-        el.style.backgroundImage = `url('../../public/marker.png')`; // Set the PNG image
+        el.style.backgroundImage = `url('/marker.png')`; // Set the PNG image
         el.style.backgroundSize = 'contain'; // Ensure the image fits
         el.style.width = '40px'; // Set marker width
         el.style.height = '40px'; // Set marker height
