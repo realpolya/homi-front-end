@@ -39,7 +39,7 @@ export const EditListingForm = () => {
     try {
       const propertyData = await getSingleProperty(id)
 
-      const formatedPropertyType = {
+      const formattedPropertyType = {
          'EN': 'Entire Place',
          'PR': 'Private Room',
          'SH': 'Shared Room',
@@ -52,20 +52,17 @@ export const EditListingForm = () => {
          'LU': 'Luxury Apartment',
      }[propertyData.property_type]
 
-      const formatedPropertyData = {
+      const formattedPropertyData = {
         ...propertyData,
-        address: {
-            ...propertyData.address,
-        },
         street: propertyData.address.street,
         city: propertyData.address.city,
         state: propertyData.address.state,
         zip_code: propertyData.address.zip_code,
-        property_type: formatedPropertyType,
+        property_type: formattedPropertyType,
         amenities: propertyData.amenities,
       }
 
-      setFormData(formatedPropertyData)
+      setFormData(formattedPropertyData)
       setPhotos(propertyData.photos)
     } catch (error) {
       console.log(error)
@@ -109,7 +106,6 @@ export const EditListingForm = () => {
     const updatedFormData = {
       ...formData,
       address: {
-        ...formData.address,
         street: formData.street,
         city: formData.city,
         state: formData.state,
@@ -141,6 +137,8 @@ export const EditListingForm = () => {
     updatedFormData.property_type = propertyTypeLookup[updatedFormData.property_type]
 
     updatedFormData.photos = photos
+
+    console.log("updated form data is", updatedFormData)
     
     await putProperty(id ,updatedFormData)
 
