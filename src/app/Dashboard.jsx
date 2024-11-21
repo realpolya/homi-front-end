@@ -84,7 +84,10 @@ export const Dashboard = () => {
           if (booking.prop.address) {
             let prevInstance = {
               latitude: booking.prop.address.latitude,
-              longitude: booking.prop.address.longitude
+              longitude: booking.prop.address.longitude,
+              title: booking.prop.title,
+              check_in: booking.check_in_date,
+              check_out: booking.check_out_date
             }
             prevData.push(prevInstance)
           }

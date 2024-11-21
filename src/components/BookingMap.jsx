@@ -37,32 +37,38 @@ export const BookingMap = ({ prev }) => {
 
       setLoading(false)
 
+      const el = document.createElement('div');
+      el.style.backgroundImage = `url('../../public/marker.png')`; // Set the PNG image
+      el.style.backgroundSize = 'contain'; // Ensure the image fits
+      el.style.width = '40px'; // Set marker width
+      el.style.height = '40px'; // Set marker height
+  
+      new mapboxgl.Marker(el, { offset: [0, -20] })
+      .setLngLat([prev.longitude, prev.latitude])
+      .addTo(map);
+
       return () => map.remove();
-      
+
     }
     
-
-    // const el = document.createElement('div');
-    // el.style.backgroundImage = `url('../../public/marker.png')`; // Set the PNG image
-    // el.style.backgroundSize = 'contain'; // Ensure the image fits
-    // el.style.width = '40px'; // Set marker width
-    // el.style.height = '40px'; // Set marker height
-
-    // new mapboxgl.Marker(el, { offset: [0, -20] })
-    // .setLngLat([lng, lat])
-    // .addTo(map);
-
-
 }, [bookingMapRef, MAPBOX_KEY, prev])
 
 
   return (
 
     <div className="w-full h-1/3 p-4 z-0">
-        { loading && (<p>No map yet</p>)}
+
+        { loading && (<p>No booking details yet</p>)}
         <div ref={bookingMapRef} 
         className="w-full h-full rounded-lg z-0"
         ></div>
+
+        { loading ? (null) : (
+          <div className="text-left pt-1">
+            <p className="text-alternativeColor">{prev.title}</p>
+            <p className="italic text-sm">from {prev.check_in} to {prev.check_out}</p>
+          </div>
+        ) }
     </div>
 
   )
