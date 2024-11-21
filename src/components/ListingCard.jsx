@@ -1,10 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function ListingCard({ listing, origin, bookingId }) {
 
+  const location = useLocation();
+
+
   return (
     <Link
-      to={origin === "dashboard" && bookingId ? (`/listing/${listing.id}/booking/${bookingId}`) : (`/listing/${listing.id}`)}
+      to={origin === "dashboard" && bookingId ? (
+        `/listing/${listing.id}/booking/${bookingId}`) : ( origin === "dashboard-host" ? (
+          `/listing/${listing.id}/owner`) : (
+          `/listing/${listing.id}`))
+        }
+
       className="block 
         2xl:w-72 2xl:h-72
         w-60 h-60

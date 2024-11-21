@@ -112,13 +112,13 @@ export const Dashboard = () => {
       <div className="w-3/6  overflow-y-auto bg-alternativeColor p-4 rounded-lg">
         {isHost ? (
           <div>
-            <p>Your Active Listings</p>
+            <p className="text-lightTextColor">Your Active Listings</p>
             <div className="flex   flex-wrap gap-4">
               {loading ? (
                 <p>Loading...</p>
               ) : myProperties.length > 0 ? (
                 myProperties.map((property) => (
-                  <ListingCard key={property.id} listing={property.prop} />
+                  <ListingCard key={property.id} listing={property.prop} bookingId={null} origin={"dashboard-host"} />
                 ))
               ) : (
                 <p>No active listings.</p>
@@ -144,7 +144,7 @@ export const Dashboard = () => {
 
       {/* Right Column */}
       <div className="w-2/6 h-full bg-whiteColor p-4 rounded-lg overflow-y-auto">
-        {isHost ? (null) : <h1>Your Previous Bookings</h1>}
+        {isHost ? (<h1>Bookings of my listings</h1>) : <h1>Your Previous Bookings</h1>}
         {isHost ? (<HostBookings hostBookings={hostBookings} />) : (
           prevBookings.length > 0 ? (
             prevBookings.map((prev, i) => {
