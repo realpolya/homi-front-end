@@ -12,10 +12,28 @@ export const SingleLeft = ({ listingId }) => {
   const user = true;
   const navigate = useNavigate();
 
-  const { listing } = useContext(SingleContext);
+  // const { listing } = useContext(SingleContext);
   const [host, setHost] = useState("");
   const [price, setPrice] = useState(0);
   const [bookings, setBookings] = useState([]);
+  const [listing, setListing] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchPropertyDetails = async (id) => {
+    try {
+      console.log("Fetching property details for ID:", id);
+      const property = await services.getSingleProperty(id); // Use the service function
+      setListing(property);
+      setHost(property.user_info.username);
+      setPrice(property.price_per_night);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching property details:", error.message);
+      setError("Failed to load property details.");
+      setLoading(false);
+    }
+  };
 
   const fetchBookings = async (id) => {
     try {
@@ -31,6 +49,7 @@ export const SingleLeft = ({ listingId }) => {
   useEffect(() => {
     if (listingId) {
       fetchBookings(listingId);
+      fetchPropertyDetails(listingId);
     }
   }, [listingId]);
 
@@ -62,7 +81,7 @@ export const SingleLeft = ({ listingId }) => {
           <Calendar bookings={bookings} />
         </div>
         <div className="w-full sm:w-[300px]">
-          <MiniListingForm />
+          <MiniListingForm bookings={bookings} listing={listing} required />
         </div>
       </div>
     </div>
