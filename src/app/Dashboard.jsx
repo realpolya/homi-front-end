@@ -4,16 +4,15 @@ import { MyUserInfo } from "../components/MyUserInfo";
 import { HostBookings } from "../components/MyBookingsListings";
 import { BookingMap } from "../components/BookingMap";
 import { ListingCard } from "../components/ListingCard";
-import { getUpcoming, getMyProperties } from "../services"; // Import your service
+import { getUpcoming, getMyProperties, getHostBookings } from "../services"; // Import your service
 
 export const Dashboard = () => {
   const location = useLocation();
   const isHost = location.pathname.includes("host"); // Check if the path is for a host
   const [upcomingBookings, setUpcomingBookings] = useState([]);
   const [myProperties, setMyProperties] = useState([]);
-
+  const [hostBookings, setHostBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState("");
 
   // Fetch upcoming bookings when the component mounts
@@ -36,10 +35,15 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if (isHost) {
-      const fetchHostProperties = async () => {
+      const fetchHostData = async () => {
         try {
-          const properties = await getMyProperties();
-          console.log(properties);
+          const [properties, bookings] = await Promise.all([
+            getMyProperties(),
+            getHostBookings(),
+          ]);
+
+          console.log("Host Properties:", properties);
+          console.log("Host Bookings:", bookings);
 
           setMyProperties(
             properties.map((prop) => ({
@@ -47,30 +51,32 @@ export const Dashboard = () => {
               prop,
             }))
           );
+          setHostBookings(bookings);
         } catch (error) {
-          console.error("Error fetching properties:", error);
-          setError("Failed to load properties. Please try again.");
+          console.error("Error fetching host data:", error);
+          setError("Failed to load host data. Please try again.");
         } finally {
-          setLoading(false); // Ensure loading state is updated
+          setLoading(false);
         }
       };
-      fetchHostProperties();
+
+      fetchHostData();
     }
   }, [isHost]);
 
   return (
-    <main className="flex flex-center h-full gap-x-6">
+    <main className="flex flex-center  h-full gap-x-6">
       {/* Left Column */}
-      <div className="w-2/6 bg-whiteColor p-4 rounded-lg">
+      <div className="w-2/6 bg-whiteColor p-4 rounded-lg overflow-y-auto">
         <MyUserInfo isHost={isHost} />
       </div>
 
       {/* Middle Column */}
-      <div className="w-3/6 bg-alternativeColor p-4 rounded-lg">
+      <div className="w-3/6  overflow-y-auto bg-alternativeColor p-4 rounded-lg">
         {isHost ? (
           <div>
             <p>Your Active Listings</p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex   flex-wrap gap-4">
               {loading ? (
                 <p>Loading...</p>
               ) : myProperties.length > 0 ? (
@@ -99,8 +105,8 @@ export const Dashboard = () => {
       </div>
 
       {/* Right Column */}
-      <div className="w-2/6 bg-whiteColor p-4 rounded-lg">
-        {isHost ? <HostBookings /> : <BookingMap />}
+      <div className="w-2/6 bg-whiteColor p-4 rounded-lg overflow-y-auto">
+        {isHost ? <HostBookings hostBookings={hostBookings} /> : <BookingMap />}
       </div>
     </main>
   );

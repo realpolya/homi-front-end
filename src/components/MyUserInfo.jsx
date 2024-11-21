@@ -124,7 +124,7 @@ export const MyUserInfo = ({ isHost }) => {
           ) : (
             <button
               onClick={handleBecomeHost}
-              className="bg-buttonColor text-white py-2 px-4 rounded hover:bg-alternativeColor"
+              className="bg-buttonColor text-whiteColor py-2 px-4 rounded hover:bg-alternativeColor"
             >
               Become a Host!
             </button>
@@ -135,7 +135,7 @@ export const MyUserInfo = ({ isHost }) => {
         <div className="flex justify-center mt-4">
           <button
             onClick={openModal}
-            className="bg-buttonColor text-white py-2 px-4 rounded hover:bg-alternativeColor"
+            className="bg-buttonColor text-whiteColor py-2 px-4 rounded hover:bg-alternativeColor"
           >
             Update Profile
           </button>
