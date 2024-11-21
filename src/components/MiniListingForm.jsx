@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { BookingForm } from "./BookingForm";
+import { useNavigate } from "react-router-dom";
+import { ListingForm } from "../app/ListingForm";
+import { EditListingForm } from "../app/EditListingForm";
+
+
+
+
+
+
 
 export const MiniListingForm = ({ bookings, required, listing }) => {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [total, setTotal] = useState(0);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState("");
 
   if (!listing) {
@@ -19,6 +29,10 @@ export const MiniListingForm = ({ bookings, required, listing }) => {
     const formattedDate = date.toISOString().split("T")[0];
     return bookings.some((booking) => booking.check_in_date === formattedDate);
   };
+
+//const navigate = useNavigate(ListingForm)
+
+
 
   const handleCheckInChange = (e) => {
     const date = new Date(e.target.value);
@@ -122,7 +136,9 @@ export const MiniListingForm = ({ bookings, required, listing }) => {
         >
           Reserve
         </button>
+        
       </form>
+      
 
       {isBookingModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -138,3 +154,4 @@ export const MiniListingForm = ({ bookings, required, listing }) => {
     </div>
   );
 };
+
