@@ -38,7 +38,7 @@ export const MiniListingForm = ({ required }) => {
   };
 
   return (
-    <div className="flex justify-self-end border rounded-lg p-4 bg-white w-48 text-center min-h-[400px]">
+    <div className="flex justify-self-end border rounded-lg p-4 bg-white w-48 text-center min-h-[400px] z-50">
       <form>
         <label htmlFor="checkInDate" className="block text-sm font-medium mb-1">
           Check-in Date:
