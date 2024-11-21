@@ -26,11 +26,9 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
     <li> <NavLink className="nav-link" to="/listing-form" onClick={() => setOpen(false)}>
         Listing Form
       </NavLink></li>
-      <li><NavLink className="nav-link" to="listing/booking" onClick={() => setOpen(false)}>
-        Book a Property
-      </NavLink></li>
+      
      <li><NavLink className="nav-link" to="listings" onClick={() => setOpen(false)}>
-        Listings
+        Book a listing
       </NavLink></li>
       <li><NavLink className="nav-link" to="/" onClick={handleLogout}>
         Log Out
