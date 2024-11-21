@@ -8,11 +8,18 @@ import services from "../services/index.js"
 
 const SingleContext = createContext(null);
 
+const pageStateOptions = [
+  "listing",
+  "booking",
+  "host-listing"
+]
+
 export const SingleListingBooking = () => {
 
   const location = useLocation();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [pageState, setPageState] = useState('listing')
 
   // extract id from url :listingId
   const { listingId } = useParams();
@@ -42,8 +49,20 @@ export const SingleListingBooking = () => {
     
   }, [listing])
 
+  useEffect(() => {
 
-  const singleObject = { listing }
+    if (location.pathname.includes("booking")) {
+      setPageState("booking")
+    } else if (location.pathname.includes("owner")) {
+      setPageState("host-listing")
+    } else {
+      setPageState("listing")
+    }
+
+  }, [location.pathname])
+
+
+  const singleObject = { listing, pageState }
 
   return (
     <SingleContext.Provider value={singleObject} >
