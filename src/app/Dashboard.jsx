@@ -132,7 +132,7 @@ export const Dashboard = () => {
               {upcomingBookings.length > 0 ? (
                 upcomingBookings.map((booking) => {
                   console.log("Daria's booking", booking);
-                  return <ListingCard key={booking.id} listing={booking.prop} origin={"dashboard"} />
+                  return <ListingCard bookingId={booking.id} listing={booking.prop} origin={"dashboard"} />
                 })
               ) : (
                 <p>No upcoming bookings.</p>
