@@ -74,15 +74,30 @@ export const LandingMap = () => {
         
         if (markers.length > 0) {
             
+            // markers.forEach(marker => {
+
+            //     new mapboxgl.Marker({ color: '#65B6A3', rotation: 0 })
+            //     .setLngLat([marker.longitude, marker.latitude])
+            //     .addTo(map);
+
+            // })
+
             markers.forEach(marker => {
-
-                new mapboxgl.Marker({ color: '#65B6A3', rotation: 0 })
-                .setLngLat([marker.longitude, marker.latitude])
-                .addTo(map);
-
-            })
+                // Create a custom HTML element for the marker
+                const el = document.createElement('div');
+                el.style.backgroundImage = `url('../../public/marker.png')`; // Set the PNG image
+                el.style.backgroundSize = 'contain'; // Ensure the image fits
+                el.style.width = '40px'; // Set marker width
+                el.style.height = '40px'; // Set marker height
+        
+                // Add the custom marker to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat([marker.longitude, marker.latitude])
+                    .addTo(map);
+            });
 
         }
+
 
 
         return () => map.remove();
