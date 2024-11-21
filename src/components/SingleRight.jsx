@@ -27,8 +27,7 @@ export const SingleRight = () => {
 
       <p className="text-left pl-4 italic">City: <span className="text-logoColor font-semibold">{cityState}</span>. Exact location will be displayed upon booking</p>
       < ListingMap />
-      {/* This shows the calendar and listing form side by side */}
-      <div className="flex flex-row space-x-6  p-4 rounded-lg items-stretch">
+      <div className="flex flex-row space-x-6  p-4 rounded-lg items-stretch w-full">
         <Amenities />
         <ListingDescription />
       </div>
