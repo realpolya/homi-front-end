@@ -200,13 +200,13 @@ export const UpdateUserForm = ({ isOpen, closeModal, user, refreshUser }) => {
               <button
                 type="button"
                 onClick={closeModal}
-                className="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 text-sm"
+                className="bg-buttonColor text-gray-700 py-2 px-4 rounded hover:bg-alternativeColor text-sm"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 text-sm"
+                className="bg-buttonColor text-white py-2 px-4 rounded hover:bg-alternativeColor text-sm"
               >
                 Save Changes
               </button>
