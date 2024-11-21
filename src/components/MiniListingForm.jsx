@@ -104,6 +104,18 @@ export const MiniListingForm = ({ required }) => {
   );
 };
 
+// TODO: apply conditional rendering to mini listing form
+// {user ? (
+//   <div className="flex justify-self-end border rounded-lg p-4 bg-white w-48 text-center min-h-[400px]">                
+//     <button
+//     type="button"
+//     onClick={() => { navigate(`/listing-form/${listingId}/edit/`) }}
+//     className="h-20 bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+//   >
+//     Edit Listing
+//   </button>
+//   </div>
+
 // import React, { useState } from "react";
 // import { BookingForm } from "../app/BookingForm";
 
