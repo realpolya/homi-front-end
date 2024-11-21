@@ -14,7 +14,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
 
   const authenticatedOptions = (
     <>
-    <ul className="flex-col w-rounded-lg   p-4">
+    <ul className="flex-col w-rounded-lg  p-4">
     <li>
           <NavLink className="nav-link" to="/dashboard/guest" onClick={() => setOpen(false)}>
             Home
