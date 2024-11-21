@@ -91,7 +91,7 @@ export const LandingMap = () => {
                 el.style.height = '40px'; // Set marker height
         
                 // Add the custom marker to the map
-                new mapboxgl.Marker(el)
+                new mapboxgl.Marker(el, { offset: [0, -20] })
                     .setLngLat([marker.longitude, marker.latitude])
                     .addTo(map);
             });
