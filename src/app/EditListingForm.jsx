@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAmenities } from "../services/sub_services/amenityServices";
-import { postProperty } from "../services/sub_services/propertyServices";
+import { getSingleProperty } from "../services/sub_services/propertyServices";
+import { putProperty } from "../services/sub_services/propertyServices";
 
-export const ListingForm = () => {
+export const EditListingForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -23,6 +24,7 @@ export const ListingForm = () => {
   const [amenities, setAmenities] = useState([])
 
   const navigate = useNavigate()
+  const { id } = useParams()
 
   const fetchAmenities = async () => {
     try {
@@ -33,8 +35,46 @@ export const ListingForm = () => {
     }
   }
 
+  const fetchProperty = async () => {
+    try {
+      const propertyData = await getSingleProperty(id)
+
+      const formatedPropertyType = {
+         'EN': 'Entire Place',
+         'PR': 'Private Room',
+         'SH': 'Shared Room',
+         'VA': 'Vacation Home',
+         'LO': 'Loft',
+         'HO': 'Hostel',
+         'MA': 'Mansion',
+         'VI': 'Villa',
+         'CA': 'Castle',
+         'LU': 'Luxury Apartment',
+     }[propertyData.property_type]
+
+      const formatedPropertyData = {
+        ...propertyData,
+        address: {
+            ...propertyData.address,
+        },
+        street: propertyData.address.street,
+        city: propertyData.address.city,
+        state: propertyData.address.state,
+        zip_code: propertyData.address.zip_code,
+        property_type: formatedPropertyType,
+        amenities: propertyData.amenities,
+      }
+
+      setFormData(formatedPropertyData)
+      setPhotos(propertyData.photos)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(()=>{
     fetchAmenities()
+    fetchProperty()
   }, [])
 
   const handleChange = (e) => {
@@ -69,6 +109,7 @@ export const ListingForm = () => {
     const updatedFormData = {
       ...formData,
       address: {
+        ...formData.address,
         street: formData.street,
         city: formData.city,
         state: formData.state,
@@ -80,6 +121,9 @@ export const ListingForm = () => {
     delete updatedFormData.city
     delete updatedFormData.state
     delete updatedFormData.zip_code
+    delete updatedFormData.id
+    delete updatedFormData.address.prop
+    delete updatedFormData.address.address_string
 
     const propertyTypeLookup = {
        'Entire Place': 'EN',
@@ -98,7 +142,7 @@ export const ListingForm = () => {
 
     updatedFormData.photos = photos
     
-    await postProperty(updatedFormData)
+    await putProperty(id ,updatedFormData)
 
     navigate("/dashboard/host")
   };
@@ -441,6 +485,8 @@ export const ListingForm = () => {
           </button>
         </div>
         <div>
+        {/* <button className="toy-detail-edit">Edit</button>
+        <button className="toy-detail-delete" onClick={handleToyDelete}>Delete</button> */}
       </div>
       </form>
     </div>
