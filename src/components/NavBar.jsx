@@ -45,7 +45,7 @@ export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
     <nav ref={navbarRef} className="flex justify-evenly items-center w-full fixed top-0 left-0 bg-backgroundColor  z-10 px-4 py-3">
 
       <NavLink to="/" className="text-5xl text-logoColor flex flex-row">
-        <img src="../../public/logo.png" className="w-10 h-10 mr-2 mt-1"/>
+        <img src="/logo.png" className="w-10 h-10 mr-2 mt-1"/>
         <p>homi</p>
       </NavLink>
 
