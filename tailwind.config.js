@@ -14,6 +14,13 @@ export default {
         alternativeColor: "#417367", // background for dark cards
         darkColor: "#042C23" // for footer
       },
+      fontFamily: {
+        sans: ["Quicksand", "sans-serif"],
+        serif: ["Montserrat", "serif"]
+      },
+      maxHeight: {
+        'amenities': '30rem',
+      }
     },
   },
   plugins: [],
