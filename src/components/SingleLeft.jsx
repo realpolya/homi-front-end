@@ -5,6 +5,8 @@ import { FivePicture } from "./FivePicture";
 import { MiniListingForm } from "./MiniListingForm";
 import { Calendar } from "./Calendar";
 
+import services from "../services/index.js";
+
 export const SingleLeft = ({ listingId }) => {
   // Need to check if we have user
   const user = true;
@@ -13,6 +15,24 @@ export const SingleLeft = ({ listingId }) => {
   const { listing } = useContext(SingleContext);
   const [host, setHost] = useState("");
   const [price, setPrice] = useState(0);
+  const [bookings, setBookings] = useState([]);
+
+  const fetchBookings = async (id) => {
+    try {
+      console.log("Fetching bookings for property ID:", id);
+      const fetchedBookings = await services.getPropBookings(id); // Use your correct service
+      setBookings(fetchedBookings);
+      console.log("Fetched bookings:", fetchedBookings);
+    } catch (error) {
+      console.error("Error fetching bookings:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (listingId) {
+      fetchBookings(listingId);
+    }
+  }, [listingId]);
 
   // wait for photos to load
   useEffect(() => {
@@ -39,7 +59,7 @@ export const SingleLeft = ({ listingId }) => {
       {/* Flex container for calendar and listing form */}
       <div className="flex flex-col sm:flex-row rounded-lg mt-0 w-full gap-4 sm:gap-6">
         <div className="flex-1">
-          <Calendar />
+          <Calendar bookings={bookings} />
         </div>
         <div className="w-full sm:w-[300px]">
           <MiniListingForm />
