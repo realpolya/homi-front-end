@@ -1,11 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-export function ListingCard({ listing }) {
-  // console.log(listing);
+export function ListingCard({ listing, origin, key }) {
+  console.log("key is ", key);
   return (
     <Link
-      to={`/listing/${listing.id}`}
+      to={origin === "dashboard" ? (`/listing/${listing.id}/booking/${key}`) : (`/listing/${listing.id}`)}
       className="block 
         2xl:w-72 2xl:h-72
         w-60 h-60

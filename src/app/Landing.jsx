@@ -51,7 +51,7 @@ export const Landing = () => {
                   {recentListings.length === 0 ? (null) : (
 
                     recentListings.map((listing) => {
-                      return <ListingCard key={listing.id} listing={listing} />
+                      return <ListingCard key={listing.id} listing={listing} origin={"landing"}/>
                     })
 
                   )}
