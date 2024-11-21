@@ -48,7 +48,7 @@ export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
         </li>
         <li>
     <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}></NavLink>
-    <li><NavLink className="nav-link" to="listing">
+    <li><NavLink className="nav-link" to="listings">
         Listings
       </NavLink></li>
 
