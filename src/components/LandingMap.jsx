@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 
-import { AppContext } from '../App.jsx';
+import App, { AppContext } from '../App.jsx';
 
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -20,6 +20,40 @@ export const LandingMap = () => {
     const [lat, setLat] = useState([40.7128])
     const [lng, setLng] = useState([-74.0060])
     const [loading, setLoading] = useState(true)
+    const [markers, setMarkers] = useState([])
+
+    const { properties } = useContext(AppContext)
+
+    useEffect(() => {
+
+        if (properties) {
+
+            if (properties.length > 0) {
+
+                let markerCollection = []
+                properties.forEach(property => {
+
+                    if (property.address) {
+
+                        let newMarker = {
+                            latitude: property.address.latitude,
+                            longitude: property.address.longitude
+                        }
+                        markerCollection.push(newMarker)
+
+                    }
+
+                })
+
+                // console.log('markerCollection is ', markerCollection)
+                setMarkers(markerCollection)
+
+            }
+
+        }
+
+    }, [properties])
+
 
     useEffect(() => {
 
@@ -41,9 +75,11 @@ export const LandingMap = () => {
         // .setLngLat([lng[0], lat[0]])
         // .addTo(map);
 
+
         return () => map.remove();
 
     }, [landingMapRef, MAPBOX_KEY])
+
 
     return (
 
