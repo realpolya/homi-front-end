@@ -73,14 +73,6 @@ export const LandingMap = () => {
 
         
         if (markers.length > 0) {
-            
-            // markers.forEach(marker => {
-
-            //     new mapboxgl.Marker({ color: '#65B6A3', rotation: 0 })
-            //     .setLngLat([marker.longitude, marker.latitude])
-            //     .addTo(map);
-
-            // })
 
             markers.forEach(marker => {
                 // Create a custom HTML element for the marker
