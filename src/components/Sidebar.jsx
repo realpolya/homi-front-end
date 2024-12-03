@@ -1,95 +1,109 @@
+/* --------------------------------Imports--------------------------------*/
 
-//import { useContext } from 'react';
-import { NavLink, useNavigate} from "react-router-dom";
-//import { AuthedUserContext } from "../services/sub_services/userServices";
+import { useContext } from 'react'
+import { NavLink, useNavigate} from "react-router-dom"
+import { AppContext } from "../App.jsx"
 import services from '../services/index.js'
 
-export const Sidebar = ({ setShowRegister, setShowLogin, user, setOpen }) => {
-  const  navigate = useNavigate();
-  const handleLogout = () => {
-    services.signOut()
-    setOpen(false)
-    navigate('/')
-  }
+/* --------------------------------Component--------------------------------*/
 
-  const authenticatedOptions = (
-    <>
-    <ul className="flex-col w-rounded-lg  p-4">
-    <li>
-          <NavLink className="nav-link" to="/dashboard/guest" onClick={() => setOpen(false)}>
-            Home
-          </NavLink>
-          </li>
-      <li><NavLink className="nav-link" to="/bookings" onClick={() => setOpen(false)}>
-        Bookings
-     </NavLink></li>
-    <li> <NavLink className="nav-link" to="/listing-form" onClick={() => setOpen(false)}>
-        Listing Form
-      </NavLink></li>
-      
-     <li><NavLink className="nav-link" to="listings" onClick={() => setOpen(false)}>
-        Book a listing
-      </NavLink></li>
-      <li><NavLink className="nav-link" to="/" onClick={handleLogout}>
-        Log Out
-      </NavLink></li>
+const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
 
-      </ul>
-    </>
-  );
+    const { user } = useContext(AppContext)
+  
+    const navigate = useNavigate()
+    const handleLogout = () => {
 
-  const unauthenticatedOptions = (
-    <>
-      <ul>
-        <li>
-          <NavLink className="nav-link" to="/" onClick={() => setOpen(false)}>
-            Home
-          </NavLink>
-        </li>
-        <li>
-    <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}></NavLink>
-    <li><NavLink className="nav-link" to="listings">
-        Listings
-      </NavLink></li>
+        services.signOut()
+        setOpen(false)
+        navigate('/')
 
-          <NavLink
-            className="nav-link"
-            to="/about"
-            onClick={() => setOpen(false)}
-          >
+    }
 
-            About homi
-          </NavLink>
-        </li>
-          <li>
+    const authenticatedOptions = (
+        <>
+            <ul className="flex-col w-rounded-lg  p-4">
+                <li>
+                    <NavLink className="nav-link" to="/dashboard/guest" onClick={() => setOpen(false)}>
+                        Home
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink className="nav-link" to="/bookings" onClick={() => setOpen(false)}>
+                        My Bookings
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink className="nav-link" to="/listing-form" onClick={() => setOpen(false)}>
+                        Listing Form
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink className="nav-link" to="listings" onClick={() => setOpen(false)}>
+                        Book a Listing
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink className="nav-link" to="/" onClick={handleLogout}>
+                        Log Out
+                    </NavLink>
+                </li>
+            </ul>
+        </>
+    )
 
-            <button onClick={() => {
-              setShowRegister(true)
-              setOpen(false)
-            }}>Register</button>
-          </li>
-          <li>
-           <button onClick={() => {
-              setShowLogin(true)
-              setOpen(false)
-            }}>Log In</button>
-          </li>
-      </ul>
-    </>
-  );
+    const unauthenticatedOptions = (
+        <>
+            <ul>
+                <li>
+                    <NavLink className="nav-link" to="/" onClick={() => setOpen(false)}>
+                        Home
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink className="nav-link" to="listings">
+                        Listings
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}>
+                        About Homi
+                    </NavLink>
+                </li>
+                <li>
+                    <button onClick={() => {
+                        setShowRegister(true)
+                        setOpen(false)
+                    }}>
+                        Register
+                    </button>
+                </li>
+                <li>
+                    <button onClick={() => {
+                        setShowLogin(true)
+                        setOpen(false)
+                    }}>
+                        Log In
+                    </button>
+                </li>
+            </ul>
+        </>
+    )
 
-  return (
-    <nav className={`absolute top-20 right-20 h-full w-1/4 max-w-sm font-serif text-whiteColor bg-alternativeColor rounded-2xl shadow-md transform transition-transform duration-300 ease-in-out  ${
-      setOpen ? "translate-y-6" : "translate-x-full"
-    }`}>
-      <div className=" bg-alternativeColor rounded-2xl p-6">
-        <nav>
-          {user && <div className="link welcome">Welcome, {user.username}</div>}
-          <div className="nav-links">
-            {user ? authenticatedOptions : unauthenticatedOptions}
-          </div>
+    return (
+        <nav className={`absolute top-20 right-20 h-full w-1/4 max-w-sm font-serif text-whiteColor shadow-md transform transition-transform duration-300 ease-in-out  ${
+            setOpen ? "translate-y-0" : "translate-x-full"
+        }`}>
+
+            <div className="bg-darkColor rounded-2xl p-6">
+                {user && <p className="link welcome">Welcome, {user.username}</p>}
+                {user ? authenticatedOptions : unauthenticatedOptions}
+            </div>
+
         </nav>
-      </div>
-    </nav>
-  );
+    );
 };
+
+/* --------------------------------Exports--------------------------------*/
+
+export default Sidebar

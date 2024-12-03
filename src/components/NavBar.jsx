@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Twirl as Hamburger } from "hamburger-react";
 import { FaSearch } from "react-icons/fa";
-import { Sidebar } from "./Sidebar";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import Sidebar from "./Sidebar.jsx";
 
-export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
+export const Navbar = ({ setShowRegister, setShowLogin }) => {
 
   const navigate = useNavigate();
   const [isOpen, setOpen] = useState(false);
@@ -71,7 +71,6 @@ export const Navbar = ({ setShowRegister, setShowLogin, user }) => {
           setOpen={setOpen}
           setShowRegister={setShowRegister}
           setShowLogin={setShowLogin}
-          user={user}
         />
 
       )}

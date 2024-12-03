@@ -1,3 +1,5 @@
+/* --------------------------------Imports--------------------------------*/
+
 import { useState, useEffect, createContext } from "react";
 import { useLocation } from "react-router-dom";
 import Rodal from "rodal";
@@ -11,7 +13,11 @@ import { Navbar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import services from "./services/index.js";
 
+/* --------------------------------Context--------------------------------*/
+
 const AppContext = createContext(null);
+
+/* --------------------------------Component--------------------------------*/
 
 function App() {
 
