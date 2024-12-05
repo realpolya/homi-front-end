@@ -1,0 +1,50 @@
+.landing-main {
+    @apply p-0
+    md:p-6
+    lg:p-20
+    w-full 
+    h-full
+    flex flex-col
+    lg:flex-row
+    
+}
+
+.landing-left {
+    @apply m-4
+    mb-0
+    pt-16
+    lg:pt-0
+    w-11/12
+    lg:w-1/2
+    h-full
+    lg:h-full
+    flex flex-col
+}
+
+.landing-right {
+    @apply m-4
+    mb-16
+    lg:w-1/2 
+    w-11/12
+    lg:h-full 
+    h-auto 
+    overflow-y-auto 
+    bg-alternativeColor 
+    rounded-lg 
+    flex flex-col 
+    xl:justify-center;
+}
+
+.landing-listings {
+    @apply box-border /* TODO: how to add padding to the bottom of scrollable container */
+    h-full
+    w-full 
+    flex flex-row
+    flex-wrap
+    justify-center
+    xl:grid 
+    xl:grid-rows-2 
+    xl:grid-cols-2 
+    gap-4
+    pb-20
+}
