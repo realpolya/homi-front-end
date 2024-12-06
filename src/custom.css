@@ -72,7 +72,7 @@
     lg:overflow-y-auto
     bg-whiteColor 
     p-4 pt-0
-    m-4 mt-24
+    m-4 mt-24 lg:mt-4
     rounded-lg
 }
 
@@ -87,8 +87,8 @@
 
 .dashboard-right {
     @apply w-11/12 lg:w-3/12 
-    min-h-96
-    h-auto /* TODO: the container does not properly extend */
+    /* min-h-96
+    h-auto TODO: the container does not properly extend if these are on */
     lg:h-full
     lg:overflow-y-auto 
     bg-whiteColor 

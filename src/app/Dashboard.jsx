@@ -59,6 +59,7 @@ const Dashboard = () => {
     useEffect(() => {
 
         if (location.pathname.includes("host")) setIsHost(true)
+        if (location.pathname.includes("guest")) setIsHost(false)
 
     }, [location.pathname])
 
@@ -111,7 +112,7 @@ const Dashboard = () => {
             {isHost ? (
                 <div className="dashboard-center">
                     <p className="text-lightTextColor">Your Active Listings</p>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-4 justify-center">
                         {loading ? (
                             <p>Loading...</p>
                         ) : (
@@ -127,7 +128,7 @@ const Dashboard = () => {
             ) : (
                 <div className="dashboard-center">
                     <p className="text-lightTextColor">Your Upcoming Bookings</p>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-4 justify-center">
                         {upcomingBookings.length > 0 ? (
                             upcomingBookings.map((booking, i) => {
                                 return <ListingCard 
