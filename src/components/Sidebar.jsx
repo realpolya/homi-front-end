@@ -34,7 +34,7 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
 
     const authenticatedOptions = (
         <>
-            <ul className="flex flex-col w-rounded-lg  p-4">
+            <ul className="sidebar-options-ul">
                 <NavLink className="nav-link" to="/dashboard/guest" onClick={() => setOpen(false)}>
                     Home
                 </NavLink>
@@ -56,7 +56,7 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
 
     const hostOptions = (
         <>
-            <ul className="flex flex-col w-rounded-lg  p-4">
+            <ul className="sidebar-options-ul">
                 <NavLink className="nav-link" to="/dashboard/guest" onClick={() => setOpen(false)}>
                     Home
                 </NavLink>
@@ -79,7 +79,7 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
 
     const unauthenticatedOptions = (
         <>
-            <ul className="flex flex-col w-rounded-lg  p-4">
+            <ul className="sidebar-options-ul">
                 <NavLink className="nav-link" to="/" onClick={() => setOpen(false)}>
                     Home
                 </NavLink>
@@ -89,13 +89,13 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
                 <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}>
                     About Homi
                 </NavLink>
-                <button onClick={() => {
+                <button className="nav-link" onClick={() => {
                     setShowRegister(true)
                     setOpen(false)
                 }}>
                     Register
                 </button>
-                <button onClick={() => {
+                <button className="nav-link" onClick={() => {
                     setShowLogin(true)
                     setOpen(false)
                 }}>
@@ -107,7 +107,9 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
 
 
     return (
-        <nav className={`absolute top-20 right-20 h-full w-1/4 max-w-sm font-serif text-whiteColor shadow-md transform transition-transform duration-300 ease-in-out  ${
+        <nav className={`absolute top-20 md:right-20 right-10 h-full md:w-1/4 w-3/4 max-w-sm 
+            text-2xl md:text-xl text-whiteColor shadow-md transform transition-transform 
+            duration-300 ease-in-out  ${
             setOpen ? "translate-y-0" : "translate-x-full"
         }`}>
 
