@@ -1,3 +1,5 @@
+/* --------------------------------Imports--------------------------------*/
+
 import { useContext, useEffect, useState, useRef } from 'react';
 
 import App, { AppContext } from '../App.jsx';
@@ -5,24 +7,24 @@ import App, { AppContext } from '../App.jsx';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+/* --------------------------------Variables--------------------------------*/
 
 const MAPBOX_KEY = import.meta.env.VITE_MAPBOX_KEY;
 const mapboxStyle = 'mapbox://styles/polinastepanova/clgsbvw0q001l01qm6uwhceyp/draft'
 
+/* --------------------------------Component--------------------------------*/
 
-export const LandingMap = () => {
-
-    // get listings from useContext object
+const LandingMap = () => {
 
     mapboxgl.accessToken = MAPBOX_KEY;
+
+    const { properties } = useContext(AppContext)
+
     const landingMapRef = useRef(null)
 
-    const [lat, setLat] = useState([40.7128])
-    const [lng, setLng] = useState([-74.0060])
     const [loading, setLoading] = useState(true)
     const [markers, setMarkers] = useState([])
 
-    const { properties } = useContext(AppContext)
 
     useEffect(() => {
 
@@ -45,7 +47,6 @@ export const LandingMap = () => {
 
                 })
 
-                // console.log('markerCollection is ', markerCollection)
                 setMarkers(markerCollection)
 
             }
@@ -99,7 +100,7 @@ export const LandingMap = () => {
 
     return (
 
-        <div className="w-full h-[90%]">
+        <div className="w-full lg:h-[90%] h-[100%]">
             { loading && (<p>No map yet</p>)}
 
             <div ref={landingMapRef} 
@@ -109,3 +110,7 @@ export const LandingMap = () => {
 
     )
 }
+
+/* --------------------------------Exports--------------------------------*/
+
+export default LandingMap

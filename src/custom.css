@@ -1,12 +1,10 @@
+/* LANDING PAGE */
 .landing-main {
     @apply p-0
     md:p-6
     lg:p-20
-    w-full 
-    h-full
     flex flex-col
     lg:flex-row
-    
 }
 
 .landing-left {
@@ -26,13 +24,12 @@
     mb-16
     lg:w-1/2 
     w-11/12
+    flex-grow
     lg:h-full 
-    h-auto 
-    overflow-y-auto 
+    overflow-y-auto /* TODO: if this is removed, map hides */
     bg-alternativeColor 
     rounded-lg 
-    flex flex-col 
-    xl:justify-center;
+    flex flex-col
 }
 
 .landing-listings {

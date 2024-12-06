@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppContext } from '../App.jsx';
-import { LandingMap } from '../components/LandingMap.jsx'
+import LandingMap from '../components/LandingMap.jsx'
 import { ListingCard } from '../components/ListingCard.jsx'
 
 /* --------------------------------Component--------------------------------*/
@@ -46,7 +46,9 @@ const Landing = () => {
 
             <div className="landing-right">
 
-                <p className="text-left p-6 text-2xl w-full text-lightTextColor hover:text-logoColor"><Link to="/listings">Recent Listings</Link></p>
+                <p className="text-left p-6 text-2xl w-full text-lightTextColor hover:text-logoColor">
+                    <Link to="/listings">Recent Listings</Link>
+                </p>
 
                 {
                     loading ? (
