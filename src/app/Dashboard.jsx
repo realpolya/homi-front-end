@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom"
 import { AppContext } from '../App.jsx'
 import { MyUserInfo } from "../components/MyUserInfo"
 import { HostBookings } from "../components/MyBookingsListings"
-import { BookingMap } from "../components/BookingMap"
+import BookingMap from "../components/BookingMap"
 import { ListingCard } from "../components/ListingCard"
 
 import services from "../services/index.js"
@@ -101,53 +101,51 @@ const Dashboard = () => {
     }, [bookings])
 
     return (
-        <main className="flex flex-center h-full gap-x-6">
+        <main className="dashboard-main">
             {/* Left Column */}
-            <div className="w-2/6 bg-whiteColor p-4 rounded-lg overflow-y-auto">
+            <div className="dashboard-left">
                 <MyUserInfo isHost={isHost} />
             </div>
 
             {/* Middle Column */}
-            <div className="w-3/6  overflow-y-auto bg-alternativeColor p-4 rounded-lg">
-                {isHost ? (
-                    <div>
-                        <p className="text-lightTextColor">Your Active Listings</p>
-                        <div className="flex flex-wrap gap-4">
-                            {loading ? (
-                                <p>Loading...</p>
-                            ) : (
-                                myProperties.length > 0 ? (
-                                    myProperties.map((property) => (
-                                        <ListingCard key={property.id} listing={property.prop} bookingId={null} origin={"dashboard-host"} />
-                                ))
-                            ) : (
-                                <p>No active listings.</p>
-                            ))}
-                        </div>
+            {isHost ? (
+                <div className="dashboard-center">
+                    <p className="text-lightTextColor">Your Active Listings</p>
+                    <div className="flex flex-wrap gap-4">
+                        {loading ? (
+                            <p>Loading...</p>
+                        ) : (
+                            myProperties.length > 0 ? (
+                                myProperties.map((property) => (
+                                    <ListingCard key={property.id} listing={property.prop} bookingId={null} origin={"dashboard-host"} />
+                            ))
+                        ) : (
+                            <p>No active listings.</p>
+                        ))}
                     </div>
-                ) : (
-                    <div>
-                        <p className="text-lightTextColor">Your Upcoming Bookings</p>
-                        <div className="flex flex-wrap gap-4">
-                            {upcomingBookings.length > 0 ? (
-                                upcomingBookings.map((booking, i) => {
-                                    return <ListingCard 
-                                    bookingId={booking.id} 
-                                    listing={booking.prop} 
-                                    origin={"dashboard"}
-                                    key={i}
-                                    booking={booking} />
-                                })
-                            ) : (
-                                <p>No upcoming bookings.</p>
-                            )}
-                        </div>
+                </div>
+            ) : (
+                <div className="dashboard-center">
+                    <p className="text-lightTextColor">Your Upcoming Bookings</p>
+                    <div className="flex flex-wrap gap-4">
+                        {upcomingBookings.length > 0 ? (
+                            upcomingBookings.map((booking, i) => {
+                                return <ListingCard 
+                                bookingId={booking.id} 
+                                listing={booking.prop} 
+                                origin={"dashboard"}
+                                key={i}
+                                booking={booking} />
+                            })
+                        ) : (
+                            <p>No upcoming bookings.</p>
+                        )}
                     </div>
-                )}
-            </div>
+                </div>
+            )}
 
             {/* Right Column */}
-            <div className="w-2/6 h-full bg-whiteColor p-4 rounded-lg overflow-y-auto">
+            <div className="dashboard-right">
                 {isHost ? (<h1>Bookings of my listings</h1>) : (<h1>Your Previous Bookings</h1>)}
                 {isHost ? (<HostBookings hostBookings={hostBookings} />) : (
                     prevBookings.length > 0 ? (
