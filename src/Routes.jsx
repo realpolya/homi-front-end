@@ -4,7 +4,7 @@ import { BookingForm } from "./components/BookingForm";
 import { Bookings } from "./app/Bookings";
 import Dashboard from "./app/Dashboard.jsx";
 import Landing from "./app/Landing";
-import { Listings } from "./app/Listings";
+import Listings from "./app/Listings";
 import { ListingForm } from "./app/ListingForm";
 import { EditListingForm } from "./app/EditListingForm";
 import { SignIn } from "./app/Signin";
