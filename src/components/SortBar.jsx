@@ -56,7 +56,7 @@ export function SortBar({ setListings, setSorting }) {
 
 
   return (
-    <section id="sort-bar-section" className="w-full p-4 mb-6 rounded-lg bg-alternativeColor shadow-md">
+    <section id="sort-bar-section" className="sort-bar-section">
       {/* Main sort bar container */}
       <div className="flex flex-wrap justify-between items-center gap-4">
 

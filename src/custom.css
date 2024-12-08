@@ -97,3 +97,27 @@
     pb-32
     rounded-lg
 }
+
+/* LISTINGS */
+.listings-main {
+    @apply p-0
+    md:p-6
+    lg:p-20
+    flex flex-col
+    items-center
+    lg:items-start
+    h-full
+}
+
+/* SORT BAR */
+
+.sort-bar-section {
+    @apply p-4 mb-6
+    md:mt-0
+    w-[95%]
+    lg:w-full 
+    rounded-lg 
+    bg-alternativeColor 
+    shadow-md 
+    size-fit
+}

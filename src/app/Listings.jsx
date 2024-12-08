@@ -70,8 +70,9 @@ const Listings = () => {
 
     return (
 
-        <main className="size-fit">
-            <h1 className=" text-left mb-6 text-2xl">All Listings</h1>
+        <main className="listings-main size-fit">
+            <h1 className="text-left pl-4 mb-6 mt-24 md:mt-12 lg:mt-0
+            text-2xl">All Listings</h1>
 
             <SortBar setListings={setListings} setSorting={setSorting}/>
 
