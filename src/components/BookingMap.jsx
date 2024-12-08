@@ -1,13 +1,18 @@
-import { useContext, useEffect, useState, useRef } from 'react';
-import { AppContext } from '../App.jsx';
+/* --------------------------------Imports--------------------------------*/
+
+import { useEffect, useState, useRef } from 'react';
 
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+/* --------------------------------Variables--------------------------------*/
+
 const MAPBOX_KEY = import.meta.env.VITE_MAPBOX_KEY;
 const mapboxStyle = 'mapbox://styles/polinastepanova/clgsbvw0q001l01qm6uwhceyp/draft'
 
-export const BookingMap = ({ prev }) => {
+/* --------------------------------Component--------------------------------*/
+
+const BookingMap = ({ prev }) => {
 
   mapboxgl.accessToken = MAPBOX_KEY;
   const bookingMapRef = useRef(null)
@@ -24,9 +29,6 @@ export const BookingMap = ({ prev }) => {
 
     
     if (prev) {
-      
-      // setLat(listing.address.latitude)
-      // setLng(listing.address.longitude)
       
       const map = new mapboxgl.Map({
           container: bookingMapRef.current,
@@ -56,7 +58,7 @@ export const BookingMap = ({ prev }) => {
 
   return (
 
-    <div className="w-full h-1/3 p-4 z-0">
+    <div className="w-full lg:h-1/3 h-60 p-4 z-0">
 
         { loading && (<p>No booking details yet</p>)}
         <div ref={bookingMapRef} 
@@ -74,3 +76,7 @@ export const BookingMap = ({ prev }) => {
   )
 
 };
+
+/* --------------------------------Exports--------------------------------*/
+
+export default BookingMap

@@ -1,0 +1,99 @@
+/* LANDING PAGE */
+.landing-main {
+    @apply p-0
+    md:p-6
+    lg:p-20
+    flex flex-col
+    lg:flex-row
+}
+
+.landing-left {
+    @apply m-4
+    mb-0
+    pt-16
+    lg:pt-0
+    w-11/12
+    lg:w-1/2
+    h-full
+    lg:h-full
+    flex flex-col
+}
+
+.landing-right {
+    @apply m-4
+    mb-16
+    lg:w-1/2 
+    w-11/12
+    flex-grow
+    lg:h-full 
+    overflow-y-auto /* TODO: if this is removed, map hides */
+    bg-alternativeColor 
+    rounded-lg 
+    flex flex-col
+}
+
+.landing-listings {
+    @apply box-border /* TODO: how to add padding to the bottom of scrollable container */
+    h-full
+    w-full 
+    flex flex-row
+    flex-wrap
+    justify-center
+    xl:grid 
+    xl:grid-rows-2 
+    xl:grid-cols-2 
+    gap-4
+    pb-20
+}
+
+/* SIDEBAR */
+.sidebar-options-ul {
+    @apply flex flex-col rounded-lg p-4
+}
+
+.nav-link {
+    @apply p-3
+}
+
+/* DASHBOARD */
+.dashboard-main {
+    @apply p-0
+    md:p-6
+    lg:p-20
+    flex flex-col
+    lg:flex-row 
+    h-full 
+    lg:gap-x-6
+    gap-y-4
+}
+
+.dashboard-left {
+    @apply w-11/12 lg:w-3/12
+    lg:overflow-y-auto
+    bg-whiteColor 
+    p-4 pt-0
+    m-4 mt-24 lg:mt-4
+    rounded-lg
+}
+
+.dashboard-center {
+    @apply w-11/12 lg:w-6/12 
+    lg:overflow-y-auto 
+    bg-alternativeColor 
+    p-4
+    m-4
+    rounded-lg
+}
+
+.dashboard-right {
+    @apply w-11/12 lg:w-3/12 
+    /* min-h-96
+    h-auto TODO: the container does not properly extend if these are on */
+    lg:h-full
+    lg:overflow-y-auto 
+    bg-whiteColor 
+    p-4
+    m-4 mb-24
+    pb-32
+    rounded-lg
+}
