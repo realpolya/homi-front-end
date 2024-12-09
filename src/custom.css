@@ -133,6 +133,7 @@
 .single-h1 {
     @apply text-center
     lg:text-left text-2xl
+    mt-6 lg:mt-0
 }
 
 .div-left-right {

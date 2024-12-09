@@ -72,7 +72,7 @@ const SingleListingBooking = () => {
         <SingleContext.Provider value={singleObject} >
 
             <main className="single-main">
-                
+
                 <div className="w-full flex flex-col sm:flex-row justify-between mb-6">
                     {loading ? (null) : (
 
@@ -86,7 +86,7 @@ const SingleListingBooking = () => {
                         
                         )
                     }
-                    <Link to="/listings" className="text-logoColor underline hover:text-textColor">back to listings</Link>
+                    <Link to="/listings" className="text-logoColor underline hover:text-textColor mt-6 lg:mt-0">back to listings</Link>
                 </div>
                 
                 <div className="div-left-right">
