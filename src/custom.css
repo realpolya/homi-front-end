@@ -131,6 +131,11 @@
     mt-12
 }
 
+.single-h1 {
+    @apply text-center
+    lg:text-left text-2xl
+}
+
 .div-left-right {
     @apply w-full h-[90%] 
     flex flex-col lg:flex-row 
