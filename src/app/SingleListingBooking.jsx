@@ -71,7 +71,7 @@ const SingleListingBooking = () => {
     return (
         <SingleContext.Provider value={singleObject} >
 
-            <main>
+            <main className="single-main">
                 <div className="w-full flex flex-col sm:flex-row justify-between mb-6">
                     {loading ? (null) : (
 

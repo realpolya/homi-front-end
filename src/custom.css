@@ -124,9 +124,38 @@
 
 /* SINGLE LISTING BOOKING */
 
+.single-main {
+    @apply
+    p-6
+    lg:p-20
+    mt-12
+}
+
 .div-left-right {
     @apply w-full h-[90%] 
     flex flex-col lg:flex-row 
     gap-y-6
     lg:gap-x-6
+}
+
+.section-left {
+    @apply flex flex-col 
+    p-6 space-y-3 
+    w-full 
+    bg-whiteColor 
+    rounded-lg 
+    lg:overflow-y-auto
+}
+
+.div-mini-form {
+    @apply w-full 
+    lg:w-1/2
+    flex flex-col 
+    justify-start 
+    items-center 
+    p-4 
+    bg-whiteColor 
+    text-center 
+    min-h-[400px] 
+    lg:z-50
 }
