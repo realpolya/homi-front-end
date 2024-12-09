@@ -9,7 +9,7 @@ import { ListingForm } from "./app/ListingForm";
 import { EditListingForm } from "./app/EditListingForm";
 import { SignIn } from "./app/Signin";
 import { SignUp } from "./app/SignUp";
-import { SingleListingBooking } from "./app/SingleListingBooking";
+import SingleListingBooking from "./app/SingleListingBooking.jsx";
 
 export function AppRoutes({}) {
   return (

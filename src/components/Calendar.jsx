@@ -7,7 +7,7 @@ export const Calendar = ({ bookings }) => {
   });
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -77,7 +77,7 @@ export const Calendar = ({ bookings }) => {
   ];
 
   return (
-    <div className="max-w-full sm:max-w-xl mx-auto p-4 bg-whiteColor rounded-lg">
+    <div className="flex-1 max-w-full sm:max-w-xl mx-auto p-4 bg-whiteColor rounded-lg">
       <div className="grid grid-cols-1 gap-8">
         {monthsToDisplay.map((month, index) => {
           const days = getDaysInMonth(month.getFullYear(), month.getMonth());

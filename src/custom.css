@@ -121,3 +121,12 @@
     shadow-md 
     size-fit
 }
+
+/* SINGLE LISTING BOOKING */
+
+.div-left-right {
+    @apply w-full h-[90%] 
+    flex flex-col lg:flex-row 
+    gap-y-6
+    lg:gap-x-6
+}
