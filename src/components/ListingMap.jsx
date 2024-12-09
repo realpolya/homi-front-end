@@ -1,13 +1,19 @@
+/* --------------------------------Imports--------------------------------*/
+
 import { useContext, useEffect, useState, useRef } from 'react';
 import { SingleContext } from '../app/SingleListingBooking.jsx';
 
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+/* --------------------------------Variables--------------------------------*/
+
 const MAPBOX_KEY = import.meta.env.VITE_MAPBOX_KEY;
 const mapboxStyle = 'mapbox://styles/polinastepanova/clgsbvw0q001l01qm6uwhceyp/draft'
 
-export function ListingMap() {
+/* --------------------------------Component--------------------------------*/
+
+const ListingMap = () => {
 
     mapboxgl.accessToken = MAPBOX_KEY;
 
@@ -21,8 +27,6 @@ export function ListingMap() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-
-        console.log(mapContainerRef.current)
 
         if (!mapContainerRef.current) {
             console.log('map container is not available at the moment')
@@ -61,7 +65,7 @@ export function ListingMap() {
 
     
     return (
-        <div className="w-full h-1/3 p-4 z-0">
+        <div className="w-full lg:h-1/3 h-96 p-4 z-0">
             { loading && (<p>No map yet</p>)}
             <div ref={mapContainerRef} 
             className="w-full h-full rounded-lg z-0"
@@ -71,30 +75,6 @@ export function ListingMap() {
     )
 }
 
-// creating a geoJSON for the POI
-// const geojson = {
-//     type: 'FeatureCollection',
-//     features: [
-//         {
-//             type: 'Feature',
-//             geometry: {
-//                 type: 'Point',
-//                 coordinates: [lng, lat]
-//             },
-//             properties: {
-//                 title: 'Project',
-//                 description: 'Project Location'
-//             }
-//         }
-//     ]
-// };
+/* --------------------------------Exports--------------------------------*/
 
-// Create a marker and add it to the map.
-// for (const feature of geojson.features) {
-//     // create a HTML element for each feature
-//     const el = document.createElement('div');
-//     el.className = 'marker';
-
-//     // make a marker for each feature and add to the map
-//     new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates).addTo(map);
-// }
+export default ListingMap

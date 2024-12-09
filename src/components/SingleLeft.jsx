@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { SingleContext } from "../app/SingleListingBooking.jsx";
 import { FivePicture } from "./FivePicture.jsx";
 import MiniListingForm from "./MiniListingForm.jsx";
-import { Calendar } from "./Calendar.jsx";
+import Calendar from "./Calendar.jsx";
 
 import services from "../services/index.js";
 

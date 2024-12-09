@@ -4,7 +4,7 @@ import { useState, createContext, useEffect } from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
 
 import SingleLeft from "../components/SingleLeft";
-import { SingleRight } from "../components/SingleRight";
+import SingleRight from "../components/SingleRight";
 
 import services from "../services/index.js"
 
@@ -72,6 +72,7 @@ const SingleListingBooking = () => {
         <SingleContext.Provider value={singleObject} >
 
             <main className="single-main">
+                
                 <div className="w-full flex flex-col sm:flex-row justify-between mb-6">
                     {loading ? (null) : (
 

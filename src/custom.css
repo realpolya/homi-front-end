@@ -125,9 +125,8 @@
 /* SINGLE LISTING BOOKING */
 
 .single-main {
-    @apply
-    p-6
-    lg:p-20
+    @apply p-6
+    lg:p-6
     mt-12
 }
 
@@ -145,21 +144,33 @@
 
 .section-left {
     @apply flex flex-col 
-    p-6 space-y-3 
-    w-full 
+    p-4 space-y-3 
+    w-full
+    lg:h-[90%]
     bg-whiteColor 
     rounded-lg 
     lg:overflow-y-auto
 }
 
+.section-right {
+    @apply flex flex-col 
+    space-y-2
+    p-4
+    w-full lg:h-[90%] 
+    bg-whiteColor 
+    rounded-lg
+    pb-24
+    lg:pb-0
+}
+
 .div-mini-form {
     @apply w-full 
     lg:w-1/2
+    p-4
     flex flex-col 
     justify-center
     lg:justify-start 
     items-center 
-    p-4 
     bg-whiteColor 
     text-center 
     min-h-[400px] 
