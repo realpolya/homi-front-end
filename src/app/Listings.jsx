@@ -3,7 +3,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from 'react-router-dom';
 import ListingCard from "../components/ListingCard.jsx";
-import { SortBar } from "../components/SortBar.jsx";
+import SortBar from "../components/SortBar.jsx";
 import { AppContext } from "../App.jsx";
 import services from "../services/index.js"
 

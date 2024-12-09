@@ -4,10 +4,10 @@ import { useState, useEffect, useContext } from "react"
 import { useLocation } from "react-router-dom"
 
 import { AppContext } from '../App.jsx'
-import { MyUserInfo } from "../components/MyUserInfo"
-import { HostBookings } from "../components/MyBookingsListings"
-import BookingMap from "../components/BookingMap"
-import ListingCard from "../components/ListingCard"
+import { MyUserInfo } from "../components/MyUserInfo.jsx"
+import { HostBookings } from "../components/MyBookingsListings.jsx"
+import BookingMap from "../components/BookingMap.jsx"
+import ListingCard from "../components/ListingCard.jsx"
 
 import services from "../services/index.js"
 
