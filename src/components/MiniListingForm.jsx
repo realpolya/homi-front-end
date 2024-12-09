@@ -1,14 +1,17 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useContext, useEffect } from "react";
+
 import { SingleContext } from "../app/SingleListingBooking.jsx";
-import { BookingForm } from "./BookingForm";
+import { AppContext } from "../App.jsx"
+import { BookingForm } from "./BookingForm.jsx";
 
 /* --------------------------------Component--------------------------------*/
 
 const MiniListingForm = ({ bookings, required }) => {
 
     const { pageState, listing } = useContext(SingleContext)
+    const { user, setShowLogin } = useContext(AppContext)
 
     const [checkInDate, setCheckInDate] = useState("");
     const [checkOutDate, setCheckOutDate] = useState("");
@@ -126,14 +129,25 @@ const MiniListingForm = ({ bookings, required }) => {
                         className="border rounded-lg p-2 mb-4 w-full text-center bg-gray-100"
                     />
 
-                    <button
-                        type="button"
-                        onClick={handleSubmit}
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
-                    >
-                        Reserve
-                    </button>
-                
+                    {user ? (
+                            <button
+                                type="button"
+                                onClick={handleSubmit}
+                                className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                            >
+                                Reserve
+                            </button>
+                        ) : (
+                            <button
+                            type="button"
+                            onClick={setShowLogin}
+                            className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                            >
+                                Log In to Reserve
+                            </button>
+                        )
+                    }
+
                 </form>
             ) : (
                 pageState === "booking" ? (

@@ -1,14 +1,18 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+
+import { AppContext } from "../App.jsx";
 import { Twirl as Hamburger } from "hamburger-react";
 import { FaSearch } from "react-icons/fa";
 import Sidebar from "./Sidebar.jsx";
 
 /* --------------------------------Component--------------------------------*/
 
-const Navbar = ({ setShowRegister, setShowLogin }) => {
+const Navbar = () => {
+
+    const { setShowLogin, setShowRegister } = useContext(AppContext)
 
     const navigate = useNavigate();
     const [isOpen, setOpen] = useState(false);

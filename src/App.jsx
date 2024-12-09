@@ -21,16 +21,16 @@ const AppContext = createContext(null);
 
 function App() {
 
-  let location = useLocation();
+    let location = useLocation();
 
-  const [activeModal, setActiveModal] = useState(null);
-  const [user, setUser] = useState(services.getUser()); // FIXME: double check
-  const [properties, setProperties] = useState([]);
-  const [bookings, setBookings] = useState([]);
-  const [amenities, setAmenities] = useState([]);
+    const [activeModal, setActiveModal] = useState(null);
+    const [user, setUser] = useState(services.getUser());
+    const [properties, setProperties] = useState([]);
+    const [bookings, setBookings] = useState([]);
+    const [amenities, setAmenities] = useState([]);
 
 
-  const fetchData = async () => {
+    const fetchData = async () => {
 
     const user = await services.verifyToken();
     setUser(user || null);
@@ -39,72 +39,73 @@ function App() {
     setProperties(propertiesData);
 
     if (user) {
-      
-      const bookingsData = await services.getBookings();
-      setBookings(bookingsData);
+        
+        const bookingsData = await services.getBookings();
+        setBookings(bookingsData);
 
     }
 
     const amenitiesData = await services.getAmenities();
     setAmenities(amenitiesData);
 
-  };
+    };
 
 
-  useEffect(() => {
+    useEffect(() => {
 
-      fetchData();
+        fetchData();
 
-  }, [location.pathname]);
+    }, [location.pathname]);
 
- 
+    const handleSignUp = (data) => {
+        setUser(data);
+        setActiveModal(null);
+    };
 
-  const handleSignUp = (data) => {
-    setUser(data);
-    setActiveModal(null);
-  };
-  
-  const handleSignIn = (data) => {
-    setUser(data);
-    setActiveModal(null);
-  };
+    const handleSignIn = (data) => {
+        setUser(data);
+        setActiveModal(null);
+    };
 
-  const appObject = { properties, amenities, bookings, setProperties, setBookings, setAmenities, user, setUser}
-  
-  return (
+    const setShowRegister = () => setActiveModal("register")
+    const setShowLogin = () => setActiveModal("login")
 
-    <AppContext.Provider value={appObject}>
-      <>
-        <Navbar
-          setShowRegister={() => setActiveModal("register")}
-          setShowLogin={() => setActiveModal("login")}
-          user={user}
-          />
-        <AppRoutes />
-        {/* Modals allow the user interaction between sign up and log in */}
-        <Rodal
-          visible={activeModal === "register"}
-          onClose={() => setActiveModal(null)}
-          customStyles={{ width: "400px", height: "400px", borderRadius: "10px" }}
-          >
-          <SignUp onSubmit={handleSignUp} />
-        </Rodal>
-        <Rodal
-          visible={activeModal === "login"}
-          onClose={() => setActiveModal(null)}
-          customStyles={{ width: "400px", height: "350px", borderRadius: "10px" }}
-          >
-          <SignIn onSubmit={handleSignIn} setActiveModal={setActiveModal} />
-        </Rodal>
-        <Footer />
-      </>
-    </AppContext.Provider>
-  );
+    const appObject = { properties, amenities, 
+        bookings, setProperties, setBookings, setAmenities, 
+        user, setUser,
+        setShowLogin, setShowRegister
+    }
+
+    return (
+
+        <AppContext.Provider value={appObject}>
+
+            <Navbar/>
+            <AppRoutes />
+
+            {/* Modals allow the user interaction between sign up and log in */}
+            <Rodal
+                visible={activeModal === "register"}
+                onClose={() => setActiveModal(null)}
+                customStyles={{ width: "400px", height: "400px", borderRadius: "10px" }}
+                >
+                <SignUp onSubmit={handleSignUp} />
+            </Rodal>
+
+            <Rodal
+                visible={activeModal === "login"}
+                onClose={() => setActiveModal(null)}
+                customStyles={{ width: "400px", height: "350px", borderRadius: "10px" }}
+                >
+                <SignIn onSubmit={handleSignIn} setActiveModal={setActiveModal} />
+            </Rodal>
+            <Footer />
+
+        </AppContext.Provider>
+    );
 }
 
-export default App;
+/* --------------------------------Exports--------------------------------*/
+
+export default App
 export { AppContext }
-
-
-
-

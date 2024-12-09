@@ -156,7 +156,8 @@
     @apply w-full 
     lg:w-1/2
     flex flex-col 
-    justify-start 
+    justify-center
+    lg:justify-start 
     items-center 
     p-4 
     bg-whiteColor 
