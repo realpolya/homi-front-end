@@ -7,7 +7,7 @@ import { AppContext } from '../App.jsx'
 import { MyUserInfo } from "../components/MyUserInfo"
 import { HostBookings } from "../components/MyBookingsListings"
 import BookingMap from "../components/BookingMap"
-import { ListingCard } from "../components/ListingCard"
+import ListingCard from "../components/ListingCard"
 
 import services from "../services/index.js"
 

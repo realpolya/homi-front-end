@@ -1,7 +1,8 @@
 /* --------------------------------Imports--------------------------------*/
+
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from 'react-router-dom';
-import { ListingCard } from "../components/ListingCard.jsx";
+import ListingCard from "../components/ListingCard.jsx";
 import { SortBar } from "../components/SortBar.jsx";
 import { AppContext } from "../App.jsx";
 import services from "../services/index.js"
@@ -80,7 +81,7 @@ const Listings = () => {
             loading ? (
                 <p>No properties yet...</p>
             ) : (
-                <div className="listing-cards-container flex flex-row flex-wrap">
+                <div className="listing-cards-container flex flex-row flex-wrap justify-center">
                 {listings.length === 0 ? (
                     <p>No listings matched your criteria...</p>
                 ) : (
