@@ -1,10 +1,14 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+
+import { SingleContext } from "../app/SingleListingBooking.jsx";
 
 /* --------------------------------Component--------------------------------*/
 
 const Calendar = ({ blockedDates }) => {
+
+    const { pageState, booking } = useContext(SingleContext)
 
     const [selectedRange, setSelectedRange] = useState({
         start: null,
@@ -15,6 +19,24 @@ const Calendar = ({ blockedDates }) => {
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+
+    useEffect(() => {
+
+        if (pageState === "booking" && booking) {
+            console.log("booking is ", booking)
+            let start = new Date(booking.check_in_date)
+            let end = new Date(booking.check_out_date)
+
+            console.log("start is ", start)
+            console.log("start is ", new Date(start.getFullYear(), start.getMonth(), start.getDate()))
+
+            setSelectedRange({
+                start: new Date(start.getFullYear(), start.getMonth(), start.getDate()),
+                end:new Date(end.getFullYear(), end.getMonth(), end.getDate()),
+            })
+        }
+
+    }, [booking, pageState])
 
     // Check if the date is before today (and prevent clicking on it)
     const isPastDate = (date) => date && date < today;
@@ -132,10 +154,11 @@ const Calendar = ({ blockedDates }) => {
                             handleDateClick(date)
                         }
                         disabled={isPastDate(date) || isBooked(date)}
+
+                        // TODO: what is happening here?
                         className={`p-2 rounded-full w-10 h-10 flex items-center justify-center ${
                             selectedRange.start &&
-                            selectedRange.start.toDateString() ===
-                            date?.toDateString()
+                            selectedRange.start.toDateString() === date?.toDateString()
                             ? "bg-buttonColor text-white"
                             : selectedRange.end &&
                                 selectedRange.end.toDateString() ===
