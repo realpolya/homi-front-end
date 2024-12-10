@@ -61,7 +61,7 @@ const ListingMap = () => {
 
         return () => map.remove();
 
-    }, [listing, mapContainerRef, MAPBOX_KEY])
+    }, [listing, listing?.address, mapContainerRef, MAPBOX_KEY])
 
     
     return (
@@ -71,7 +71,6 @@ const ListingMap = () => {
             className="w-full h-full rounded-lg z-0"
             ></div>
         </div>
-        
     )
 }
 
