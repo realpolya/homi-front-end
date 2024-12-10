@@ -28,6 +28,7 @@ const SingleListingBooking = () => {
     const [loading, setLoading] = useState(true);
     const [pageState, setPageState] = useState('listing')
     const [booking, setBooking] = useState(null) // current booking if on booking page
+    
 
     const { listingId, bookingId } = useParams();
 

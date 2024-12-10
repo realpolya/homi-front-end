@@ -1,32 +1,61 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* --------------------------------Component--------------------------------*/
 
 const Calendar = ({ bookings }) => {
+
     const [selectedRange, setSelectedRange] = useState({
-    start: null,
-    end: null,
+        start: null,
+        end: null,
     });
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [blockedDates, setBlockedDates] = useState([])
 
     const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    useEffect(() => {
+
+        if (bookings) {
+            const newBlockedDates = bookings.reduce((arg, booking) => {
+                let start = new Date(booking.check_in_date)
+                let end = new Date(booking.check_out_date)
+
+                const checkIn = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+                const checkOut = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+                const dates = []
+                for (let d = new Date(checkIn); d <= checkOut; d.setDate(d.getDate() + 1)) {
+                    dates.push(new Date(d))
+                }
+
+                return [...arg, ...dates];
+            }, [])
+
+            setBlockedDates(newBlockedDates)
+        }
+
+    }, [bookings])
+
     // Check if the date is before today (and prevent clicking on it)
     const isPastDate = (date) => date && date < today;
 
     // Check if a date is booked
-    //NOTE: THIS IS WHERE WE FETCH API FROM BACKEND TO CONFIRM IF IT IS BOOKED
     const isBooked = (date) => {
-        return bookings.some((booking) => {
-            const checkIn = new Date(booking.check_in_date);
-            const checkOut = new Date(booking.check_out_date);
-            return date >= checkIn && date <= checkOut;
-        });
+
+        const dateObj = new Date(date)
+        const normalizedDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+
+        const isUnavail = blockedDates.some(blockedDate => {
+            const normalizedBlockedDate = new Date(blockedDate.getFullYear(), blockedDate.getMonth(), blockedDate.getDate());
+            return normalizedBlockedDate.getTime() === normalizedDate.getTime();
+        })
+
+        return isUnavail;
     };
 
     const getDaysInMonth = (year, month) => {
@@ -75,8 +104,8 @@ const Calendar = ({ bookings }) => {
     };
 
     const monthsToDisplay = [
-    currentMonth,
-    // new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1),
+        currentMonth,
+        // new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1),
     ];
 
     return (
@@ -110,45 +139,45 @@ const Calendar = ({ bookings }) => {
                 </div>
 
                 <div className="grid grid-cols-7 gap-2">
-                {daysOfWeek.map((day) => (
-                    <div
-                    key={day}
-                    className="text-center font-semibold text-textColor"
-                    >
-                    {day}
-                    </div>
-                ))}
-                {days.map((date, idx) => (
-                    <button
-                    key={idx}
-                    onClick={() =>
-                        date &&
-                        !isPastDate(date) &&
-                        !isBooked(date) &&
-                        handleDateClick(date)
-                    }
-                    disabled={isPastDate(date) || isBooked(date)}
-                    className={`p-2 rounded-full w-10 h-10 flex items-center justify-center ${
-                        selectedRange.start &&
-                        selectedRange.start.toDateString() ===
-                        date?.toDateString()
-                        ? "bg-buttonColor text-white"
-                        : selectedRange.end &&
-                            selectedRange.end.toDateString() ===
+                    {daysOfWeek.map((day) => (
+                        <div
+                        key={day}
+                        className="text-center font-semibold text-textColor"
+                        >
+                        {day}
+                        </div>
+                    ))}
+                    {days.map((date, idx) => (
+                        <button
+                        key={idx}
+                        onClick={() =>
+                            date &&
+                            !isPastDate(date) &&
+                            !isBooked(date) &&
+                            handleDateClick(date)
+                        }
+                        disabled={isPastDate(date) || isBooked(date)}
+                        className={`p-2 rounded-full w-10 h-10 flex items-center justify-center ${
+                            selectedRange.start &&
+                            selectedRange.start.toDateString() ===
                             date?.toDateString()
-                        ? "bg-buttonColor text-white"
-                        : isInRange(date)
-                        ? "bg-buttonColor text-gray-800"
-                        : "text-gray-700 hover:bg-gray-100"
-                    } ${
-                        isPastDate(date) || isBooked(date)
-                        ? "cursor-not-allowed text-gray-300 line-through"
-                        : ""
-                    }`}
-                    >
-                    {date ? date.getDate() : null}
-                    </button>
-                ))}
+                            ? "bg-buttonColor text-white"
+                            : selectedRange.end &&
+                                selectedRange.end.toDateString() ===
+                                date?.toDateString()
+                            ? "bg-buttonColor text-white"
+                            : isInRange(date)
+                            ? "bg-buttonColor text-gray-800"
+                            : "text-gray-700 hover:bg-gray-100"
+                        } ${
+                            isPastDate(date) || isBooked(date)
+                            ? "cursor-not-allowed text-gray-300 line-through"
+                            : ""
+                        }`}
+                        >
+                        {date ? date.getDate() : null}
+                        </button>
+                    ))}
                 </div>
             </div>
             );

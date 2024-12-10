@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import { SingleContext } from "../app/SingleListingBooking.jsx";
 import { AppContext } from "../App.jsx"
-import { BookingForm } from "./BookingForm.jsx";
+import BookingForm from "./BookingForm.jsx";
 
 import services from "../services/index.js"
 
@@ -82,6 +82,8 @@ const MiniListingForm = ({ bookings, required }) => {
         }
         setIsBookingModalOpen(true);
     };
+
+    // TODO: function to delete reservation - link to the cancel button
 
 
     return (
@@ -205,7 +207,10 @@ const MiniListingForm = ({ bookings, required }) => {
 
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        onClick={handleSubmit}
+                        className="bg-logoColor text-white font-medium 
+                        rounded-full py-2 px-6 mt-2 w-full transition-transform 
+                        transform active:scale-95 hover:bg-backgroundColor"
                     >
                         Edit reservation
                     </button>
