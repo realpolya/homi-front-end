@@ -19,6 +19,8 @@ const SingleLeft = ({ listingId }) => {
     const [price, setPrice] = useState(0);
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [blockedDates, setBlockedDates] = useState([])
+
 
     const fetchBookings = async (id) => {
         try {
@@ -39,6 +41,31 @@ const SingleLeft = ({ listingId }) => {
         }
     }, [listing, listingId]);
 
+
+    useEffect(() => {
+
+        if (bookings) {
+            const newBlockedDates = bookings.reduce((arg, booking) => {
+                let start = new Date(booking.check_in_date)
+                let end = new Date(booking.check_out_date)
+
+                const checkIn = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+                const checkOut = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+                const dates = []
+                for (let d = new Date(checkIn); d <= checkOut; d.setDate(d.getDate() + 1)) {
+                    dates.push(new Date(d))
+                }
+
+                return [...arg, ...dates];
+            }, [])
+
+            setBlockedDates(newBlockedDates)
+        }
+
+    }, [bookings])
+
+
     return (
         <section className="section-left">
             <FivePicture />
@@ -49,8 +76,8 @@ const SingleLeft = ({ listingId }) => {
             </div>
 
             <div className="flex flex-col sm:flex-row rounded-lg mt-0 w-full gap-4 sm:gap-6">
-                <Calendar bookings={bookings} />
-                <MiniListingForm bookings={bookings} required />
+                <Calendar blockedDates={blockedDates} />
+                <MiniListingForm bookings={bookings} blockedDates={blockedDates} required />
             </div>
         </section>
     );

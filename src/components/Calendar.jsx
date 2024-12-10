@@ -1,45 +1,20 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 /* --------------------------------Component--------------------------------*/
 
-const Calendar = ({ bookings }) => {
+const Calendar = ({ blockedDates }) => {
 
     const [selectedRange, setSelectedRange] = useState({
         start: null,
         end: null,
     });
     const [currentMonth, setCurrentMonth] = useState(new Date());
-    const [blockedDates, setBlockedDates] = useState([])
-
     const daysOfWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
-    useEffect(() => {
-
-        if (bookings) {
-            const newBlockedDates = bookings.reduce((arg, booking) => {
-                let start = new Date(booking.check_in_date)
-                let end = new Date(booking.check_out_date)
-
-                const checkIn = new Date(start.getFullYear(), start.getMonth(), start.getDate());
-                const checkOut = new Date(end.getFullYear(), end.getMonth(), end.getDate());
-
-                const dates = []
-                for (let d = new Date(checkIn); d <= checkOut; d.setDate(d.getDate() + 1)) {
-                    dates.push(new Date(d))
-                }
-
-                return [...arg, ...dates];
-            }, [])
-
-            setBlockedDates(newBlockedDates)
-        }
-
-    }, [bookings])
 
     // Check if the date is before today (and prevent clicking on it)
     const isPastDate = (date) => date && date < today;

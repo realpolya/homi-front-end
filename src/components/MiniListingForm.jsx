@@ -11,7 +11,7 @@ import services from "../services/index.js"
 
 /* --------------------------------Component--------------------------------*/
 
-const MiniListingForm = ({ bookings, required }) => {
+const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
     const { pageState, listing, booking } = useContext(SingleContext)
     const { user, setShowLogin } = useContext(AppContext)
@@ -147,7 +147,7 @@ const MiniListingForm = ({ bookings, required }) => {
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                                className="form-button"
                             >
                                 Reserve
                             </button>
@@ -155,7 +155,7 @@ const MiniListingForm = ({ bookings, required }) => {
                             <button
                             type="button"
                             onClick={setShowLogin}
-                            className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                            className="form-button"
                             >
                                 Log In to Reserve
                             </button>
@@ -217,7 +217,7 @@ const MiniListingForm = ({ bookings, required }) => {
 
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        className="form-button"
                     >
                         Cancel reservation
                     </button>
@@ -228,19 +228,19 @@ const MiniListingForm = ({ bookings, required }) => {
                     <div>
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        className="form-button"
                     >
                         Archive listing
                     </button>
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        className="form-button"
                     >
                         Edit listing
                     </button>
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        className="form-button"
                     >
                         View bookings related to listing
                     </button>
@@ -254,6 +254,7 @@ const MiniListingForm = ({ bookings, required }) => {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white rounded-lg p-6 w-96">
                     <BookingForm
+                        blockedDates={blockedDates}
                         onClose={() => setIsBookingModalOpen(false)}
                         initialCheckInDate={checkInDate}
                         initialCheckOutDate={checkOutDate}
