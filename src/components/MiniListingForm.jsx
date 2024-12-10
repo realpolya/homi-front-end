@@ -13,9 +13,7 @@ import services from "../services/index.js"
 
 const MiniListingForm = ({ bookings, required }) => {
 
-    const { bookingId } = useParams();
-
-    const { pageState, listing } = useContext(SingleContext)
+    const { pageState, listing, booking } = useContext(SingleContext)
     const { user, setShowLogin } = useContext(AppContext)
 
     const [checkInDate, setCheckInDate] = useState("");
@@ -24,29 +22,19 @@ const MiniListingForm = ({ bookings, required }) => {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
-    const [currBooking, setCurrBooking] = useState() // current booking if on booking page
 
-    const fetchBooking = async (id) => {
-        setCurrBooking(await services.getSingleBooking(id))
-    }
 
     useEffect(() => {
         if (listing) setCleaningFee(listing.cleaning_fee)
     }, [listing])
 
     useEffect(() => {
-        if (pageState === "booking" && bookingId) {
-            fetchBooking(bookingId)
+        if (pageState === "booking" && booking) {
+            setCheckInDate(booking.check_in_date)
+            setCheckOutDate(booking.check_out_date)
+            setTotal(booking.total_price)
         }
-    }, [pageState, bookingId])
-
-    useEffect(() => {
-        if (pageState === "booking" && currBooking) {
-            setCheckInDate(currBooking.check_in_date)
-            setCheckOutDate(currBooking.check_out_date)
-            setTotal(currBooking.total_price)
-        }
-    }, [currBooking])
+    }, [booking])
 
     const isDateBlocked = (date) => {
         if (!date || isNaN(date)) return false;
@@ -142,7 +130,7 @@ const MiniListingForm = ({ bookings, required }) => {
                     )}
 
                     <label htmlFor="total" className="block text-sm font-medium mb-1">
-                        Total:
+                        Total price:
                     </label>
                     <input
                         type="number"
@@ -205,7 +193,7 @@ const MiniListingForm = ({ bookings, required }) => {
                     />
 
                     <label htmlFor="total" className="block text-sm font-medium mb-1">
-                        Total:
+                        Total price:
                     </label>
                     <input
                         type="number"
@@ -214,6 +202,13 @@ const MiniListingForm = ({ bookings, required }) => {
                         readOnly
                         className="border rounded-lg p-2 mb-4 w-full text-center bg-gray-100"
                     />
+
+                    <button
+                        type="button"
+                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                    >
+                        Edit reservation
+                    </button>
 
                     <button
                         type="button"
