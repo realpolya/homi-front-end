@@ -83,7 +83,7 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
                 <NavLink className="nav-link" to="/" onClick={() => setOpen(false)}>
                     Home
                 </NavLink>
-                <NavLink className="nav-link" to="listings">
+                <NavLink className="nav-link" to="/listings" onClick={() => setOpen(false)}>
                     Listings
                 </NavLink>
                 <NavLink className="nav-link" to="/about" onClick={() => setOpen(false)}>

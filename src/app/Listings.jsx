@@ -1,95 +1,103 @@
+/* --------------------------------Imports--------------------------------*/
+
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from 'react-router-dom';
-import { ListingCard } from "../components/ListingCard.jsx";
-import { SortBar } from "../components/SortBar.jsx";
+import ListingCard from "../components/ListingCard.jsx";
+import SortBar from "../components/SortBar.jsx";
 import { AppContext } from "../App.jsx";
 import services from "../services/index.js"
 
-export const Listings = () => {
-  let location = useLocation()
-  const { properties } = useContext(AppContext)
-  console.log("Listings.jsx ", properties)
-  const [listings, setListings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [sorting, setSorting] = useState(true);
-  const [searchData, setSearchData] = useState('')
+/* --------------------------------Component--------------------------------*/
 
-  
-  const fetchWhereData = async (data) => {
-    
-    const query = `where=${data}`
-    console.log('fetchWhereData is firing ', query)
-    const fetchedData = await services.getProperties(query)
-    console.log('fetched where data is ', fetchedData)
-    setListings(fetchedData)
-    
-  }
+const Listings = () => {
 
-  // restore properties
-  useEffect(() => {
+    const { properties } = useContext(AppContext)
 
-    if (!sorting) {
-      setListings(properties);
-      setSearchData('');
-      setLoading(false);
+    let location = useLocation()
+
+    const [listings, setListings] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [sorting, setSorting] = useState(true);
+    const [searchData, setSearchData] = useState('')
+
+
+    const fetchWhereData = async (data) => {
+
+        const query = `where=${data}`
+        setListings(await services.getProperties(query))
+
     }
 
-  }, [sorting, properties])
 
-  
-  // active searching
-  useEffect(() => {
-    
-    if (location.state) {
-      setSearchData(location.state.whereData)
-      setSorting(true)
-    } 
-    
-  }, [location.state])
+    useEffect(() => {
 
-  // fetch or do initial load
-  useEffect(() => {
+        if (!sorting) {
+            setListings(properties);
+            setSearchData('');
+            setLoading(false);
+        }
 
-    if (searchData.length > 0) {
-
-      fetchWhereData(searchData);
-      setLoading(false);
-      
-    }
-    else if (properties) {
-
-      setListings(properties);
-      setLoading(false);
- 
-    }
-
-  }, [location.pathname, properties, searchData]);
+    }, [sorting, properties])
 
 
-  return (
+    useEffect(() => {
 
-    <main className="size-fit">
-      <h1 className=" text-left mb-6 text-2xl">All Listings</h1>
+        if (location.state) {
+            setSearchData(location.state.whereData)
+            setSorting(true)
+        } 
 
-      <SortBar setListings={setListings} setSorting={setSorting}/>
+    }, [location.state])
 
-      {
-        loading ? (
-          <p>No properties yet...</p>
-        ) : (
-          <div className="listing-cards-container flex flex-row flex-wrap">
-            {listings.length === 0 ? (
-              <p>No listings matched your criteria...</p>
+
+    // fetch or do initial load
+    useEffect(() => {
+
+        if (searchData.length > 0) {
+
+            fetchWhereData(searchData);
+            setLoading(false);
+            
+        }
+        else if (properties) {
+
+            setListings(properties);
+            setLoading(false);
+
+        }
+
+    }, [location.pathname, properties, searchData]);
+
+
+    return (
+
+        <main className="listings-main size-fit">
+            <h1 className="text-left pl-4 mb-6 mt-24 md:mt-12 lg:mt-0
+            text-2xl">All Listings</h1>
+
+            <SortBar setListings={setListings} setSorting={setSorting}/>
+
+            {
+            loading ? (
+                <p>No properties yet...</p>
             ) : (
-              listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} origin={"listings"} bookingId={null} />
-              ))
-            )}
-          </div>
-        )
-      }
-      
-    </main>
+                <div className="listing-cards-container flex flex-row flex-wrap justify-center">
+                {listings.length === 0 ? (
+                    <p>No listings matched your criteria...</p>
+                ) : (
+                    listings.map((listing) => (
+                    <ListingCard key={listing.id} listing={listing} origin={"listings"} bookingId={null} />
+                    ))
+                )}
+                </div>
+            )
+            }
+            
+        </main>
 
-  );
+    );
 };
+
+/* --------------------------------Exports--------------------------------*/
+
+export default Listings

@@ -97,3 +97,83 @@
     pb-32
     rounded-lg
 }
+
+/* LISTINGS */
+.listings-main {
+    @apply p-0
+    md:p-6
+    lg:p-20
+    flex flex-col
+    items-center
+    lg:items-start
+    h-full
+}
+
+/* SORT BAR */
+
+.sort-bar-section {
+    @apply p-4 mb-6
+    md:mt-0
+    w-[95%]
+    lg:w-full 
+    rounded-lg 
+    bg-alternativeColor 
+    shadow-md 
+    size-fit
+}
+
+/* SINGLE LISTING BOOKING */
+
+.single-main {
+    @apply p-6
+    lg:p-6
+    mt-12
+}
+
+.single-h1 {
+    @apply text-center
+    lg:text-left text-2xl
+    mt-6 lg:mt-0
+}
+
+.div-left-right {
+    @apply w-full h-[90%] 
+    flex flex-col lg:flex-row 
+    gap-y-6
+    lg:gap-x-6
+}
+
+.section-left {
+    @apply flex flex-col 
+    p-4 space-y-3 
+    w-full
+    lg:h-[90%]
+    bg-whiteColor 
+    rounded-lg 
+    lg:overflow-y-auto
+}
+
+.section-right {
+    @apply flex flex-col 
+    space-y-2
+    p-4
+    w-full lg:h-[90%] 
+    bg-whiteColor 
+    rounded-lg
+    pb-24
+    lg:pb-0
+}
+
+.div-mini-form {
+    @apply w-full 
+    lg:w-1/2
+    p-4
+    flex flex-col 
+    justify-center
+    lg:justify-start 
+    items-center 
+    bg-whiteColor 
+    text-center 
+    min-h-[400px] 
+    lg:z-50
+}

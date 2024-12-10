@@ -1,14 +1,18 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState, useRef, useEffect } from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { AppContext } from "../App.jsx";
 import { Twirl as Hamburger } from "hamburger-react";
 import { FaSearch } from "react-icons/fa";
 import Sidebar from "./Sidebar.jsx";
 
 /* --------------------------------Component--------------------------------*/
 
-const Navbar = ({ setShowRegister, setShowLogin }) => {
+const Navbar = () => {
+
+    const { setShowLogin, setShowRegister } = useContext(AppContext)
 
     const navigate = useNavigate();
     const [isOpen, setOpen] = useState(false);
@@ -34,11 +38,11 @@ const Navbar = ({ setShowRegister, setShowLogin }) => {
         };
     }, [isOpen]);
 
+
     const handleWhereChange = (e) => setWhereData(e.target.value)
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        console.log('in navbar where data is ', whereData)
         navigate("/listings", { state: { whereData } })
         setWhereData('')
 
