@@ -1,14 +1,19 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useContext, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
 import { SingleContext } from "../app/SingleListingBooking.jsx";
 import { AppContext } from "../App.jsx"
 import { BookingForm } from "./BookingForm.jsx";
 
+import services from "../services/index.js"
+
 /* --------------------------------Component--------------------------------*/
 
 const MiniListingForm = ({ bookings, required }) => {
+
+    const { bookingId } = useParams();
 
     const { pageState, listing } = useContext(SingleContext)
     const { user, setShowLogin } = useContext(AppContext)
@@ -19,10 +24,29 @@ const MiniListingForm = ({ bookings, required }) => {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
+    const [currBooking, setCurrBooking] = useState() // current booking if on booking page
+
+    const fetchBooking = async (id) => {
+        setCurrBooking(await services.getSingleBooking(id))
+    }
 
     useEffect(() => {
         if (listing) setCleaningFee(listing.cleaning_fee)
     }, [listing])
+
+    useEffect(() => {
+        if (pageState === "booking" && bookingId) {
+            fetchBooking(bookingId)
+        }
+    }, [pageState, bookingId])
+
+    useEffect(() => {
+        if (pageState === "booking" && currBooking) {
+            setCheckInDate(currBooking.check_in_date)
+            setCheckOutDate(currBooking.check_out_date)
+            setTotal(currBooking.total_price)
+        }
+    }, [currBooking])
 
     const isDateBlocked = (date) => {
         if (!date || isNaN(date)) return false;
