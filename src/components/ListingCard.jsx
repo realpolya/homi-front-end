@@ -43,11 +43,11 @@ function ListingCard({ listing, origin, bookingId, booking }) {
         >
 
             <img
-            src={listing.first_photo?.link || "../../public/img/defaulthouse.jpg"}
+            src={listing.first_photo?.link || "/img/defaulthouse.jpg"}
             alt={`Image of ${listing.title}`}
             className="relative w-[90%] h-2/3 object-cover object-center m-3 rounded-lg"
             loading="lazy"
-            onError={(e) => (e.target.src = "../../public/img/defaulthouse.jpg")}
+            onError={(e) => (e.target.src = "/img/defaulthouse.jpg")}
             />
 
             <div className="h-1/3">
