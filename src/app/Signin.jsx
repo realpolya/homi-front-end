@@ -1,9 +1,9 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState } from "react";
-import { signIn } from "../services/sub_services/userServices";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
+import { signIn } from "../services/index.js";
 
 /* --------------------------------Variables--------------------------------*/
 

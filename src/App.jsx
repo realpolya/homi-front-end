@@ -9,7 +9,7 @@ import "./App.css";
 import "./index.css";
 
 import AppRoutes from "./Routes.jsx";
-import { SignUp } from "./app/SignUp";
+import SignUp from "./app/SignUp";
 import SignIn from "./app/Signin";
 import Navbar from "./components/NavBar";
 import { Footer } from "./components/Footer";
