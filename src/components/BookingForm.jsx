@@ -92,23 +92,30 @@ const BookingForm = ({
                 dates.push(new Date(d))
             }
 
-            let isUnavail = blockedDates.some(blockedDate => 
-                dates.some(date => blockedDate.getTime() === date.getTime())
-            );
 
-            // separate logic for changing existing booking and creating new
+            let isUnavail = true
             if (edit && booking) {
+
                 const bookingDates = []
+
                 for (let d = new Date(booking.check_in_date); d <= booking.check_out_date; d.setDate(d.getDate() + 1)) {
                     bookingDates.push(new Date(d))
                 }
 
                 let filtered = blockedDates.filter(blockedDate => {
-                    return bookingDates.filter(date => {
-                        return blockedDate.getTime() !== date.getTime()
-                    })
+                    return bookingDates.some(date => blockedDate.getTime() === date.getTime());
                 });
-                
+
+                isUnavail = filtered.some(blockedDate => 
+                    dates.some(date => blockedDate.getTime() === date.getTime())
+                );
+
+            } else {
+
+                isUnavail = blockedDates.some(blockedDate => 
+                    dates.some(date => blockedDate.getTime() === date.getTime())
+                );
+
             }
 
             return isUnavail;
@@ -180,18 +187,27 @@ const BookingForm = ({
                 return;
             }
 
-            // TODO: if other dates from other bookings are blocking it
-            if (isDateBlocked(checkIn, checkOut) && pageState === "listing") {
-                alert(
-                    "The selected dates are unavailable. Please choose different dates."
-                );
-                return;
-            } else if 
-
             if (pageState === "listing") {
+
+                if (isDateBlocked(checkIn, checkOut)) {
+                    alert(
+                        "The selected dates are unavailable. Please choose different dates."
+                    );
+                    return;
+                }
+
                 createBooking(listingId, formData)
                 alert("Booking submitted successfully!");
+
             } else if (pageState === "booking") {
+
+                if (isDateBlocked(checkIn, checkOut, true, booking)) {
+                    alert(
+                        "The selected dates are unavailable. Please choose different dates."
+                    );
+                    return;
+                }
+
                 updateBooking(bookingId, formData)
                 alert("Booking changed successfully!");
             }
