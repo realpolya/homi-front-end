@@ -28,18 +28,23 @@ const ListingMap = () => {
 
     useEffect(() => {
 
+        
+        if (listing && listing.address) {
+            
+            setLat(listing.address.latitude)
+            setLng(listing.address.longitude)
+            setLoading(false)
+
+        }
+
+    }, [listing, listing?.address, mapContainerRef, MAPBOX_KEY])
+
+
+    useEffect(() => {
+
         if (!mapContainerRef.current) {
             console.log('map container is not available at the moment')
             return;
-        }
-
-        setLoading(false)
-
-        if (listing && listing.address) {
-
-            setLat(listing.address.latitude)
-            setLng(listing.address.longitude)
-
         }
 
         const map = new mapboxgl.Map({
@@ -61,7 +66,7 @@ const ListingMap = () => {
 
         return () => map.remove();
 
-    }, [listing, listing?.address, mapContainerRef, MAPBOX_KEY])
+    }, [lat, lng])
 
     
     return (
