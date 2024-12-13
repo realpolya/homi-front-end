@@ -48,6 +48,7 @@ const BookingForm = ({
 
         const [formData, setFormData] = useState(formDefault);
 
+
         useEffect(() => {
 
             setFormData(prev => {
@@ -106,7 +107,6 @@ const BookingForm = ({
         const handleChange = (e) => {
 
             const { name, value } = e.target;
-
             setFormData(prev => ({...prev, [name]: value }));
 
             if (name === "check_in_date" ) {

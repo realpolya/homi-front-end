@@ -67,10 +67,16 @@ const Dashboard = () => {
     useEffect(() => {
 
         if (!isHost) fetchUpcomingBookings()
-
         if (isHost) fetchHostData()
 
     }, [isHost])
+
+
+    useEffect(() => {
+
+        if (bookings) fetchUpcomingBookings()
+
+    }, [bookings])
 
 
     useEffect(() => {
@@ -100,6 +106,7 @@ const Dashboard = () => {
         }
 
     }, [bookings])
+
 
     return (
         <main className="dashboard-main">
