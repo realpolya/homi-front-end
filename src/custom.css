@@ -69,6 +69,7 @@
 
 .dashboard-left {
     @apply w-11/12 lg:w-3/12
+    lg:h-full
     lg:overflow-y-auto
     bg-whiteColor 
     p-4 pt-0
@@ -78,7 +79,8 @@
 
 .dashboard-center {
     @apply w-11/12 lg:w-6/12 
-    lg:overflow-y-auto 
+    lg:h-full
+    lg:overflow-y-auto
     bg-alternativeColor 
     p-4
     m-4

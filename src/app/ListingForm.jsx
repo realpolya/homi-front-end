@@ -51,16 +51,20 @@ export const ListingForm = () => {
 
   // Handle input change for a specific index
   const handlePhotoChange = (index, value) => {
+
     const updatedPhotos = [...photos];
     updatedPhotos[index] = { link: value };
     setPhotos(updatedPhotos);
+
   };
 
   // Add a new input field
   const addImageInput = () => {
+
     if (photos.length < 5) {
       setPhotos([...photos, { link: "" }]);
     }
+    
   };
 
   const handleSubmit = async (e) => {

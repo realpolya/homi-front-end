@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { signUp } from '../services/sub_services/userServices';
 
 export const SignUp = ({ onSubmit }) => {
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -22,8 +23,6 @@ export const SignUp = ({ onSubmit }) => {
     e.preventDefault();
 
     const userData = await signUp(formData)
-
-   
 
     onSubmit(userData);
   };
