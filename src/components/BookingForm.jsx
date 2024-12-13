@@ -7,31 +7,32 @@ import { SingleContext } from "../app/SingleListingBooking.jsx";
 
 import services from "../services/index.js";
 
-/* --------------------------------Component--------------------------------*/
-
+/* --------------------------------Variables--------------------------------*/
 
 /* back-end booking model:
 
 prop = models.ForeignKey(Property, on_delete=models.CASCADE)
 
-    guest = models.ForeignKey(User, on_delete=models.CASCADE)
-    check_in_date = models.DateField()
-    check_out_date = models.DateField()
-    total_price = models.IntegerField(default=0)
-    message = models.TextField()
-    number_of_guests = models.IntegerField(default=1)
-    credit_card = models.IntegerField(default=0000000000000000)
+guest = models.ForeignKey(User, on_delete=models.CASCADE)
+check_in_date = models.DateField()
+check_out_date = models.DateField()
+total_price = models.IntegerField(default=0)
+message = models.TextField()
+number_of_guests = models.IntegerField(default=1)
+credit_card = models.IntegerField(default=0000000000000000)
 
 */
 
 const formDefault = {
     check_in_date: "",
     check_out_date: "",
-    total: 0,
+    total_price: 0,
     message: "",
     number_of_guests: 1,
     credit_card: 0
 }
+
+/* --------------------------------Component--------------------------------*/
 
 const BookingForm = ({
         blockedDates,
@@ -44,7 +45,7 @@ const BookingForm = ({
         const { pageState, listing, booking } = useContext(SingleContext)
 
         const  navigate = useNavigate();
-        const { listingId } = useParams();
+        const { listingId, bookingId } = useParams();
 
         const [formData, setFormData] = useState(formDefault);
 
@@ -62,7 +63,23 @@ const BookingForm = ({
         }, [initialCheckInDate, initialCheckOutDate, total]);
 
 
-        const isDateBlocked = (start, end) => {
+        useEffect(() => {
+
+            if (booking && pageState === "booking") {
+                setFormData({
+                    check_in_date: booking.check_in_date,
+                    check_out_date: booking.check_out_date,
+                    total_price: booking.total_price,
+                    message: booking.message,
+                    number_of_guests: booking.number_of_guests,
+                    credit_card: booking.credit_card
+                })
+            }
+
+        }, [booking, pageState])
+
+
+        const isDateBlocked = (start, end, edit=false, booking=null) => {
 
             let startDate = new Date(start)
             let endDate = new Date(end)
@@ -75,15 +92,39 @@ const BookingForm = ({
                 dates.push(new Date(d))
             }
 
-            return blockedDates.some(blockedDate => 
+            let isUnavail = blockedDates.some(blockedDate => 
                 dates.some(date => blockedDate.getTime() === date.getTime())
             );
 
+            // separate logic for changing existing booking and creating new
+            if (edit && booking) {
+                const bookingDates = []
+                for (let d = new Date(booking.check_in_date); d <= booking.check_out_date; d.setDate(d.getDate() + 1)) {
+                    bookingDates.push(new Date(d))
+                }
+
+                let filtered = blockedDates.filter(blockedDate => {
+                    return bookingDates.filter(date => {
+                        return blockedDate.getTime() !== date.getTime()
+                    })
+                });
+                
+            }
+
+            return isUnavail;
+
         };
+
 
         const createBooking = async (prop_id, data) => {
             return await services.postBooking(prop_id, data)
         }
+
+
+        const updateBooking = async (bookingId, data) => {
+            return await services.putBooking(bookingId, data)
+        }
+        
 
         const updateTotal = (checkInDate, checkOutDate) => {
 
@@ -139,16 +180,22 @@ const BookingForm = ({
                 return;
             }
 
-            if (isDateBlocked(checkIn, checkOut)) {
+            // TODO: if other dates from other bookings are blocking it
+            if (isDateBlocked(checkIn, checkOut) && pageState === "listing") {
                 alert(
                     "The selected dates are unavailable. Please choose different dates."
                 );
                 return;
+            } else if 
+
+            if (pageState === "listing") {
+                createBooking(listingId, formData)
+                alert("Booking submitted successfully!");
+            } else if (pageState === "booking") {
+                updateBooking(bookingId, formData)
+                alert("Booking changed successfully!");
             }
 
-            createBooking(listingId, formData)
-
-            alert("Booking submitted successfully!");
             onClose();
             navigate("/dashboard/guest")
 
@@ -165,7 +212,13 @@ const BookingForm = ({
                     ✕
                 </button>
 
-                <h2 className="text-xl font-semibold mb-4">Book Your Stay</h2>
+                { pageState === "listing" ? (
+                    <h2 className="text-xl font-semibold mb-4">Book Your Stay</h2>
+                ) : (
+                    <h2 className="text-xl font-semibold mb-4">Edit Your Booking</h2>
+                )}
+
+                
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
