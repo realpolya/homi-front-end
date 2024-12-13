@@ -19,7 +19,7 @@ const ListingMap = () => {
 
     const mapContainerRef = useRef(null)
 
-    const { listing } = useContext(SingleContext);
+    const { listing, pageState } = useContext(SingleContext);
 
     // NYC coordinates as default
     const [lat, setLat] = useState(40.7128)
@@ -55,14 +55,28 @@ const ListingMap = () => {
         });
 
         const el = document.createElement('div');
-        el.style.backgroundImage = `url('/marker.png')`; // Set the PNG image
-        el.style.backgroundSize = 'contain'; // Ensure the image fits
-        el.style.width = '40px'; // Set marker width
-        el.style.height = '40px'; // Set marker height
 
-        new mapboxgl.Marker(el, { offset: [0, -20] })
-        .setLngLat([lng, lat])
-        .addTo(map);
+        if (pageState === "listing") {
+            el.style.backgroundImage = `url('/radius.png')`; // Set the PNG image
+            el.style.backgroundSize = 'contain'; // Ensure the image fits
+            el.style.width = '200px'; // Set marker width
+            el.style.height = '200px'; // Set marker height
+
+            new mapboxgl.Marker(el, { offset: [0, 0] })
+            .setLngLat([lng, lat])
+            .addTo(map);
+        } else {
+            el.style.backgroundImage = `url('/marker.png')`; // Set the PNG image
+            el.style.backgroundSize = 'contain'; // Ensure the image fits
+            el.style.width = '40px'; // Set marker width
+            el.style.height = '40px'; // Set marker height
+
+            new mapboxgl.Marker(el, { offset: [0, -20] })
+            .setLngLat([lng, lat])
+            .addTo(map);
+        }
+
+
 
         return () => map.remove();
 
