@@ -48,7 +48,7 @@ export const SignUp = ({ onSubmit }) => {
         </label>
         <input
           type="text"
-          id="username"
+          id="username-1"
           name="username"
           value={formData.username}
           onChange={handleChange}
@@ -93,7 +93,7 @@ export const SignUp = ({ onSubmit }) => {
         </label>
         <input
           type="password"
-          id="password"
+          id="password-1"
           name="password"
           value={formData.password}
           onChange={handleChange}

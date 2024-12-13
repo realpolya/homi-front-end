@@ -27,8 +27,10 @@ const SingleListingBooking = () => {
     const [listing, setListing] = useState(null);
     const [loading, setLoading] = useState(true);
     const [pageState, setPageState] = useState('listing')
+    const [booking, setBooking] = useState(null) // current booking if on booking page
+    
 
-    const { listingId } = useParams();
+    const { listingId, bookingId } = useParams();
 
     const fetchListing = async (id) => {
         try {
@@ -36,6 +38,10 @@ const SingleListingBooking = () => {
         } catch (error) {
             console.error("Error fetching property details:", error.message);
         }
+    }
+
+    const fetchBooking = async (id) => {
+        setBooking(await services.getSingleBooking(id))
     }
 
     /* USE EFFECT */
@@ -66,7 +72,14 @@ const SingleListingBooking = () => {
     }, [location.pathname])
 
 
-    const singleObject = { listing, pageState }
+    useEffect(() => {
+        if (pageState === "booking" && bookingId) {
+            fetchBooking(bookingId)
+        }
+    }, [pageState, bookingId])
+
+
+    const singleObject = { listing, pageState, booking }
 
     return (
         <SingleContext.Provider value={singleObject} >

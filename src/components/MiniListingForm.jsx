@@ -1,16 +1,19 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useContext, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
 import { SingleContext } from "../app/SingleListingBooking.jsx";
 import { AppContext } from "../App.jsx"
-import { BookingForm } from "./BookingForm.jsx";
+import BookingForm from "./BookingForm.jsx";
+
+import services from "../services/index.js"
 
 /* --------------------------------Component--------------------------------*/
 
-const MiniListingForm = ({ bookings, required }) => {
+const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
-    const { pageState, listing } = useContext(SingleContext)
+    const { pageState, listing, booking } = useContext(SingleContext)
     const { user, setShowLogin } = useContext(AppContext)
 
     const [checkInDate, setCheckInDate] = useState("");
@@ -20,9 +23,18 @@ const MiniListingForm = ({ bookings, required }) => {
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
 
+
     useEffect(() => {
         if (listing) setCleaningFee(listing.cleaning_fee)
     }, [listing])
+
+    useEffect(() => {
+        if (pageState === "booking" && booking) {
+            setCheckInDate(booking.check_in_date)
+            setCheckOutDate(booking.check_out_date)
+            setTotal(booking.total_price)
+        }
+    }, [booking])
 
     const isDateBlocked = (date) => {
         if (!date || isNaN(date)) return false;
@@ -71,6 +83,8 @@ const MiniListingForm = ({ bookings, required }) => {
         setIsBookingModalOpen(true);
     };
 
+    // TODO: function to delete reservation - link to the cancel button
+
 
     return (
         <div className="div-mini-form">
@@ -118,7 +132,7 @@ const MiniListingForm = ({ bookings, required }) => {
                     )}
 
                     <label htmlFor="total" className="block text-sm font-medium mb-1">
-                        Total:
+                        Total price:
                     </label>
                     <input
                         type="number"
@@ -133,7 +147,7 @@ const MiniListingForm = ({ bookings, required }) => {
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                                className="form-button"
                             >
                                 Reserve
                             </button>
@@ -141,7 +155,7 @@ const MiniListingForm = ({ bookings, required }) => {
                             <button
                             type="button"
                             onClick={setShowLogin}
-                            className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                            className="form-button"
                             >
                                 Log In to Reserve
                             </button>
@@ -181,7 +195,7 @@ const MiniListingForm = ({ bookings, required }) => {
                     />
 
                     <label htmlFor="total" className="block text-sm font-medium mb-1">
-                        Total:
+                        Total price:
                     </label>
                     <input
                         type="number"
@@ -193,7 +207,17 @@ const MiniListingForm = ({ bookings, required }) => {
 
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        onClick={handleSubmit}
+                        className="bg-logoColor text-white font-medium 
+                        rounded-full py-2 px-6 mt-2 w-full transition-transform 
+                        transform active:scale-95 hover:bg-backgroundColor"
+                    >
+                        Edit reservation
+                    </button>
+
+                    <button
+                        type="button"
+                        className="form-button"
                     >
                         Cancel reservation
                     </button>
@@ -204,19 +228,19 @@ const MiniListingForm = ({ bookings, required }) => {
                     <div>
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        className="form-button"
                     >
                         Archive listing
                     </button>
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        className="form-button"
                     >
                         Edit listing
                     </button>
                     <button
                         type="button"
-                        className="bg-logoColor text-white font-medium rounded-full py-2 px-6 mt-2 w-full transition-transform transform active:scale-95 hover:bg-backgroundColor"
+                        className="form-button"
                     >
                         View bookings related to listing
                     </button>
@@ -230,6 +254,7 @@ const MiniListingForm = ({ bookings, required }) => {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white rounded-lg p-6 w-96">
                     <BookingForm
+                        blockedDates={blockedDates}
                         onClose={() => setIsBookingModalOpen(false)}
                         initialCheckInDate={checkInDate}
                         initialCheckOutDate={checkOutDate}
