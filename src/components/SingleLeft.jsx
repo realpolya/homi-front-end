@@ -75,7 +75,7 @@ const SingleLeft = ({ listingId }) => {
                 <p><span className="text-alternativeColor font-semibold">${price}</span>{" "}per night</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row rounded-lg mt-0 w-full gap-4 sm:gap-6">
+            <div className="div-cale-mini">
                 <Calendar blockedDates={blockedDates} />
                 <MiniListingForm bookings={bookings} blockedDates={blockedDates} required />
             </div>

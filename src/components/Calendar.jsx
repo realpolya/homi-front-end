@@ -106,7 +106,7 @@ const Calendar = ({ blockedDates }) => {
     ];
 
     return (
-    <div className="flex-1 max-w-full sm:max-w-xl mx-auto p-4 bg-whiteColor rounded-lg">
+    <div className="div-calendar">
         <div className="grid grid-cols-1 gap-8">
         {monthsToDisplay.map((month, index) => {
             const days = getDaysInMonth(month.getFullYear(), month.getMonth());
