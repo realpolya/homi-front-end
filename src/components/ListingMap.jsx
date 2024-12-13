@@ -57,6 +57,7 @@ const ListingMap = () => {
         const el = document.createElement('div');
 
         if (pageState === "listing") {
+
             el.style.backgroundImage = `url('/radius.png')`; // Set the PNG image
             el.style.backgroundSize = 'contain'; // Ensure the image fits
             el.style.width = '200px'; // Set marker width
@@ -65,7 +66,9 @@ const ListingMap = () => {
             new mapboxgl.Marker(el, { offset: [0, 0] })
             .setLngLat([lng, lat])
             .addTo(map);
+
         } else {
+
             el.style.backgroundImage = `url('/marker.png')`; // Set the PNG image
             el.style.backgroundSize = 'contain'; // Ensure the image fits
             el.style.width = '40px'; // Set marker width
@@ -74,13 +77,12 @@ const ListingMap = () => {
             new mapboxgl.Marker(el, { offset: [0, -20] })
             .setLngLat([lng, lat])
             .addTo(map);
+
         }
-
-
 
         return () => map.remove();
 
-    }, [lat, lng])
+    }, [lat, lng, pageState])
 
     
     return (
