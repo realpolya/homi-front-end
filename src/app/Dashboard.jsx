@@ -4,11 +4,10 @@ import { useState, useEffect, useContext } from "react"
 import { Link, useLocation } from "react-router-dom"
 
 import { AppContext } from '../App.jsx'
-import { MyUserInfo } from "../components/MyUserInfo.jsx"
+import MyUserInfo from "../components/MyUserInfo.jsx"
 import HostBookings from "../components/HostBookings.jsx"
 import MyBookingsListings from "../components/MyBookingsListings.jsx"
 import BookingMap from "../components/BookingMap.jsx"
-import ListingCard from "../components/ListingCard.jsx"
 
 import services from "../services/index.js"
 
@@ -21,40 +20,17 @@ const Dashboard = () => {
     const location = useLocation()
 
     const [isHost, setIsHost] = useState(false)
-    const [upcomingBookings, setUpcomingBookings] = useState([]);
-    const [myProperties, setMyProperties] = useState([]);
     const [hostBookings, setHostBookings] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [prevBookings, setPrevBookings] = useState([])
-
-
-    const fetchUpcomingBookings = async () => {
-        try {
-            setUpcomingBookings(await services.getUpcoming())
-        } catch (error) {
-            console.error("Error fetching upcoming bookings:", error)
-        }
-    }
 
     const fetchHostData = async () => {
         try {
-
-            const properties = await services.getMyProperties()
-
-            setMyProperties(
-                properties.map((prop) => ({
-                    id: prop.id,
-                    prop,
-                }))
-            );
 
             setHostBookings(await services.getHostBookings());
 
         } catch (error) {
             console.error("Error fetching host data:", error);
-        } finally {
-            setLoading(false);
-        }
+        } 
     };
 
     useEffect(() => {
@@ -67,7 +43,6 @@ const Dashboard = () => {
 
     useEffect(() => {
 
-        if (!isHost) fetchUpcomingBookings()
         if (isHost) fetchHostData()
 
     }, [isHost])
