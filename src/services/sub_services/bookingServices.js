@@ -149,6 +149,8 @@ const getPropBookings = async (prop_id) => {
 
 }
 
+// TODO: create service for previous bookings
+
 /* --------------------------------Exports--------------------------------*/
 
 export { 

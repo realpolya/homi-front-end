@@ -67,7 +67,7 @@ const TeamMemberCard = ({ member }) => {
                     href={member.github}
                     className="bg-buttonColor text-whiteColor px-4 py-2 rounded-full text-sm hover:bg-alternativeColor"
                     >
-                    View GitHub
+                        View GitHub
                     </a>
                 )}
             </div>

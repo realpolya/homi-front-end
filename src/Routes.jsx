@@ -3,7 +3,7 @@
 import { Routes, Route } from "react-router-dom";
 import About from "./app/About.jsx";
 import BookingForm from "./components/BookingForm";
-import { Bookings } from "./app/Bookings";
+import Bookings from "./app/Bookings.jsx";
 import Dashboard from "./app/Dashboard.jsx";
 import Landing from "./app/Landing";
 import Listings from "./app/Listings";
@@ -20,10 +20,14 @@ function AppRoutes({}) {
             {/* NOTE: this needs to get changed once we have services file adding {user &&()} */}
             <Route path="/booking-form" element={<BookingForm />} />
             <Route path="/booking-form/:bookingId" element={<BookingForm />} />
+
             <Route path="/bookings/guest" element={<Bookings />} />
             <Route path="/bookings/host" element={<Bookings />} />
+            <Route path="/bookings/guest/past" element={<Bookings />} />
+
             <Route path="/dashboard/host" element={<Dashboard />} />
             <Route path="/dashboard/guest" element={<Dashboard />} />
+            
             <Route path="/listing-form" element={<ListingForm />} />
             <Route path="/listing-form/:id/edit" element={<EditListingForm />} />
             <Route
@@ -42,7 +46,6 @@ function AppRoutes({}) {
 
             {/* NOTE: Going to DELETE LATER*/}
             <Route path="/listing/booking" element={<SingleListingBooking />} />
-            <Route path="/bookings" element={<Bookings />} />
         </Routes>
     );
 }

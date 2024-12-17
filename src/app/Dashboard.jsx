@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useEffect, useContext } from "react"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import { AppContext } from '../App.jsx'
 import { MyUserInfo } from "../components/MyUserInfo.jsx"
@@ -134,7 +134,7 @@ const Dashboard = () => {
                 </div>
             ) : (
                 <div className="dashboard-center">
-                    <p className="text-lightTextColor">Your Upcoming Bookings</p>
+                    <Link to="/bookings/guest" className="classic-link text-lightTextColor">Your Upcoming Bookings</Link>
                     <div className="flex flex-wrap gap-4 justify-center">
                         {upcomingBookings.length > 0 ? (
                             upcomingBookings.map((booking, i) => {
@@ -154,12 +154,14 @@ const Dashboard = () => {
 
             {/* Right Column */}
             <div className="dashboard-right">
-                {isHost ? (<h1>Bookings of my listings</h1>) : (<h1>Your Previous Bookings</h1>)}
+                {isHost ? (<Link to="/bookings/host" className="classic-link">Bookings of my listings</Link>) : (
+                    <Link to="/bookings/guest/past" className="classic-link">Your Previous Bookings</Link>
+                )} 
                 {isHost ? (<HostBookings hostBookings={hostBookings} />) : (
                     prevBookings.length > 0 ? (
-                    prevBookings.map((prev, i) => {
-                        return <BookingMap prev={prev} key={i}/>
-                    })
+                        prevBookings.map((prev, i) => {
+                            return <BookingMap prev={prev} key={i}/>
+                        })
                     ) : (null)
                 )}
             </div>
