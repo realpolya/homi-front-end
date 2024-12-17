@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { Routes, Route } from "react-router-dom";
-import { About } from "./app/About";
+import About from "./app/About.jsx";
 import BookingForm from "./components/BookingForm";
 import { Bookings } from "./app/Bookings";
 import Dashboard from "./app/Dashboard.jsx";

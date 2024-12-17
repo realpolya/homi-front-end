@@ -199,6 +199,16 @@
     lg:z-50
 }
 
+/* ABOUT */
+
+.about-main {
+    @apply p-6
+    md:p-6
+    lg:p-20
+    pt-0
+    flex flex-col
+}
+
 /* BUTTON STYLING */
 
 .form-button {
