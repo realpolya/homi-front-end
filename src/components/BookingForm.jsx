@@ -1,6 +1,36 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { SingleContext } from "../app/SingleListingBooking.jsx";
+
+import services from "../services/index.js";
+
+/* --------------------------------Variables--------------------------------*/
+
+/* back-end booking model:
+
+prop = models.ForeignKey(Property, on_delete=models.CASCADE)
+
+guest = models.ForeignKey(User, on_delete=models.CASCADE)
+check_in_date = models.DateField()
+check_out_date = models.DateField()
+total_price = models.IntegerField(default=0)
+message = models.TextField()
+number_of_guests = models.IntegerField(default=1)
+credit_card = models.IntegerField(default=0000000000000000)
+
+*/
+
+const formDefault = {
+    check_in_date: "",
+    check_out_date: "",
+    total_price: 0,
+    message: "",
+    number_of_guests: 1,
+    credit_card: 0
+}
 
 /* --------------------------------Component--------------------------------*/
 
@@ -9,20 +39,47 @@ const BookingForm = ({
         onClose,
         initialCheckInDate="",
         initialCheckOutDate="",
+        total=0
     }) => {
 
-        const [checkInDate, setCheckInDate] = useState("");
-        const [checkOutDate, setCheckOutDate] = useState("");
-        const [numberOfGuests, setNumberOfGuests] = useState(1);
-        const [message, setMessage] = useState("");
-        const [creditCard, setCreditCard] = useState("");
+        const { pageState, listing, booking } = useContext(SingleContext)
+
+        const  navigate = useNavigate();
+        const { listingId, bookingId } = useParams();
+
+        const [formData, setFormData] = useState(formDefault);
+
 
         useEffect(() => {
-            setCheckInDate(initialCheckInDate);
-            setCheckOutDate(initialCheckOutDate);
-        }, [initialCheckInDate, initialCheckOutDate]);
 
-        const isDateBlocked = (start, end) => {
+            setFormData(prev => {
+                return {...prev, 
+                    check_in_date: initialCheckInDate,
+                    check_out_date: initialCheckOutDate,
+                    total_price: total
+                }
+            })
+
+        }, [initialCheckInDate, initialCheckOutDate, total]);
+
+
+        useEffect(() => {
+
+            if (booking && pageState === "booking") {
+                setFormData({
+                    check_in_date: booking.check_in_date,
+                    check_out_date: booking.check_out_date,
+                    total_price: booking.total_price,
+                    message: booking.message,
+                    number_of_guests: booking.number_of_guests,
+                    credit_card: booking.credit_card
+                })
+            }
+
+        }, [booking, pageState])
+
+
+        const isDateBlocked = (start, end, edit=false, booking=null) => {
 
             let startDate = new Date(start)
             let endDate = new Date(end)
@@ -35,19 +92,48 @@ const BookingForm = ({
                 dates.push(new Date(d))
             }
 
-            return blockedDates.some(blockedDate => 
-                dates.some(date => blockedDate.getTime() === date.getTime())
-            );
+
+            let isUnavail = true
+            if (edit && booking) {
+
+                const bookingDates = []
+
+                for (let d = new Date(booking.check_in_date); d <= booking.check_out_date; d.setDate(d.getDate() + 1)) {
+                    bookingDates.push(new Date(d))
+                }
+
+                let filtered = blockedDates.filter(blockedDate => {
+                    return bookingDates.some(date => blockedDate.getTime() === date.getTime());
+                });
+
+                isUnavail = filtered.some(blockedDate => 
+                    dates.some(date => blockedDate.getTime() === date.getTime())
+                );
+
+            } else {
+
+                isUnavail = blockedDates.some(blockedDate => 
+                    dates.some(date => blockedDate.getTime() === date.getTime())
+                );
+
+            }
+
+            return isUnavail;
 
         };
 
-        const handleSubmit = (e) => {
-            e.preventDefault();
 
-            if (!checkInDate || !checkOutDate) {
-                alert("Please select both check-in and check-out dates.");
-                return;
-            }
+        const createBooking = async (prop_id, data) => {
+            return await services.postBooking(prop_id, data)
+        }
+
+
+        const updateBooking = async (bookingId, data) => {
+            return await services.putBooking(bookingId, data)
+        }
+        
+
+        const updateTotal = (checkInDate, checkOutDate) => {
 
             const checkIn = new Date(checkInDate);
             const checkOut = new Date(checkOutDate);
@@ -57,15 +143,78 @@ const BookingForm = ({
                 return;
             }
 
-            if (isDateBlocked(checkIn, checkOut)) {
-                alert(
-                    "The selected dates are unavailable. Please choose different dates."
-                );
+            const nights = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
+
+            const newTotal = nights * listing.price_per_night + listing.cleaning_fee;
+
+            return setFormData(prev => ({...prev, total_price: newTotal}))
+
+        }
+
+
+        const handleChange = (e) => {
+
+            const { name, value } = e.target;
+            setFormData(prev => ({...prev, [name]: value }));
+
+            if (name === "check_in_date" ) {
+
+                updateTotal(value, formData.check_out_date)
+                
+            } else if (name === "check_out_date") {
+                
+                updateTotal(formData.check_in_date, value)
+
+            } 
+
+        };
+
+
+        const handleSubmit = (e) => {
+
+            e.preventDefault();
+
+            if (!formData.check_in_date || !formData.check_out_date) {
+                alert("Please select both check-in and check-out dates.");
                 return;
             }
 
-            alert("Booking submitted successfully!");
+            const checkIn = new Date(formData.check_in_date);
+            const checkOut = new Date(formData.check_out_date);
+
+            if (checkOut <= checkIn) {
+                alert("Check-out date must be after check-in date.");
+                return;
+            }
+
+            if (pageState === "listing") {
+
+                if (isDateBlocked(checkIn, checkOut)) {
+                    alert(
+                        "The selected dates are unavailable. Please choose different dates."
+                    );
+                    return;
+                }
+
+                createBooking(listingId, formData)
+                alert("Booking submitted successfully!");
+
+            } else if (pageState === "booking") {
+
+                if (isDateBlocked(checkIn, checkOut, true, booking)) {
+                    alert(
+                        "The selected dates are unavailable. Please choose different dates."
+                    );
+                    return;
+                }
+
+                updateBooking(bookingId, formData)
+                alert("Booking changed successfully!");
+            }
+
             onClose();
+            navigate("/dashboard/guest")
+
         };
 
         return (
@@ -79,7 +228,13 @@ const BookingForm = ({
                     ✕
                 </button>
 
-                <h2 className="text-xl font-semibold mb-4">Book Your Stay</h2>
+                { pageState === "listing" ? (
+                    <h2 className="text-xl font-semibold mb-4">Book Your Stay</h2>
+                ) : (
+                    <h2 className="text-xl font-semibold mb-4">Edit Your Booking</h2>
+                )}
+
+                
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
@@ -92,8 +247,9 @@ const BookingForm = ({
                         <input
                             type="date"
                             id="checkInDate"
-                            value={checkInDate}
-                            onChange={(e) => setCheckInDate(e.target.value)}
+                            name="check_in_date"
+                            value={formData.check_in_date}
+                            onChange={handleChange}
                             className="border rounded-lg p-2 w-full"
                             required
                         />
@@ -109,8 +265,9 @@ const BookingForm = ({
                         <input
                             type="date"
                             id="checkOutDate"
-                            value={checkOutDate}
-                            onChange={(e) => setCheckOutDate(e.target.value)}
+                            name="check_out_date"
+                            value={formData.check_out_date}
+                            onChange={handleChange}
                             className="border rounded-lg p-2 w-full"
                             required
                         />
@@ -126,8 +283,9 @@ const BookingForm = ({
                         <input
                             type="number"
                             id="numberOfGuests"
-                            value={numberOfGuests}
-                            onChange={(e) => setNumberOfGuests(e.target.value)}
+                            name="number_of_guests"
+                            value={formData.number_of_guests}
+                            onChange={handleChange}
                             className="border rounded-lg p-2 w-full"
                             required
                         />
@@ -139,11 +297,31 @@ const BookingForm = ({
                         </label>
                         <textarea
                             id="message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
                             className="border rounded-lg p-2 w-full"
+                            placeholder="Type N/A if no requests"
                             rows="3"
                         ></textarea>
+                    </div>
+
+                    <div>
+                        <label
+                            htmlFor="totalPrice"
+                            className="block text-sm font-medium mb-1"
+                        >
+                            Total Price ($):
+                        </label>
+                        <input
+                            type="text"
+                            id="totalPrice"
+                            name="total_price"
+                            disabled
+                            value={formData.total_price}
+                            className="border rounded-lg p-2 w-full"
+                            required
+                        />
                     </div>
 
                     <div>
@@ -156,8 +334,9 @@ const BookingForm = ({
                         <input
                             type="text"
                             id="creditCard"
-                            value={creditCard}
-                            onChange={(e) => setCreditCard(e.target.value)}
+                            name="credit_card"
+                            value={formData.credit_card}
+                            onChange={handleChange}
                             className="border rounded-lg p-2 w-full"
                             required
                         />
@@ -169,6 +348,7 @@ const BookingForm = ({
                     >
                     Confirm Booking
                     </button>
+
                 </form>
             </div>
         );

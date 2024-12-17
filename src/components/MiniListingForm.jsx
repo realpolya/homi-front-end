@@ -258,6 +258,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
                         onClose={() => setIsBookingModalOpen(false)}
                         initialCheckInDate={checkInDate}
                         initialCheckOutDate={checkOutDate}
+                        total={total}
                     />
                     </div>
                 </div>

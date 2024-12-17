@@ -9,8 +9,6 @@ import Landing from "./app/Landing";
 import Listings from "./app/Listings";
 import { ListingForm } from "./app/ListingForm";
 import { EditListingForm } from "./app/EditListingForm";
-import { SignIn } from "./app/Signin";
-import { SignUp } from "./app/SignUp";
 import SingleListingBooking from "./app/SingleListingBooking.jsx";
 
 /* --------------------------------Component--------------------------------*/
@@ -38,8 +36,6 @@ function AppRoutes({}) {
             {/*these are currently public paths*/}
             <Route path="/" element={<Landing />} />
             <Route path="/about" element={<About />} />
-            <Route path="/sign-in" element={<SignIn />} /> {/*TODO: this is not a path*/}
-            <Route path="/sign-up" element={<SignUp />} /> {/*TODO: this is not a path*/}
             <Route path="/listings" element={<Listings />} />
 
             <Route path="/listing/:listingId" element={<SingleListingBooking />} />

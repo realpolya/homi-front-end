@@ -40,7 +40,7 @@ const getUpcoming = async () => {
 
 }
 
-// TODO: create a new booking
+
 const postBooking = async (prop_id, formData) => {
 
     try {
