@@ -5,7 +5,8 @@ import { Link, useLocation } from "react-router-dom"
 
 import { AppContext } from '../App.jsx'
 import { MyUserInfo } from "../components/MyUserInfo.jsx"
-import { HostBookings } from "../components/MyBookingsListings.jsx"
+import HostBookings from "../components/HostBookings.jsx"
+import MyBookingsListings from "../components/MyBookingsListings.jsx"
 import BookingMap from "../components/BookingMap.jsx"
 import ListingCard from "../components/ListingCard.jsx"
 
@@ -72,11 +73,11 @@ const Dashboard = () => {
     }, [isHost])
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (bookings) fetchUpcomingBookings()
+    //     if (bookings) fetchUpcomingBookings()
 
-    }, [bookings])
+    // }, [bookings])
 
 
     useEffect(() => {
@@ -116,41 +117,7 @@ const Dashboard = () => {
             </div>
 
             {/* Middle Column */}
-            {isHost ? (
-                <div className="dashboard-center">
-                    <p className="text-lightTextColor">Your Active Listings</p>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                        {loading ? (
-                            <p>Loading...</p>
-                        ) : (
-                            myProperties.length > 0 ? (
-                                myProperties.map((property) => (
-                                    <ListingCard key={property.id} listing={property.prop} bookingId={null} origin={"dashboard-host"} />
-                            ))
-                        ) : (
-                            <p>No active listings.</p>
-                        ))}
-                    </div>
-                </div>
-            ) : (
-                <div className="dashboard-center">
-                    <Link to="/bookings/guest" className="classic-link text-lightTextColor">Your Upcoming Bookings</Link>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                        {upcomingBookings.length > 0 ? (
-                            upcomingBookings.map((booking, i) => {
-                                return <ListingCard 
-                                bookingId={booking.id} 
-                                listing={booking.prop} 
-                                origin={"dashboard"}
-                                key={i}
-                                booking={booking} />
-                            })
-                        ) : (
-                            <p>No upcoming bookings.</p>
-                        )}
-                    </div>
-                </div>
-            )}
+            < MyBookingsListings isHost={isHost} />
 
             {/* Right Column */}
             <div className="dashboard-right">
