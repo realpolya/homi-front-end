@@ -47,6 +47,7 @@ const MyUserInfo = ({ isHost }) => {
     };
 
     const handleBecomeHost = async () => {
+
         try {
             const updatedUser = await services.updateUser({
                 profile: {
@@ -59,15 +60,18 @@ const MyUserInfo = ({ isHost }) => {
             console.error("Error becoming a host:", err);
             setError("Failed to update profile.");
         }
+
     };
 
     const handleSwitchView = () => {
+
         // Switch between 'guest' and 'host' view based on the current URL
         if (location.pathname.includes("guest")) {
             navigate("/dashboard/host");
         } else {
             navigate("/dashboard/guest");
         }
+
     };
 
     // if (loading) return <p>Loading...</p>;
@@ -129,7 +133,7 @@ const MyUserInfo = ({ isHost }) => {
                     {user.profile?.is_host ? (
                     <button
                         onClick={handleSwitchView}
-                        className="bg-buttonColor text-white py-2 px-4 rounded hover:bg-alternativeColor"
+                        className="form-button"
                     >
                         {location.pathname.includes("guest")
                         ? "Switch to Host View"
@@ -138,7 +142,7 @@ const MyUserInfo = ({ isHost }) => {
                     ) : (
                     <button
                         onClick={handleBecomeHost}
-                        className="bg-buttonColor text-whiteColor py-2 px-4 rounded hover:bg-alternativeColor"
+                        className="form-button"
                     >
                         Become a Host!
                     </button>
@@ -149,7 +153,7 @@ const MyUserInfo = ({ isHost }) => {
                 <div className="flex justify-center mt-4">
                     <button
                     onClick={openModal}
-                    className="bg-buttonColor text-whiteColor py-2 px-4 rounded hover:bg-alternativeColor"
+                    className="form-button"
                     >
                     Update Profile
                     </button>
