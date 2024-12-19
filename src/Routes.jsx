@@ -32,19 +32,21 @@ function AppRoutes({}) {
             
             <Route path="/listing-form" element={<ListingForm />} />
             <Route path="/listing-form/:id/edit" element={<EditListingForm />} />
+
             <Route
                 path="/listing/:listingId/owner"
                 element={<SingleListingBooking />}
             />
             <Route path="/listing/:listingId/booking/:bookingId" element={<SingleListingBooking />} />
+            <Route path="/listing/:listingId" element={<SingleListingBooking />} />
+
             <Route path="/mylistings" element={<Listings />} />
+            <Route path="/listings" element={<Listings />} />
 
             {/*these are currently public paths*/}
             <Route path="/" element={<Landing />} />
             <Route path="/about" element={<About />} />
-            <Route path="/listings" element={<Listings />} />
 
-            <Route path="/listing/:listingId" element={<SingleListingBooking />} />
 
         </Routes>
     );

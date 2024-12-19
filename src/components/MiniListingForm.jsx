@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useContext, useEffect } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { SingleContext } from "../app/SingleListingBooking.jsx";
 import { AppContext } from "../App.jsx"
@@ -64,7 +64,6 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
     }
 
-    // TODO: function to delete reservation - link to the cancel button
     const handleDelete = async () => {
         await services.deleteBooking(booking.id)
         navigate('/dashboard/guest')
@@ -238,7 +237,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
                         className="border rounded-lg p-2 mb-4 w-full text-center bg-gray-100"
                     />
 
-                    {guestOptions ? (
+                    { guestOptions ? (
                         <>
                             <button
                                 type="button"
