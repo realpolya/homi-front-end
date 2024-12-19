@@ -24,10 +24,14 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
+    const [hostOptions, setHostOptions] = useState(false)
 
     /* USE EFFECT */
     useEffect(() => {
-        if (listing) setCleaningFee(listing.cleaning_fee)
+        if (listing) {
+            setCleaningFee(listing.cleaning_fee)
+            setHostOptions(true)
+        }
     }, [listing])
 
     useEffect(() => {
@@ -40,6 +44,22 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
     const handleEdit = () => {
         navigate(`/listing-form/${listing.id}/edit`)
+    }
+
+    const handleArchive = async () => {
+
+        try {
+
+            let newData = {is_active: false}
+            await services.putProperty(listing.id, newData)
+            navigate('/dashboard/host')
+
+        } catch (err) {
+
+            console.log(err)
+
+        }
+
     }
 
     const isDateBlocked = (date) => {
@@ -91,8 +111,6 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     };
 
     // TODO: function to delete reservation - link to the cancel button
-    // TODO: function to archive a listing - link to the archive button
-
 
     return (
         <div className="div-mini-form">
@@ -232,32 +250,35 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
                 
                 </form>
 
-                ) : ( 
-                    <div>
+                ) : ( hostOptions ? (<div>
 
-                        <button
-                            type="button"
-                            className="form-button"
-                        >
-                            Archive listing
-                        </button>
+                    <button
+                        type="button"
+                        className="form-button"
+                        onClick={handleArchive}
+                    >
+                        Archive listing
+                    </button>
 
-                        <button
-                            type="button"
-                            className="form-button"
-                            onClick={handleEdit}
-                        >
-                            Edit listing
-                        </button>
+                    <button
+                        type="button"
+                        className="form-button"
+                        onClick={handleEdit}
+                    >
+                        Edit listing
+                    </button>
 
-                        <button
-                            type="button"
-                            className="form-button"
-                        >
-                            View bookings related to listing
-                        </button>
+                    <button
+                        type="button"
+                        className="form-button"
+                    >
+                        View bookings related to listing
+                    </button>
 
-                    </div>
+                    </div>) : (
+                        <p>Listing has not loaded yet...</p>
+                    )
+                    
                 )
             )}
 
