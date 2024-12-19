@@ -25,6 +25,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
     const [hostOptions, setHostOptions] = useState(false)
+    const [guestOptions, setGuestOptions] = useState(false)
 
     /* USE EFFECT */
     useEffect(() => {
@@ -39,6 +40,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
             setCheckInDate(booking.check_in_date)
             setCheckOutDate(booking.check_out_date)
             setTotal(booking.total_price)
+            setGuestOptions(true)
         }
     }, [booking])
 
@@ -60,6 +62,12 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
         }
 
+    }
+
+    // TODO: function to delete reservation - link to the cancel button
+    const handleDelete = async () => {
+        await services.deleteBooking(booking.id)
+        navigate('/dashboard/guest')
     }
 
     const isDateBlocked = (date) => {
@@ -110,7 +118,6 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
         setIsBookingModalOpen(true);
     };
 
-    // TODO: function to delete reservation - link to the cancel button
 
     return (
         <div className="div-mini-form">
@@ -231,22 +238,28 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
                         className="border rounded-lg p-2 mb-4 w-full text-center bg-gray-100"
                     />
 
-                    <button
-                        type="button"
-                        onClick={handleSubmit}
-                        className="bg-logoColor text-white font-medium 
-                        rounded-full py-2 px-6 mt-2 w-full transition-transform 
-                        transform active:scale-95 hover:bg-backgroundColor"
-                    >
-                        Edit reservation
-                    </button>
+                    {guestOptions ? (
+                        <>
+                            <button
+                                type="button"
+                                onClick={handleSubmit}
+                                className="bg-logoColor text-white font-medium 
+                                rounded-full py-2 px-6 mt-2 w-full transition-transform 
+                                transform active:scale-95 hover:bg-backgroundColor"
+                            >
+                                Edit reservation
+                            </button>
 
-                    <button
-                        type="button"
-                        className="form-button"
-                    >
-                        Cancel reservation
-                    </button>
+                            <button
+                                type="button"
+                                className="form-button"
+                                onClick={handleDelete}
+                            >
+                                Cancel reservation
+                            </button>
+                        </>
+                    ) : (<p>Booking has not loaded yet...</p>)}
+                    
                 
                 </form>
 
