@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react"
 import { Link, useLocation } from "react-router-dom"
 
 import { AppContext } from '../App.jsx'
+
 import MyUserInfo from "../components/MyUserInfo.jsx"
 import HostBookings from "../components/HostBookings.jsx"
 import MyBookingsListings from "../components/MyBookingsListings.jsx"
@@ -98,7 +99,8 @@ const Dashboard = () => {
             <div className="dashboard-right">
                 {isHost ? (<Link to="/bookings/host" className="classic-link">Bookings of my listings</Link>) : (
                     <Link to="/bookings/guest/past" className="classic-link">Your Previous Bookings</Link>
-                )} 
+                )}
+                
                 {isHost ? (<HostBookings hostBookings={hostBookings} />) : (
                     prevBookings.length > 0 ? (
                         prevBookings.map((prev, i) => {

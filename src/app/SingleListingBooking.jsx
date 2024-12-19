@@ -91,7 +91,7 @@ const SingleListingBooking = () => {
 
                         location.pathname.includes("booking") ? (
                                     <h1 className="single-h1">
-                                    <span className="text-logoColor">Your booking at: </span>  
+                                    <span className="text-logoColor">Booking by</span> {booking?.guest?.username} <span className="text-logoColor"> at: </span>  
                                     {listing.title}</h1>
                                 ) : (
                                     <h1 className="single-h1"> {listing.title}</h1>
