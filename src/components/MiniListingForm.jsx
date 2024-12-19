@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useContext, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { SingleContext } from "../app/SingleListingBooking.jsx";
 import { AppContext } from "../App.jsx"
@@ -13,6 +13,8 @@ import services from "../services/index.js"
 
 const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
+    const navigate = useNavigate();
+
     const { pageState, listing, booking } = useContext(SingleContext)
     const { user, setShowLogin } = useContext(AppContext)
 
@@ -22,10 +24,15 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
+    const [hostOptions, setHostOptions] = useState(false)
+    const [guestOptions, setGuestOptions] = useState(false)
 
-
+    /* USE EFFECT */
     useEffect(() => {
-        if (listing) setCleaningFee(listing.cleaning_fee)
+        if (listing) {
+            setCleaningFee(listing.cleaning_fee)
+            setHostOptions(true)
+        }
     }, [listing])
 
     useEffect(() => {
@@ -33,8 +40,34 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
             setCheckInDate(booking.check_in_date)
             setCheckOutDate(booking.check_out_date)
             setTotal(booking.total_price)
+            setGuestOptions(true)
         }
     }, [booking])
+
+    const handleEdit = () => {
+        navigate(`/listing-form/${listing.id}/edit`)
+    }
+
+    const handleArchive = async () => {
+
+        try {
+
+            let newData = {is_active: false}
+            await services.putProperty(listing.id, newData)
+            navigate('/dashboard/host')
+
+        } catch (err) {
+
+            console.log(err)
+
+        }
+
+    }
+
+    const handleDelete = async () => {
+        await services.deleteBooking(booking.id)
+        navigate('/dashboard/guest')
+    }
 
     const isDateBlocked = (date) => {
         if (!date || isNaN(date)) return false;
@@ -53,6 +86,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     };
 
     const handleCheckOutChange = (e) => {
+
         const date = new Date(e.target.value);
         if (isDateBlocked(date)) {
             setErrorMessage("Selected check-out date is not available.");
@@ -82,8 +116,6 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
         }
         setIsBookingModalOpen(true);
     };
-
-    // TODO: function to delete reservation - link to the cancel button
 
 
     return (
@@ -205,46 +237,60 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
                         className="border rounded-lg p-2 mb-4 w-full text-center bg-gray-100"
                     />
 
-                    <button
-                        type="button"
-                        onClick={handleSubmit}
-                        className="bg-logoColor text-white font-medium 
-                        rounded-full py-2 px-6 mt-2 w-full transition-transform 
-                        transform active:scale-95 hover:bg-backgroundColor"
-                    >
-                        Edit reservation
-                    </button>
+                    { guestOptions ? (
+                        <>
+                            <button
+                                type="button"
+                                onClick={handleSubmit}
+                                className="bg-logoColor text-white font-medium 
+                                rounded-full py-2 px-6 mt-2 w-full transition-transform 
+                                transform active:scale-95 hover:bg-backgroundColor"
+                            >
+                                Edit reservation
+                            </button>
 
-                    <button
-                        type="button"
-                        className="form-button"
-                    >
-                        Cancel reservation
-                    </button>
+                            <button
+                                type="button"
+                                className="form-button"
+                                onClick={handleDelete}
+                            >
+                                Cancel reservation
+                            </button>
+                        </>
+                    ) : (<p>Booking has not loaded yet...</p>)}
+                    
                 
                 </form>
 
-                ) : ( 
-                    <div>
+                ) : ( hostOptions ? (<div>
+
                     <button
                         type="button"
                         className="form-button"
+                        onClick={handleArchive}
                     >
                         Archive listing
                     </button>
+
                     <button
                         type="button"
                         className="form-button"
+                        onClick={handleEdit}
                     >
                         Edit listing
                     </button>
+
                     <button
                         type="button"
                         className="form-button"
                     >
                         View bookings related to listing
                     </button>
-                    </div>
+
+                    </div>) : (
+                        <p>Listing has not loaded yet...</p>
+                    )
+                    
                 )
             )}
 

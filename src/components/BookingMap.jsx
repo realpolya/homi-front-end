@@ -58,11 +58,11 @@ const BookingMap = ({ prev }) => {
 
   return (
 
-    <div className="w-full lg:h-1/3 h-60 p-4 z-0">
+    <div className="w-full h-60 p-4 z-0">
 
         { loading && (<p>No booking details yet</p>)}
         <div ref={bookingMapRef} 
-        className="w-full h-full rounded-lg z-0"
+        className="w-full h-[80%] lg:h-[60%] rounded-lg z-0"
         ></div>
 
         { loading ? (null) : (

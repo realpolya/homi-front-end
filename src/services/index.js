@@ -25,6 +25,7 @@ const {
 const {
   getBookings,
   getUpcoming,
+  getPrevious,
   postBooking,
   getSingleBooking,
   putBooking,
@@ -67,6 +68,7 @@ const services = {
 
 export {
     services as default,
+    
     signUp,
     signIn,
     getUser,
@@ -84,6 +86,7 @@ export {
 
     getBookings,
     getUpcoming,
+    getPrevious,
     postBooking,
     getSingleBooking,
     putBooking,

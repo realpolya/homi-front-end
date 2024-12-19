@@ -51,7 +51,7 @@ function ListingCard({ listing, origin, bookingId, booking }) {
             />
 
             <div className="h-1/3">
-                <p className="text-sm font-semibold text-gray-900 truncate" title={listing.title}>
+                <p className="text-sm font-semibold text-gray-900 truncate pl-4 pr-4" title={listing.title}>
                     {listing.title}
                 </p>
 

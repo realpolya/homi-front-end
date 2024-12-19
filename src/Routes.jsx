@@ -1,9 +1,10 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { Routes, Route } from "react-router-dom";
-import { About } from "./app/About";
+
+import About from "./app/About.jsx";
 import BookingForm from "./components/BookingForm";
-import { Bookings } from "./app/Bookings";
+import Bookings from "./app/Bookings.jsx";
 import Dashboard from "./app/Dashboard.jsx";
 import Landing from "./app/Landing";
 import Listings from "./app/Listings";
@@ -16,33 +17,37 @@ import SingleListingBooking from "./app/SingleListingBooking.jsx";
 function AppRoutes({}) {
     return (
         <Routes>
+
             {/* separating routes that needs authenticaiton vs public */}
             {/* NOTE: this needs to get changed once we have services file adding {user &&()} */}
             <Route path="/booking-form" element={<BookingForm />} />
             <Route path="/booking-form/:bookingId" element={<BookingForm />} />
+
             <Route path="/bookings/guest" element={<Bookings />} />
             <Route path="/bookings/host" element={<Bookings />} />
+            <Route path="/bookings/guest/past" element={<Bookings />} />
+
             <Route path="/dashboard/host" element={<Dashboard />} />
             <Route path="/dashboard/guest" element={<Dashboard />} />
+            
             <Route path="/listing-form" element={<ListingForm />} />
             <Route path="/listing-form/:id/edit" element={<EditListingForm />} />
+
             <Route
                 path="/listing/:listingId/owner"
                 element={<SingleListingBooking />}
             />
             <Route path="/listing/:listingId/booking/:bookingId" element={<SingleListingBooking />} />
+            <Route path="/listing/:listingId" element={<SingleListingBooking />} />
+
             <Route path="/mylistings" element={<Listings />} />
+            <Route path="/listings" element={<Listings />} />
 
             {/*these are currently public paths*/}
             <Route path="/" element={<Landing />} />
             <Route path="/about" element={<About />} />
-            <Route path="/listings" element={<Listings />} />
 
-            <Route path="/listing/:listingId" element={<SingleListingBooking />} />
 
-            {/* NOTE: Going to DELETE LATER*/}
-            <Route path="/listing/booking" element={<SingleListingBooking />} />
-            <Route path="/bookings" element={<Bookings />} />
         </Routes>
     );
 }

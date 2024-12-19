@@ -40,6 +40,23 @@ const getUpcoming = async () => {
 
 }
 
+const getPrevious = async () => {
+
+    try {
+
+        // console.log('services: getting my previous bookings')
+        const response = await api.get('bookings/prev/')
+        return response.data
+
+    } catch (err) {
+
+        console.log(err.response.data.error);
+        throw err
+
+    }
+
+}
+
 
 const postBooking = async (prop_id, formData) => {
 
@@ -95,7 +112,6 @@ const putBooking = async (id, formData) => {
 
 }
 
-// TODO: delete one booking
 const deleteBooking = async (id) => {
 
     try {
@@ -149,11 +165,13 @@ const getPropBookings = async (prop_id) => {
 
 }
 
+
 /* --------------------------------Exports--------------------------------*/
 
 export { 
     getBookings,
     getUpcoming,
+    getPrevious,
     postBooking,
     getSingleBooking,
     putBooking,
