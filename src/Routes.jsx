@@ -1,6 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { Routes, Route } from "react-router-dom";
+
 import About from "./app/About.jsx";
 import BookingForm from "./components/BookingForm";
 import Bookings from "./app/Bookings.jsx";
@@ -16,6 +17,7 @@ import SingleListingBooking from "./app/SingleListingBooking.jsx";
 function AppRoutes({}) {
     return (
         <Routes>
+
             {/* separating routes that needs authenticaiton vs public */}
             {/* NOTE: this needs to get changed once we have services file adding {user &&()} */}
             <Route path="/booking-form" element={<BookingForm />} />
@@ -44,8 +46,6 @@ function AppRoutes({}) {
 
             <Route path="/listing/:listingId" element={<SingleListingBooking />} />
 
-            {/* NOTE: Going to DELETE LATER*/}
-            <Route path="/listing/booking" element={<SingleListingBooking />} />
         </Routes>
     );
 }

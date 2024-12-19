@@ -90,16 +90,22 @@ const SingleListingBooking = () => {
                     {loading ? (null) : (
 
                         location.pathname.includes("booking") ? (
-                                    <h1 className="single-h1">
-                                    <span className="text-logoColor">Booking by</span> {booking?.guest?.username} <span className="text-logoColor"> at: </span>  
-                                    {listing.title}</h1>
-                                ) : (
-                                    <h1 className="single-h1"> {listing.title}</h1>
+                                <h1 className="single-h1">
+                                <span className="text-logoColor">Booking by</span> {booking?.guest?.username} <span className="text-logoColor"> at: </span>  
+                                {listing.title}</h1>
+                            ) : (
+                                <h1 className="single-h1"> {listing.title}</h1>
                             )
                         
                         )
                     }
-                    <Link to="/listings" className="text-logoColor underline hover:text-textColor mt-6 lg:mt-0">back to listings</Link>
+                    {pageState === "listing" ? (
+                        <Link to="/listings" className="text-logoColor underline hover:text-textColor mt-6 lg:mt-0">back to listings</Link>
+                        ) : (
+                        <Link to="/dashboard/guest" className="text-logoColor underline hover:text-textColor mt-6 lg:mt-0">back to dashboard</Link>
+                        )
+                    }
+                    
                 </div>
                 
                 <div className="div-left-right">

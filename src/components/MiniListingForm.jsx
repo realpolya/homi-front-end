@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useContext, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { SingleContext } from "../app/SingleListingBooking.jsx";
 import { AppContext } from "../App.jsx"
@@ -13,6 +13,8 @@ import services from "../services/index.js"
 
 const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
+    const navigate = useNavigate();
+
     const { pageState, listing, booking } = useContext(SingleContext)
     const { user, setShowLogin } = useContext(AppContext)
 
@@ -23,7 +25,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
 
-
+    /* USE EFFECT */
     useEffect(() => {
         if (listing) setCleaningFee(listing.cleaning_fee)
     }, [listing])
@@ -35,6 +37,10 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
             setTotal(booking.total_price)
         }
     }, [booking])
+
+    const handleEdit = () => {
+        navigate(`/listing-form/${listing.id}/edit`)
+    }
 
     const isDateBlocked = (date) => {
         if (!date || isNaN(date)) return false;
@@ -53,6 +59,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     };
 
     const handleCheckOutChange = (e) => {
+
         const date = new Date(e.target.value);
         if (isDateBlocked(date)) {
             setErrorMessage("Selected check-out date is not available.");
@@ -84,6 +91,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     };
 
     // TODO: function to delete reservation - link to the cancel button
+    // TODO: function to archive a listing - link to the archive button
 
 
     return (
@@ -226,24 +234,29 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
 
                 ) : ( 
                     <div>
-                    <button
-                        type="button"
-                        className="form-button"
-                    >
-                        Archive listing
-                    </button>
-                    <button
-                        type="button"
-                        className="form-button"
-                    >
-                        Edit listing
-                    </button>
-                    <button
-                        type="button"
-                        className="form-button"
-                    >
-                        View bookings related to listing
-                    </button>
+
+                        <button
+                            type="button"
+                            className="form-button"
+                        >
+                            Archive listing
+                        </button>
+
+                        <button
+                            type="button"
+                            className="form-button"
+                            onClick={handleEdit}
+                        >
+                            Edit listing
+                        </button>
+
+                        <button
+                            type="button"
+                            className="form-button"
+                        >
+                            View bookings related to listing
+                        </button>
+
                     </div>
                 )
             )}
