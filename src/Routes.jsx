@@ -8,7 +8,7 @@ import Bookings from "./app/Bookings.jsx";
 import Dashboard from "./app/Dashboard.jsx";
 import Landing from "./app/Landing";
 import Listings from "./app/Listings";
-import { ListingForm } from "./app/ListingForm";
+import ListingForm from "./app/ListingForm";
 import { EditListingForm } from "./app/EditListingForm";
 import SingleListingBooking from "./app/SingleListingBooking.jsx";
 
