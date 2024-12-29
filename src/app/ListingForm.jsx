@@ -143,18 +143,19 @@ const ListingForm = () => {
         <main className="flex flex-col justify-center p-2 md:p-6
                 lg:p-20 md:mt-60 mt-72 items-center">
 
-            <h1 className="text-left text-2xl md:mt-32 mt-48">Edit Your Listing</h1>
+            <h1 className="text-left text-2xl md:mt-60 mt-48 text-logoColor">Edit Your Listing</h1>
 
             <form
             onSubmit={handleSubmit}
-            className="w-full max-w-screen-lg p-20 m-8 bg-alternativeColor 
+            className="w-full max-w-screen-lg md:p-20 p-2 m-8 bg-alternativeColor 
             flex flex-col
             rounded-md shadow-lg text-white"
             >
                 <div className="flex flex-col
                 md:grid md:grid-cols-2 md:gap-8">
+
                     {/* Title */}
-                    <div className="flex items-center">
+                    <div className="listing-form-div">
                         <label htmlFor="title" className="block text-sm font-bold w-1/3">
                             Title:
                         </label>
@@ -170,7 +171,7 @@ const ListingForm = () => {
                     </div>
 
                     {/* Description */}
-                    <div className="flex items-center">
+                    <div className="listing-form-div">
                     <label htmlFor="description" className="block text-sm font-bold w-1/3">
                         Description:
                     </label>
@@ -185,7 +186,7 @@ const ListingForm = () => {
                     </div>
 
                     {/* State Dropdown */}
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                         <label htmlFor="propertyType" className="block text-sm font-bold w-1/3">
                         Property Type:
                         </label>
@@ -210,7 +211,7 @@ const ListingForm = () => {
                     {/* Address Fields */}
                     <div>
                     <h3 className="font-bold mb-2">Address</h3>
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                         <label htmlFor="street" className="block text-sm font-bold w-1/3">
                         Street:
                         </label>
@@ -223,7 +224,7 @@ const ListingForm = () => {
                         className="w-full p-2 rounded-md bg-white text-gray-900 focus:outline-none"
                         />
                     </div>
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                         <label htmlFor="city" className="block text-sm font-bold w-1/3">
                         City:
                         </label>
@@ -238,7 +239,7 @@ const ListingForm = () => {
                     </div>
 
                     {/* State Dropdown */}
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                         
                         <label htmlFor="state" className="block text-sm font-bold w-1/3">
                         State:
@@ -262,7 +263,7 @@ const ListingForm = () => {
                         </select>
                     </div>
 
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                         <label htmlFor="zip" className="block text-sm font-bold w-1/3">
                         Zip Code:
                         </label>
@@ -278,7 +279,7 @@ const ListingForm = () => {
                     </div>
 
                     {/* Cancellation Policy */}
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                     <label
                         htmlFor="cancellationPolicy"
                         className="block text-sm font-bold w-1/3"
@@ -306,7 +307,7 @@ const ListingForm = () => {
                     </div>
 
                     {/* Cleaning Fee */}
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                     <label htmlFor="cleaningFee" className="block text-sm font-bold w-1/3">
                         Cleaning Fee ($):
                     </label>
@@ -322,7 +323,7 @@ const ListingForm = () => {
                     </div>
 
                     {/* Price Per Night */}
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div">
                     <label htmlFor="pricePerNight" className="block text-sm font-bold w-1/3">
                         Price Per Night ($):
                     </label>
@@ -338,7 +339,7 @@ const ListingForm = () => {
                     </div>
 
                     {/* Max Guests */}
-                    <div className="flex items-center mb-4">
+                    <div className="listing-form-div mb-4">
                     <label htmlFor="maxGuests" className="block text-sm font-bold w-1/3">
                         Max. Guests:
                     </label>
@@ -354,74 +355,75 @@ const ListingForm = () => {
                     </div>
 
                     {/* Amenities */}
-                    <div className="col-span-2 flex justify-center">
-                    <div className="w-1/2">
-                        <h3 className="font-bold mb-4 text-center">Amenities</h3>
+                    <div className="col-span-2 flex justify-center md:w-1/2 w-full">
+
+                        <h3 className="font-bold mb-4 text-center pr-2">Amenities</h3>
+
                         <div
-                        className="overflow-y-auto max-h-64 p-4 bg-gray-100 rounded-lg"
-                        style={{
-                            border: "2px solid #ccc",
-                            borderRadius: "30px",
-                        }}
+                        className="overflow-y-auto w-full max-h-64 p-4 bg-gray-100 rounded-lg
+                        grid grid-cols-3 gap-4"
                         >
-                        <div className="grid grid-cols-3 gap-4">
                             {amenities.map((amenity) => (
-                            <label
-                                key={amenity.name}
-                                htmlFor={`amenity-${amenity.name}`}
-                                className="flex flex-col items-center p-4 border border-gray-200 rounded-lg bg-white hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer"
-                            >
-                                <input
-                                type="checkbox"
-                                id={`amenity-${amenity.name}`}
-                                value={amenity.id}
-                                checked={formData.amenities.includes(amenity.id)}
-                                onChange={() => handleCheckboxChange(amenity.id)}
-                                className="w-5 h-5 mb-3 text-teal-600 bg-white border-gray-300 rounded focus:ring-teal-500"
-                                />
-                                <img
-                                src={amenity.image}
-                                alt={amenity.name}
-                                className="w-12 h-12 mb-2"
-                                />
-                                <span className="text-sm font-medium text-gray-900 text-center">
-                                {amenity.name}
-                                </span>
-                            </label>
+                                <label
+                                    key={amenity.name}
+                                    htmlFor={`amenity-${amenity.name}`}
+                                    className="flex flex-col items-center p-4 border border-gray-200 rounded-lg bg-white hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer"
+                                >
+                                    <input
+                                    type="checkbox"
+                                    id={`amenity-${amenity.name}`}
+                                    value={amenity.id}
+                                    checked={formData.amenities.includes(amenity.id)}
+                                    onChange={() => handleCheckboxChange(amenity.id)}
+                                    className="w-5 h-5 mb-3 text-teal-600 bg-white border-gray-300 rounded focus:ring-teal-500"
+                                    />
+                                    <img
+                                    src={amenity.image}
+                                    alt={amenity.name}
+                                    className="w-12 h-12 mb-2"
+                                    />
+                                    <span className="text-sm font-medium text-gray-900 text-center">
+                                    {amenity.name}
+                                    </span>
+                                </label>
                             ))}
                         </div>
-                        </div>
-                    </div>
+
                     </div>
 
                     <h2>Add Images</h2>
+
                     {photos.map((photo, index) => (
-                    <div key={index}>
-                        <label>Image {index + 1} URL: </label>
-                        <input
-                        type="text"
-                        value={photo.link}
-                        onChange={(e) => handlePhotoChange(index, e.target.value)}
-                        placeholder="Enter image URL"
-                        className="text-sm font-medium text-gray-900 text-center"
-                        />
-                    </div>
+                        <div key={index}>
+                            <label>Image {index + 1} URL: </label>
+                            <input
+                            type="text"
+                            value={photo.link}
+                            onChange={(e) => handlePhotoChange(index, e.target.value)}
+                            placeholder="Enter image URL"
+                            className="text-sm font-medium text-gray-900 text-center"
+                            />
+                        </div>
                     ))}
+
                     {photos.length < 5 && (
-                    <button type="button" onClick={addImageInput}>
-                        Add Image
-                    </button>
+                        <button type="button" className="form-button" onClick={addImageInput}>
+                            Add Image
+                        </button>
                     )}
+
                 </div>
 
                 {/* Submit Button */}
                 <div className="text-center mt-6">
+
                     <button
                     type="submit"
-                    className="px-4 py-2 bg-buttonColor text-white rounded-md hover:bg-green-500"
+                    className="form-button"
                     >
                     Submit
                     </button>
+
                 </div>
                 <div>
                 </div>

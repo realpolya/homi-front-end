@@ -228,3 +228,8 @@
 }
 
 /* LISTING FORM */
+
+.listing-form-div {
+    @apply flex flex-row items-center
+    p-2 mb-4
+}
