@@ -36,6 +36,7 @@ const ListingForm = () => {
     const [amenities, setAmenities] = useState([])
 
     const navigate = useNavigate()
+    const { listingId } = useParams()
 
     const fetchAmenities = async () => {
         try {
@@ -45,9 +46,36 @@ const ListingForm = () => {
         }
     }
 
-    useEffect(()=>{
+    const fetchProperty = async (id) => {
+        try {
+          const propertyData = await services.getSingleProperty(id)
+          const propType = propertyTypeLookup[propertyData.property_type]
+    
+          const propData = {
+            ...propertyData,
+            street: propertyData.address.street,
+            city: propertyData.address.city,
+            state: propertyData.address.state,
+            zip_code: propertyData.address.zip_code,
+            property_type: formattedPropertyType,
+            amenities: propertyData.amenities,
+          }
+    
+          setFormData(propData)
+          setPhotos(propertyData.photos)
+
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+    useEffect(() => {
         fetchAmenities()
     }, [])
+
+    useEffect(() => {
+        if (listingId) fetchProperty(listingId)
+    }, [listingId])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -112,28 +140,33 @@ const ListingForm = () => {
     };
 
     return (
-        <main className="flex justify-center items-center">
+        <main className="flex flex-col justify-center p-2 md:p-6
+                lg:p-20 md:mt-60 mt-72 items-center">
+
+            <h1 className="text-left text-2xl md:mt-32 mt-48">Edit Your Listing</h1>
 
             <form
             onSubmit={handleSubmit}
-            className="w-full  max-w-screen-lg p-20 m-8 bg-alternativeColor rounded-md shadow-lg text-white"
-            
+            className="w-full max-w-screen-lg p-20 m-8 bg-alternativeColor 
+            flex flex-col
+            rounded-md shadow-lg text-white"
             >
-                <div className="grid grid-cols-2 gap-8">
+                <div className="flex flex-col
+                md:grid md:grid-cols-2 md:gap-8">
                     {/* Title */}
                     <div className="flex items-center">
-                    <label htmlFor="title" className="block text-sm font-bold w-1/3">
-                        Title:
-                    </label>
-                    <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        className="w-full p-2 rounded-md text-gray-900 bg-white focus:outline-none"
-                        placeholder="Enter a descriptive title"
-                    />
+                        <label htmlFor="title" className="block text-sm font-bold w-1/3">
+                            Title:
+                        </label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            className="w-full p-2 rounded-md text-gray-900 bg-white focus:outline-none"
+                            placeholder="Enter a descriptive title"
+                        />
                     </div>
 
                     {/* Description */}

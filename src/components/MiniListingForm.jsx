@@ -45,7 +45,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     }, [booking])
 
     const handleEdit = () => {
-        navigate(`/listing-form/${listing.id}/edit`)
+        navigate(`/listing-form/${listing.id}`)
     }
 
     const handleArchive = async () => {

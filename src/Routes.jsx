@@ -31,7 +31,7 @@ function AppRoutes({}) {
             <Route path="/dashboard/guest" element={<Dashboard />} />
             
             <Route path="/listing-form" element={<ListingForm />} />
-            <Route path="/listing-form/:id/edit" element={<EditListingForm />} />
+            <Route path="/listing-form/:listingId" element={<ListingForm />} />
 
             <Route
                 path="/listing/:listingId/owner"
