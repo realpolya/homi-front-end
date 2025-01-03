@@ -8,8 +8,7 @@ import Bookings from "./app/Bookings.jsx";
 import Dashboard from "./app/Dashboard.jsx";
 import Landing from "./app/Landing";
 import Listings from "./app/Listings";
-import { ListingForm } from "./app/ListingForm";
-import { EditListingForm } from "./app/EditListingForm";
+import ListingForm from "./app/ListingForm";
 import SingleListingBooking from "./app/SingleListingBooking.jsx";
 
 /* --------------------------------Component--------------------------------*/
@@ -31,7 +30,7 @@ function AppRoutes({}) {
             <Route path="/dashboard/guest" element={<Dashboard />} />
             
             <Route path="/listing-form" element={<ListingForm />} />
-            <Route path="/listing-form/:id/edit" element={<EditListingForm />} />
+            <Route path="/listing-form/:listingId" element={<ListingForm />} />
 
             <Route
                 path="/listing/:listingId/owner"

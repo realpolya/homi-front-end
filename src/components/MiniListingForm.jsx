@@ -11,7 +11,7 @@ import services from "../services/index.js"
 
 /* --------------------------------Component--------------------------------*/
 
-const MiniListingForm = ({ bookings, required, blockedDates }) => {
+const MiniListingForm = ({ bookings, required, blockedDates, chosenDates }) => {
 
     const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
     const [errorMessage, setErrorMessage] = useState("");
     const [cleaningFee, setCleaningFee] = useState(0);
     const [hostOptions, setHostOptions] = useState(false)
-    const [guestOptions, setGuestOptions] = useState(false)
+    const [guestOptions, setGuestOptions] = useState(false) // view existing booking
 
     /* USE EFFECT */
     useEffect(() => {
@@ -44,8 +44,26 @@ const MiniListingForm = ({ bookings, required, blockedDates }) => {
         }
     }, [booking])
 
+    useEffect(() => {
+        if (chosenDates) {
+            let start = new Date(chosenDates.start).toISOString().split("T")[0]
+            let end = new Date(chosenDates.end).toISOString().split("T")[0]
+            setCheckInDate(start);
+            setCheckOutDate(end);
+            const nights = (chosenDates.end - chosenDates.start) / (1000 * 60 * 60 * 24);
+            setTotal(nights * listing.price_per_night + cleaningFee);
+        }
+    }, [chosenDates])
+
+    useEffect(() => {
+        if (checkInDate && checkOutDate) {
+            console.log("check in date is ", checkInDate)
+            console.log("check out date is ", checkOutDate)
+        }
+    }, [checkInDate, checkOutDate])
+
     const handleEdit = () => {
-        navigate(`/listing-form/${listing.id}/edit`)
+        navigate(`/listing-form/${listing.id}`)
     }
 
     const handleArchive = async () => {

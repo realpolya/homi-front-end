@@ -12,13 +12,11 @@ const getProperties = async (query=null) => {
         // passing queries in url and into the function
         if (query) {
 
-            // console.log('services: query for getProperties', query)
             response = await api.get(`properties/?${query}`);
         
         // general retrieval of all properties
         } else {
 
-            // console.log('services: no query for getProperties')
             response = await api.get('properties/');
 
         }
@@ -39,7 +37,6 @@ const postProperty = async (formData) => {
 
     try {
 
-        // console.log('services: creating new property')
         const response = await api.post('properties/', formData)
         return response.data
 
@@ -57,7 +54,6 @@ const getMyProperties = async () => {
 
     try {
 
-        // console.log('services: getting my properties')
         const response = await api.get('properties/mine/')
         return response.data
 
@@ -75,7 +71,6 @@ const getMyArchived = async () => {
 
     try {
 
-        // console.log('services: getting my archived properties')
         const response = await api.get('properties/mine/archived/')
         return response.data
 
@@ -93,7 +88,6 @@ const getUserProperties = async (user_id) => {
 
     try {
 
-        // console.log("services: getting requested user's properties ", user_id)
         const response = await api.get(`properties/user/${user_id}/`)
         return response.data
 
@@ -128,7 +122,6 @@ const putProperty = async (id, formData) => {
 
     try {
 
-        // console.log("services: updating property with id ", id)
         const response = await api.patch(`properties/${id}/`, formData)
         return response.data
 

@@ -20,6 +20,7 @@ const SingleLeft = ({ listingId }) => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [blockedDates, setBlockedDates] = useState([])
+    const [chosenDates, setChosenDates] = useState()
 
 
     const fetchBookings = async (id) => {
@@ -76,8 +77,9 @@ const SingleLeft = ({ listingId }) => {
             </div>
 
             <div className="div-cale-mini">
-                <Calendar blockedDates={blockedDates} />
-                <MiniListingForm bookings={bookings} blockedDates={blockedDates} required />
+                <Calendar blockedDates={blockedDates} setChosenDates={setChosenDates} />
+                <MiniListingForm bookings={bookings} blockedDates={blockedDates} 
+                chosenDates={chosenDates} required />
             </div>
         </section>
     );
