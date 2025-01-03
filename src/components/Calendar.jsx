@@ -6,7 +6,7 @@ import { SingleContext } from "../app/SingleListingBooking.jsx";
 
 /* --------------------------------Component--------------------------------*/
 
-const Calendar = ({ blockedDates }) => {
+const Calendar = ({ blockedDates, setChosenDates }) => {
 
     const { pageState, booking } = useContext(SingleContext)
 
@@ -85,6 +85,7 @@ const Calendar = ({ blockedDates }) => {
             setSelectedRange({ start: date, end: null });
         } else if (date > selectedRange.start) {
             setSelectedRange({ ...selectedRange, end: date });
+            setChosenDates({ start: selectedRange.start, end: date });
         } else {
             setSelectedRange({ start: date, end: null });
         }
