@@ -169,9 +169,17 @@ const ListingForm = () => {
 
     return (
         <main className="flex flex-col justify-center p-2 md:p-6
-                lg:p-20 md:mt-60 mt-72 items-center">
-
-            <h1 className="text-left text-2xl md:mt-60 mt-48 text-logoColor">Edit Your Listing</h1>
+                lg:p-20 md:mt-72 mt-72 items-center">
+            { state === "edit" ? (
+                <h1 className="text-left text-2xl md:mt-60 mt-72 text-logoColor">
+                    Edit Your Listing
+                </h1>) : (
+                <h1 className="text-left text-2xl md:mt-60 mt-72 text-logoColor">
+                    New Listing
+                </h1>
+                ) 
+            }
+            
 
             <form
             onSubmit={handleSubmit}
