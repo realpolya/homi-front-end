@@ -46,9 +46,10 @@ const MiniListingForm = ({ bookings, required, blockedDates, chosenDates }) => {
 
     useEffect(() => {
         if (chosenDates) {
-            console.log("chosen dates are ", chosenDates)
-            setCheckInDate(new Date(chosenDates.start));
-            setCheckOutDate(new Date(chosenDates.end));
+            let start = new Date(chosenDates.start).toISOString().split("T")[0]
+            let end = new Date(chosenDates.end).toISOString().split("T")[0]
+            setCheckInDate(start);
+            setCheckOutDate(end);
             const nights = (chosenDates.end - chosenDates.start) / (1000 * 60 * 60 * 24);
             setTotal(nights * listing.price_per_night + cleaningFee);
         }
