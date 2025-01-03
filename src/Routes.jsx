@@ -13,7 +13,8 @@ import SingleListingBooking from "./app/SingleListingBooking.jsx";
 
 /* --------------------------------Component--------------------------------*/
 
-function AppRoutes({}) {
+function AppRoutes() {
+
     return (
         <Routes>
 
@@ -39,7 +40,6 @@ function AppRoutes({}) {
             <Route path="/listing/:listingId/booking/:bookingId" element={<SingleListingBooking />} />
             <Route path="/listing/:listingId" element={<SingleListingBooking />} />
 
-            <Route path="/mylistings" element={<Listings />} />
             <Route path="/listings" element={<Listings />} />
 
             {/*these are currently public paths*/}

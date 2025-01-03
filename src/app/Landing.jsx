@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppContext } from '../App.jsx';
+
 import LandingMap from '../components/LandingMap.jsx'
 import ListingCard from '../components/ListingCard.jsx'
 

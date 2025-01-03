@@ -76,6 +76,7 @@ const TeamMemberCard = ({ member }) => {
 
 };
 
+/* --------------------------------Component--------------------------------*/
 
 const About = () => {
     return (

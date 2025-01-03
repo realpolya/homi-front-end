@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { NavLink, useNavigate, useLocation } from "react-router-dom"
 
 import { AppContext } from "../App.jsx"
+
 import services from '../services/index.js'
 
 /* --------------------------------Component--------------------------------*/
@@ -16,11 +17,13 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
 
   
     const navigate = useNavigate()
+
     const handleLogout = () => {
 
         services.signOut()
         setOpen(false)
         navigate('/')
+        window.location.reload();
 
     }
 

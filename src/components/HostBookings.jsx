@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 /* --------------------------------Component--------------------------------*/
 
 const HostBookings = ({ hostBookings }) => {
-    console.log("host bookings are ", hostBookings)
 
     return (
         <div className="max-w-md mx-auto mt-5 flex flex-col space-y-4">

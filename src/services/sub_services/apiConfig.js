@@ -39,9 +39,3 @@ api.interceptors.request.use(
 /* --------------------------------Exports--------------------------------*/
 
 export default api;
-
-// // solution for token not being fetched fast enough
-// return new Promise((resolve) => {
-//     const token = localStorage.getItem("token");
-//     resolve(token ? `Bearer ${token}` : null);
-// });

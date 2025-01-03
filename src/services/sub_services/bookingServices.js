@@ -42,6 +42,8 @@ const getPrevious = async () => {
 
     try {
 
+        console.log("previous in progress")
+
         const response = await api.get('bookings/prev/')
         return response.data
 
@@ -89,7 +91,6 @@ const getSingleBooking = async (id) => {
 }
 
 
-// TODO: update one booking
 const putBooking = async (id, formData) => {
 
     try {

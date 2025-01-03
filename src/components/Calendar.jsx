@@ -147,34 +147,33 @@ const Calendar = ({ blockedDates, setChosenDates }) => {
                     ))}
                     {days.map((date, idx) => (
                         <button
-                        key={idx}
-                        onClick={() =>
-                            date &&
-                            !isPastDate(date) &&
-                            !isBooked(date) &&
-                            handleDateClick(date)
-                        }
-                        disabled={isPastDate(date) || isBooked(date)}
+                            key={idx}
+                            onClick={() =>
+                                date &&
+                                !isPastDate(date) &&
+                                !isBooked(date) &&
+                                handleDateClick(date)
+                            }
+                            disabled={isPastDate(date) || isBooked(date)}
 
-                        // TODO: what is happening here?
-                        className={`p-2 rounded-full w-10 h-10 flex items-center justify-center ${
-                            selectedRange.start &&
-                            selectedRange.start.toDateString() === date?.toDateString()
-                            ? "bg-buttonColor text-white"
-                            : selectedRange.end &&
-                                selectedRange.end.toDateString() ===
-                                date?.toDateString()
-                            ? "bg-buttonColor text-white"
-                            : isInRange(date)
-                            ? "bg-buttonColor text-gray-800"
-                            : "text-gray-700 hover:bg-gray-100"
-                        } ${
-                            isPastDate(date) || isBooked(date)
-                            ? "cursor-not-allowed text-gray-300 line-through"
-                            : ""
-                        }`}
-                        >
-                        {date ? date.getDate() : null}
+                            className={`p-2 rounded-full w-10 h-10 flex items-center justify-center ${
+                                selectedRange.start &&
+                                selectedRange.start.toDateString() === date?.toDateString()
+                                ? "bg-buttonColor text-white"
+                                : selectedRange.end &&
+                                    selectedRange.end.toDateString() ===
+                                    date?.toDateString()
+                                ? "bg-buttonColor text-white"
+                                : isInRange(date)
+                                ? "bg-buttonColor text-gray-800"
+                                : "text-gray-700 hover:bg-gray-100"
+                            } ${
+                                isPastDate(date) || isBooked(date)
+                                ? "cursor-not-allowed text-gray-300 line-through"
+                                : ""
+                            }`}
+                            >
+                            {date ? date.getDate() : null}
                         </button>
                     ))}
                 </div>

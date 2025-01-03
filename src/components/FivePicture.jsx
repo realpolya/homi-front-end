@@ -1,9 +1,10 @@
+/* --------------------------------Imports--------------------------------*/
 
 import { useContext, useEffect, useState } from 'react';
-import { SingleContext } from '../app/SingleListingBooking.jsx'
-import React from 'react'
 
+import { SingleContext } from '../app/SingleListingBooking.jsx';
 
+/* --------------------------------Component--------------------------------*/
 
 export const FivePicture = () => {
 
@@ -62,60 +63,6 @@ export const FivePicture = () => {
   
 };
 
+/* --------------------------------Exports--------------------------------*/
 
-// Marquise's old code below:
-
-{/* <div className="row-span-2">
-    <img
-      src="https://a0.muscache.com/im/pictures/5e67688b-757d-44d6-8b4b-1e91dc6fe49f.jpg?im_w=1920"
-      alt="home1"
-      className="w-full h-full object-cover rounded-lg"
-    />
-</div>
-
-      <div>
-        <img
-          src="https://a0.muscache.com/im/pictures/5e67688b-757d-44d6-8b4b-1e91dc6fe49f.jpg?im_w=1920"
-          alt="home1"
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </div>
-      <div>
-        <img
-          src="https://a0.muscache.com/im/pictures/5e67688b-757d-44d6-8b4b-1e91dc6fe49f.jpg?im_w=1920"
-          alt="home1"
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </div>
-      <div>
-        <img
-          src="https://a0.muscache.com/im/pictures/5e67688b-757d-44d6-8b4b-1e91dc6fe49f.jpg?im_w=1920"
-          alt="home1"
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </div>
-      <div>
-        <img
-          src="https://a0.muscache.com/im/pictures/5e67688b-757d-44d6-8b4b-1e91dc6fe49f.jpg?im_w=1920"
-          alt="home1"
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </div> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default FivePicture

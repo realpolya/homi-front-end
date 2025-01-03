@@ -3,8 +3,9 @@
 import { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import UpdateUserForm from "./UpdateUserForm.jsx";
 import { AppContext } from "../App.jsx";
+
+import UpdateUserForm from "./UpdateUserForm.jsx";
 
 import services from "../services/index.js";
 
