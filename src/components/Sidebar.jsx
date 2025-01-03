@@ -16,11 +16,13 @@ const Sidebar = ({ setShowRegister, setShowLogin, setOpen }) => {
 
   
     const navigate = useNavigate()
+
     const handleLogout = () => {
 
         services.signOut()
         setOpen(false)
         navigate('/')
+        window.location.reload();
 
     }
 
