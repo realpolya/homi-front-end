@@ -2,9 +2,12 @@
 
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from 'react-router-dom';
+
+import { AppContext } from "../App.jsx";
+
 import ListingCard from "../components/ListingCard.jsx";
 import SortBar from "../components/SortBar.jsx";
-import { AppContext } from "../App.jsx";
+
 import services from "../services/index.js"
 
 /* --------------------------------Component--------------------------------*/
