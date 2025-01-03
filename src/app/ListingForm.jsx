@@ -34,6 +34,7 @@ const ListingForm = () => {
     const [formData, setFormData] = useState(initial);
     const [photos, setPhotos] = useState([{ link: "" }]);
     const [amenities, setAmenities] = useState([])
+    const [state, setState] = useState('new')
 
     const navigate = useNavigate()
     const { listingId } = useParams()
@@ -48,38 +49,50 @@ const ListingForm = () => {
 
     const fetchProperty = async (id) => {
         try {
-          const propertyData = await services.getSingleProperty(id)
-          const propType = propertyTypeLookup[propertyData.property_type]
-    
-          const propData = {
+
+            const propertyData = await services.getSingleProperty(id)
+            const propType = propertyTypeLookup[propertyData.property_type]
+
+            const propData = {
             ...propertyData,
             street: propertyData.address.street,
             city: propertyData.address.city,
             state: propertyData.address.state,
             zip_code: propertyData.address.zip_code,
-            property_type: formattedPropertyType,
+            property_type: propType,
             amenities: propertyData.amenities,
-          }
-    
-          setFormData(propData)
-          setPhotos(propertyData.photos)
+            }
+
+            setFormData(propData)
+            setPhotos(propertyData.photos)
 
         } catch (error) {
-          console.log(error)
+            console.log(error)
         }
-      }
+    }
+
 
     useEffect(() => {
         fetchAmenities()
     }, [])
 
+
     useEffect(() => {
         if (listingId) fetchProperty(listingId)
     }, [listingId])
 
+
+    useEffect(() => {
+        if (listingId) setState("edit")
+        if (!listingId) setState("new")
+    }, [listingId])
+
+
     const handleChange = (e) => {
+
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+
     };
 
     const handleCheckboxChange = (amenityId) => {
@@ -133,7 +146,12 @@ const ListingForm = () => {
 
         updatedFormData.photos = photos
 
-        await services.postProperty(updatedFormData)
+        // either put/patch or post
+        if (state === "new") {
+            await services.postProperty(updatedFormData)
+        } else if (state === "edit") {
+            await services.putProperty(listingId, updatedFormData)
+        }
 
         navigate("/dashboard/host")
 
