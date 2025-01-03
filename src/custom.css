@@ -26,14 +26,14 @@
     w-11/12
     flex-grow
     lg:h-full 
-    overflow-y-auto /* TODO: if this is removed, map hides */
+    overflow-y-auto
     bg-alternativeColor 
     rounded-lg 
     flex flex-col
 }
 
 .landing-listings {
-    @apply box-border /* TODO: how to add padding to the bottom of scrollable container */
+    @apply box-border
     h-full
     w-full 
     flex flex-row

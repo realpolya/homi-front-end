@@ -4,10 +4,11 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import { SingleContext } from "../app/SingleListingBooking.jsx";
-import { AppContext } from "../App.jsx"
+import { AppContext } from "../App.jsx";
+
 import BookingForm from "./BookingForm.jsx";
 
-import services from "../services/index.js"
+import services from "../services/index.js";
 
 /* --------------------------------Component--------------------------------*/
 

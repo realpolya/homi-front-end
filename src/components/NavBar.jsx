@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../App.jsx";
 import { Twirl as Hamburger } from "hamburger-react";
 import { FaSearch } from "react-icons/fa";
+
 import Sidebar from "./Sidebar.jsx";
 
 /* --------------------------------Component--------------------------------*/

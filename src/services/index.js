@@ -56,6 +56,7 @@ const services = {
 
     getBookings,
     getUpcoming,
+    getPrevious,
     postBooking,
     getSingleBooking,
     putBooking,

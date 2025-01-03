@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { SingleContext } from '../app/SingleListingBooking.jsx';
 import { AppContext } from '../App.jsx';
+
 import Amenities from "./Amenities";
 import ListingDescription from "./ListingDescription";
 import ListingMap from "../components/ListingMap.jsx"

@@ -9,20 +9,6 @@ import services from "../services/index.js";
 
 /* --------------------------------Variables--------------------------------*/
 
-/* back-end booking model:
-
-prop = models.ForeignKey(Property, on_delete=models.CASCADE)
-
-guest = models.ForeignKey(User, on_delete=models.CASCADE)
-check_in_date = models.DateField()
-check_out_date = models.DateField()
-total_price = models.IntegerField(default=0)
-message = models.TextField()
-number_of_guests = models.IntegerField(default=1)
-credit_card = models.IntegerField(default=0000000000000000)
-
-*/
-
 const formDefault = {
     check_in_date: "",
     check_out_date: "",

@@ -1,6 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useContext, useEffect, useState } from 'react';
+
 import { SingleContext } from '../app/SingleListingBooking.jsx';
 
 /* --------------------------------Variables--------------------------------*/

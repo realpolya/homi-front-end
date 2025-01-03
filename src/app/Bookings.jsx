@@ -11,10 +11,6 @@ const pageOptions = ["guest", "host", "past"]
 
 /* --------------------------------Component--------------------------------*/
 
-{/* <Route path="/bookings/guest" element={<Bookings />} />
-<Route path="/bookings/host" element={<Bookings />} />
-<Route path="/bookings/guest/past" element={<Bookings />} /> */}
-
 const Bookings = () => {
 
     const location = useLocation();
@@ -23,7 +19,6 @@ const Bookings = () => {
     const [isHost, setIsHost] = useState(false)
     const [bookings, setBookings] = useState([]);
     const [pageState, setPageState] = useState("guest")
-
 
     const fetchBookings = async () => {
         try {
@@ -52,15 +47,15 @@ const Bookings = () => {
 
     useEffect(() => {
 
-        if (pageState === "host") {
+        if (pageState === "host" || location.pathname.includes("host")) {
             fetchHostBookings()
+        } else if (pageState === "past" || location.pathname.includes("past")) {
+            fetchPrevBookings()
         } else if (pageState === "guest") {
             fetchBookings()
-        } else if (pageState === "past") {
-            fetchPrevBookings()
         }
 
-    }, [isHost, pageState]);
+    }, [isHost, pageState, location.pathname]);
 
 
     useEffect(() => {
@@ -68,17 +63,16 @@ const Bookings = () => {
         if (location.pathname.includes("host")) {
             setIsHost(true)
             setPageState("host")
-        } else if (location.pathname.includes("guest")) {
-            setIsHost(false)
-            setPageState("guest")
         } else if (location.pathname.includes("past")) {
             setIsHost(false)
             setPageState("past")
+        } else if (location.pathname.includes("guest")) {
+            setIsHost(false)
+            setPageState("guest")
         }
 
     }, [location.pathname])
 
-    // TODO: Your Past Bookings is not showing
     return (
         <main className="max-w-5xl mx-auto p-6 mt-10 ">
             <h1 className=" text-3xl font-semibold mb-6  mt-6 text-center">
