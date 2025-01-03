@@ -146,11 +146,21 @@ const ListingForm = () => {
 
         updatedFormData.photos = photos
 
-        // either put/patch or post
-        if (state === "new") {
-            await services.postProperty(updatedFormData)
-        } else if (state === "edit") {
-            await services.putProperty(listingId, updatedFormData)
+        try {
+
+            // either put/patch or post
+            if (state === "new") {
+                await services.postProperty(updatedFormData)
+                alert("Listing successfully created!")
+            } else if (state === "edit") {
+                await services.putProperty(listingId, updatedFormData)
+                alert("Listing successfully changed!")
+            }
+
+        } catch(err) {
+
+            alert(err)
+
         }
 
         navigate("/dashboard/host")
@@ -433,16 +443,15 @@ const ListingForm = () => {
                 </div>
 
                 {/* Submit Button */}
-                <div className="text-center mt-6">
 
-                    <button
-                    type="submit"
-                    className="form-button"
-                    >
+                <button
+                type="submit"
+                className="form-button mb-24"
+                >
                     Submit
-                    </button>
+                </button>
 
-                </div>
+
                 <div>
                 </div>
             </form>
